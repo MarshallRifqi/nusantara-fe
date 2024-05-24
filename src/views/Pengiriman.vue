@@ -1,57 +1,134 @@
 <template>
   <div class="wrapper">
     <Aside/>
-  <div class="main">
-      <div class="input-group mt-5 mb-5">
-        <input type="search" placeholder="Cari stok barang" class="form-control rounded-pill">
-        <div class="input-group-append mx-3">
-          <button id="button-addon5" class="btn btn-primary">
-            <i class="bi bi-search">Search</i>
-          </button>
-        </div>
-        <div class="tambah-barang">
-          <button><RouterLink to="#" class="btn btn-primary tambah-button">Tambah Barang</RouterLink> </button>
-          <!-- <RouterLink to="#" class="btn btn-primary tambah-button">Tambah Barang</RouterLink> -->
-        </div>
-      </div>
-      <div class="card border-0 mx-5">
-        <div class="card-header">
-          <h5 class="card-title">Product lists</h5>
-        </div>
-        <div class="card-body">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nomor Produk</th>
-                <th scope="col">Nama Produk</th>
-                <th scope="col">Kategori</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row"></th>
-                <td>Lorem ipsum dolor sit amet.</td>
-                <td>Lorem ipsum dolor sit amet.</td>
-                <td>Lorem ipsum dolor sit amet.</td>
-                <td>
-                  <!-- <RouterLink :to="{ name: 'UpdateProd', params: { id_product: product.id_product } }" class="btn btn-sm btn-warning">Edit</RouterLink> -->
-                  <!-- <button class="btn btn-sm btn-warning">Edit</button> -->
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <a href="#" class="theme-toggle">
-        <i class="fa-regular fa-moon"></i>
-        <i class="fa-regular fa-sun"></i>
-      </a>
-    </div>
-  </div>
 
+            <div class="main">
+            <div class="input-group mb-5">
+                <input type="search" placeholder="Cari stok barang" aria-describedby="button-addon5" class="form-control rounded-pill">
+                <div class="input-group-append mx-3">
+                    <button id="button-addon5" type="submit" class="btn btn-primary"><i class="bi bi-search"></i>Search</button>
+                </div>
+                <div class="riwayat">
+                    <a href="#" class="btn btn-primary">
+                        <RouterLink :to="{ name: 'Login' }" class="tambah-button">Barang Terkirim</RouterLink>
+                    </a>
+                </div>
+            </div>
+                    <!-- Table Element -->
+                    <div class="card border-0 mx-5">
+                        <div class="card-header">
+                            <h5 class="card-title">
+                                Recent Orders
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nomor DO</th>
+                                        <th scope="col">Kode Barang</th>
+                                        <th scope="col">Deskripsi</th>
+                                        <th scope="col">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>DO-001</td>
+                                        <td>DUEL-1</td>
+                                        <td>Dueller</td>
+                                        <td>
+                                          <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>DO-002</td>
+                                        <td>PTNZ-3</td>
+                                        <td>Potenza</td>
+                                        <td>
+                                          <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>DO-003</td>
+                                        <td>ECOP-2</td>
+                                        <td>Ecopia</td>
+                                        <td>
+                                          <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>DO-001</td>
+                                        <td>DUEL-1</td>
+                                        <td>Dueller</td>
+                                        <td>
+                                          <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td>DO-002</td>
+                                        <td>PTNZ-3</td>
+                                        <td>Potenza</td>
+                                        <td>
+                                          <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>DO-003</td>
+                                        <td>ECOP-2</td>
+                                        <td>Ecopia</td>
+                                        <td>
+                                          <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">7</th>
+                                        <td>DO-003</td>
+                                        <td>ECOP-2</td>
+                                        <td>Ecopia</td>
+                                        <td>
+                                          <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">8</th>
+                                        <td>DO-003</td>
+                                        <td>ECOP-2</td>
+                                        <td>Ecopia</td>
+                                        <td>
+                                          <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">9</th>
+                                        <td>DO-003</td>
+                                        <td>ECOP-2</td>
+                                        <td>Ecopia</td>
+                                        <td>
+                                          <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">10</th>
+                                        <td>DO-003</td>
+                                        <td>ECOP-2</td>
+                                        <td>Ecopia</td>
+                                        <td>
+                                          <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
 </template>
 
 
@@ -60,7 +137,7 @@ import Aside from '../components/Aside.vue'
 </script>
 
 
-<style>
+<style scoped>
 
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
@@ -100,56 +177,67 @@ h4 {
 }
 
 .tambah-button {
-  color: #FFF;
-  font-size: 0.875rem;
+    color: #FFF;
+    font-size: 0.875rem;
 }
 
 .input-group {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
-  width: 600px;
-  margin-left: 300px;
-  margin-top: 20px;
-  font-size: 1rem;
+    display: flex;
+    /* align-content: center;
+    align-items: center;
+    justify-content: center;
+    align-items: center; */
+    width: 50%;
+    /* margin-left: 300px; */
+    /* margin-top: 20px; */
+    font-size: 1rem;
 }
 
 .footer {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 60px;
-  background-color: var(--bs-primary-bg-subtle);
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    background-color: var(--bs-primary-bg-subtle);
 
 }
 
 /* Layout for admin dashboard skeleton */
 
 .wrapper {
-  align-items: stretch;
-  display: flex;
-  width: 100%;
+    align-items: stretch;
+    display: flex;
+    width: 100%;
 }
 
 #sidebar {
-  max-width: 264px;
-  min-width: 264px;
-  background: #cf1313;
-  transition: all 0.35s ease-in-out;
+    max-width: 264px;
+    min-width: 264px;
+    background: #cf1313;
+    transition: all 0.35s ease-in-out;
 }
 
 .main {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  min-width: 0;
-  overflow: hidden;
-  transition: all 0.35s ease-in-out;
-  width: 100%;
-  background: var(--bs-dark-bg-subtle);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    min-width: 0;
+    overflow: hidden;
+    transition: all 0.35s ease-in-out;
+    width: 100%;
+    background: var(--bs-dark-bg-subtle);
+}
+
+.main .card {
+    width: 90%;
+}
+
+.main .riwayat {
+    width: 30%;
 }
 
 /* Sidebar Elements Style */

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Home from '../views/Home.vue'
 
 
 const router = createRouter({
@@ -7,12 +7,12 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView
+      name: 'Home',
+      component: Home
     },
     {
       path: '/about',
-      name: 'about',
+      name: 'About',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -20,7 +20,7 @@ const router = createRouter({
     },
     {
       path: '/barangmasuk',
-      name: 'barangmasuk',
+      name: 'BarangMasuk',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -28,7 +28,7 @@ const router = createRouter({
     },
     {
       path: '/barangkeluar',
-      name: 'barangkeluar',
+      name: 'BarangKeluar',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -36,7 +36,7 @@ const router = createRouter({
     },
     {
       path: '/dashboard',
-      name: 'dashboard',
+      name: 'Dashboard',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -44,7 +44,7 @@ const router = createRouter({
     },
     {
       path: '/login',
-      name: 'login',
+      name: 'Login',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -52,7 +52,7 @@ const router = createRouter({
     },
     {
       path: '/register',
-      name: 'register',
+      name: 'Register',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -60,7 +60,7 @@ const router = createRouter({
     },
     {
       path: '/stockopname',
-      name: 'stockopname',
+      name: 'StockOpname',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -68,7 +68,7 @@ const router = createRouter({
     },
     {
       path: '/pengiriman',
-      name: 'pengiriman',
+      name: 'Pengiriman',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.

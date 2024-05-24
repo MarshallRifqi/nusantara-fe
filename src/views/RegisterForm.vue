@@ -64,7 +64,7 @@
               <div class="forgot">
                 <p>Already have an account?
                   <a href="#">
-                    <RouterLink to="#" class="nav-link">Sign in here</RouterLink>
+                    <RouterLink to="/login" class="nav-link">Sign in here</RouterLink>
                   </a>
                 </p>
               </div>
@@ -78,9 +78,9 @@
 
 <script>
 
-import axios from 'axios';
+// import axios from 'axios';
 
-export default {
+// export default {
 // data() {
 //   return {
 //     username: '',
@@ -101,6 +101,6 @@ export default {
 //     }
 //   }
 // }
-}
+// }
 
 </script>

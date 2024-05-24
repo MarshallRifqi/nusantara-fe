@@ -1,11 +1,34 @@
 <template>
   <div class="wrapper">
     <Aside/>
-        <div class="main">
+    <div class="main">
+            <nav class="navbar navbar-expand px-3 border-bottom">
+                <button class="btn" id="sidebar-toggle" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse navbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                                <img src="../assets/nusantara.png" class="avatar img-fluid rounded" alt="">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a href="#" class="dropdown-item">Profile</a>
+                                <a href="#" class="dropdown-item">Setting</a>
+                                <a href="#" class="dropdown-item">Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="chart">
+                <ChartComponent />
+            </div>
+
             <main class="content px-3 py-2">
                 <div class="container-fluid">
                     <div class="mb-3">
-                        <h4>Barang Keluar</h4>
+                        <h4>Admin Dashboard</h4>
                     </div>
                     <div class="row">
                         <div class="col-12 col-md-6 d-flex">
@@ -19,7 +42,7 @@
                                             </div>
                                         </div>
                                         <div class="col-6 align-self-end text-end">
-                                            <img src="#" class="img-fluid illustration-img"
+                                            <img src="" class="img-fluid illustration-img"
                                                 alt="">
                                         </div>
                                     </div>
@@ -51,6 +74,8 @@
                             </div>
                         </div>
                     </div>
+                    
+                    
                     <!-- Table Element -->
                     <div class="card border-0">
                         <div class="card-header">
@@ -143,29 +168,6 @@
                 <i class="fa-regular fa-moon"></i>
                 <i class="fa-regular fa-sun"></i>
             </a>
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row text-muted">
-                        <div class="col-6 text-start">
-                            <p class="mb-0">
-                                <a href="#" class="text-muted">
-                                    <strong>Nusantara</strong>
-                                </a>
-                            </p>
-                        </div>
-                        <div class="col-6 text-end">
-                            <ul class="list-inline">
-                                <li class="list-inline-item">
-                                    <a href="#" class="text-muted">Contact</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#" class="text-muted">About Us</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </footer>
         </div>
     </div>
     
@@ -173,9 +175,11 @@
 
 <script setup>
 import Aside from '../components/Aside.vue'
+
+import ChartComponent from '@/components/ChartComponent.vue';
 </script>
 
-<style>
+<style scoped>
 
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
