@@ -1,5 +1,5 @@
 <template>
-  <aside id="sidebar" class="js-sidebar">
+  <aside id="sidebar">
     <!-- Content For Sidebar -->
     <div class="h-100">
       <div class="sidebar-logo mb-5">
@@ -13,30 +13,35 @@
         </li>
         <li class="sidebar-item">
           <RouterLink to="/dashboard" class="sidebar-link nav-link" exact>
+            <i class="bi bi-house"></i>
             <i class="fa-solid fa-list pe-2"></i>
             Dashboard
           </RouterLink>
         </li>
         <li class="sidebar-item">
           <RouterLink :to="{ name: 'BarangMasuk' }" class="sidebar-link nav-link">
+            <i class="bi bi-box-arrow-in-down"></i>
             <i class="fa-solid fa-list pe-2"></i>
             Barang Masuk
           </RouterLink>
         </li>
         <li class="sidebar-item">
           <RouterLink :to="{ name: 'BarangKeluar' }" class="sidebar-link nav-link">
+            <i class="bi bi-box-arrow-up"></i>
             <i class="fa-solid fa-list pe-2"></i>
             Barang Keluar
           </RouterLink>
         </li>
         <li class="sidebar-item">
           <RouterLink :to="{ name: 'Pengiriman' }" class="sidebar-link nav-link">
+            <i class="bi bi-truck"></i>
             <i class="fa-solid fa-list pe-2"></i>
             Pengiriman
           </RouterLink>
         </li>
         <li class="sidebar-item">
           <RouterLink :to="{ name: 'StockOpname' }" class="sidebar-link nav-link">
+            <i class="bi bi-bag-check"></i>
             <i class="fa-solid fa-list pe-2"></i>
             Stok Opname
           </RouterLink>
@@ -54,6 +59,10 @@
 
 <style scoped>
 /* Sidebar Elements Style */
+/* .h-100{
+  background-color: #E94F37;
+} */
+
 a {
     cursor: pointer;
     text-decoration: none;
@@ -65,6 +74,7 @@ a {
   width: 150px;
   height: 150px;
 }
+
 
 #sidebar {
     max-width: 264px;
@@ -127,5 +137,9 @@ a {
 .router-link-exact-active {
   color: #000000; /* Active link color */
   background-color: #ffffff; /* Active link background color */
+}
+
+.sidebar-item{
+  margin-bottom: 15px;
 }
 </style>
