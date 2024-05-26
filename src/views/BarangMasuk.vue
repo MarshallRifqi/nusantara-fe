@@ -69,11 +69,11 @@
           <table class="table table-light table-striped">
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nomor DO</th>
-                <th scope="col">Kode Barang</th>
-                <th scope="col">Deskripsi</th>
-                <th scope="col">Aksi</th>
+                <th scope="col" class="tbl-no">No</th>
+                <th scope="col" class="tbl-do">Nomor DO</th>
+                <th scope="col" class="tbl-kode">Kode Barang</th>
+                <th scope="col" class="tbl-deskripsi">Deskripsi</th>
+                <th scope="col" class="tbl-aksi">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -83,7 +83,15 @@
                 <td>DUEL-1</td>
                 <td>Dueller</td>
                 <td>
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                  <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
+                    <i class="bi bi-pencil-square"></i>
+                    Edit
+                  </button>
+                  <EditModal />
+                  <button class="btn btn-sm btn-danger mx-2">
+                    <i class="bi bi-trash"></i>
+                    Delete
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -92,7 +100,15 @@
                 <td>PTNZ-3</td>
                 <td>Potenza</td>
                 <td>
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                  <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
+                    <i class="bi bi-pencil-square"></i>
+                    Edit
+                  </button>
+                  <EditModal />
+                  <button class="btn btn-sm btn-danger mx-2">
+                    <i class="bi bi-trash"></i>
+                    Delete
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -101,7 +117,15 @@
                 <td>ECOP-2</td>
                 <td>Ecopia</td>
                 <td>
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                  <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
+                    <i class="bi bi-pencil-square"></i>
+                    Edit
+                  </button>
+                  <EditModal />
+                  <button class="btn btn-sm btn-danger mx-2">
+                    <i class="bi bi-trash"></i>
+                    Delete
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -110,7 +134,15 @@
                 <td>DUEL-1</td>
                 <td>Dueller</td>
                 <td>
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                  <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
+                    <i class="bi bi-pencil-square"></i>
+                    Edit
+                  </button>
+                  <EditModal />
+                  <button class="btn btn-sm btn-danger mx-2">
+                    <i class="bi bi-trash"></i>
+                    Delete
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -119,7 +151,15 @@
                 <td>PTNZ-3</td>
                 <td>Potenza</td>
                 <td>
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                  <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
+                    <i class="bi bi-pencil-square"></i>
+                    Edit
+                  </button>
+                  <EditModal />
+                  <button class="btn btn-sm btn-danger mx-2">
+                    <i class="bi bi-trash"></i>
+                    Delete
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -128,7 +168,15 @@
                 <td>ECOP-2</td>
                 <td>Ecopia</td>
                 <td>
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                  <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
+                    <i class="bi bi-pencil-square"></i>
+                    Edit
+                  </button>
+                  <EditModal />
+                  <button class="btn btn-sm btn-danger mx-2">
+                    <i class="bi bi-trash"></i>
+                    Delete
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -137,7 +185,15 @@
                 <td>ECOP-2</td>
                 <td>Ecopia</td>
                 <td>
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                  <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
+                    <i class="bi bi-pencil-square"></i>
+                    Edit
+                  </button>
+                  <EditModal />
+                  <button class="btn btn-sm btn-danger mx-2">
+                    <i class="bi bi-trash"></i>
+                    Delete
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -146,7 +202,15 @@
                 <td>ECOP-2</td>
                 <td>Ecopia</td>
                 <td>
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                  <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
+                    <i class="bi bi-pencil-square"></i>
+                    Edit
+                  </button>
+                  <EditModal />
+                  <button class="btn btn-sm btn-danger mx-2">
+                    <i class="bi bi-trash"></i>
+                    Delete
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -155,7 +219,15 @@
                 <td>ECOP-2</td>
                 <td>Ecopia</td>
                 <td>
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                  <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
+                    <i class="bi bi-pencil-square"></i>
+                    Edit
+                  </button>
+                  <EditModal />
+                  <button class="btn btn-sm btn-danger mx-2">
+                    <i class="bi bi-trash"></i>
+                    Delete
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -164,7 +236,15 @@
                 <td>ECOP-2</td>
                 <td>Ecopia</td>
                 <td>
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                  <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
+                    <i class="bi bi-pencil-square"></i>
+                    Edit
+                  </button>
+                  <EditModal />
+                  <button class="btn btn-sm btn-danger mx-2">
+                    <i class="bi bi-trash"></i>
+                    Delete
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -177,6 +257,7 @@
 
 <script setup>
 import Aside from '../components/Aside.vue'
+import EditModal from '@/components/EditModal.vue';
 </script>
 
 
@@ -213,6 +294,26 @@ h4 {
   font-family: 'Poppins', sans-serif;
   font-size: 1.275rem;
   color: var(--bs-emphasis-color);
+}
+
+.tbl-no {
+  width: 3%;
+}
+
+.tbl-do {
+  width: 10%;
+}
+
+.tbl-kode {
+  width: 10%;
+}
+
+.tbl-deskripsi {
+  width: 15%;
+}
+
+.tbl-aksi {
+  width: 10%;
 }
 
 ::-webkit-input-placeholder {
