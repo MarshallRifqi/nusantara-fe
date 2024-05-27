@@ -262,6 +262,26 @@ h4 {
   color: var(--bs-emphasis-color);
 }
 
+.tbl-no {
+  width: 3%;
+}
+
+.tbl-do {
+  width: 10%;
+}
+
+.tbl-kode {
+  width: 10%;
+}
+
+.tbl-deskripsi {
+  width: 15%;
+}
+
+.tbl-aksi {
+  width: 10%;
+}
+
 ::-webkit-input-placeholder {
  font-size: 15px;
 }
