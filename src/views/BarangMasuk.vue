@@ -13,48 +13,36 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Form Barang Masuk</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <form action="" class="mb-3">
+                <form @submit.prevent="handleAddSubmit">
                   <div class="container-fluid">
                     <div class="row">
                       <div class="mb-3 col-md-12">
-                        <label for="recipient-name" class="col-form-label">Pilih kode barang</label>
+                        <label for="kode-barang" class="col-form-label">Masukan kode barang</label>
+                        <input type="text" class="form-control" id="kode-barang" v-model="newBarang.id_barang">
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-10">
-                        <input type="text" class="form-control" id="recipient-name">
-                      </div>
-                      <div class="col-md-2">
-                        <button type="button" class="btn btn-primary"><i class="bi bi-search"></i></button>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-                <form>
-                  <div class="container-fluid">
-                    <div class="row">
-                      <div class="mb-3 col-md-7">
-                        <label for="message-text" class="col-form-label">Nama Barang</label>
-                        <input type="text" class="form-control" id="message-text" readonly placeholder="Nama barang akan tampil">
-                      </div>
                       <div class="mb-3 col-md-5">
-                        <label for="message-text" class="col-form-label">Tipe Ban</label>
-                        <input type="text" class="form-control" id="message-text" readonly placeholder="tipe barang akan tampil">
+                        <label for="tanggal" class="col-form-label">Tanggal Masuk</label>
+                        <input type="date" class="form-control" id="tanggal" v-model="newBarang.tanggal_masuk">
+                      </div>
+                      <div class="mb-3 col-md-7">
+                        <label for="stok" class="col-form-label">Jumlah masuk stok</label>
+                        <input type="number" class="form-control" id="stok" v-model="newBarang.kuantitas" min="0" max="200">
                       </div>
                     </div>
-                    <div class="mb-3">
-                      <label for="message-text" class="col-form-label">Jumlah masuk stok</label>
-                      <input type="number" class="form-control" id="message-text" min="0" max="200"> 
-                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                      <i class="bi bi-x-lg"></i><span class="mx-2">Batal</span>
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                      <i class="bi bi-check2"></i><span class="mx-2">Simpan</span>
+                    </button>
                   </div>
                 </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i><span class="mx-2">Batal</span></button>
-                <button type="button" class="btn btn-primary"><i class="bi bi-check2"></i><span class="mx-2">Simpan</span></button>
               </div>
             </div>
           </div>
@@ -70,101 +58,29 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Nomor DO</th>
+                <th scope="col">Id barang masuk</th>
                 <th scope="col">Kode Barang</th>
-                <th scope="col">Deskripsi</th>
+                <th scope="col">No DO</th>
+                <th scope="col">Nama Ban</th>
+                <th scope="col">Tipe Ban</th>
+                <th scope="col">Stok</th>
                 <th scope="col">Aksi</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>DO-001</td>
-                <td>DUEL-1</td>
-                <td>Dueller</td>
+              <tr v-for="(barangMsk, index) in barangList" :key="barangMsk.id_barang_masuk">
+                <th scope="row">{{ index + 1 }}</th>
+                <td>{{ barangMsk.id_barang_masuk }}</td>
+                <td>{{ barangMsk.id_barang }}</td>
+                <td>{{ barangMsk.no_do }}</td>
+                <td>{{ barangMsk.barang.nama_barang }}</td>
+                <td>{{ barangMsk.barang.kategori }}</td>
+                <td>{{ barangMsk.kuantitas }}</td>
                 <td>
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>DO-002</td>
-                <td>PTNZ-3</td>
-                <td>Potenza</td>
-                <td>
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>DO-003</td>
-                <td>ECOP-2</td>
-                <td>Ecopia</td>
-                <td>
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">4</th>
-                <td>DO-001</td>
-                <td>DUEL-1</td>
-                <td>Dueller</td>
-                <td>
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">5</th>
-                <td>DO-002</td>
-                <td>PTNZ-3</td>
-                <td>Potenza</td>
-                <td>
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">6</th>
-                <td>DO-003</td>
-                <td>ECOP-2</td>
-                <td>Ecopia</td>
-                <td>
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">7</th>
-                <td>DO-003</td>
-                <td>ECOP-2</td>
-                <td>Ecopia</td>
-                <td>
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">8</th>
-                <td>DO-003</td>
-                <td>ECOP-2</td>
-                <td>Ecopia</td>
-                <td>
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">9</th>
-                <td>DO-003</td>
-                <td>ECOP-2</td>
-                <td>Ecopia</td>
-                <td>
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">10</th>
-                <td>DO-003</td>
-                <td>ECOP-2</td>
-                <td>Ecopia</td>
-                <td>
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                  <!-- <button class="btn btn-sm btn-primary mx-2"><i class="bi bi-pencil-square"></i> <span>Edit</span></button> -->
+                  <!-- <button type="button" class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#editModal" @click="openEditModal(barangMsk)">edit</button> -->
+                  <button class="btn btn-sm btn-primary mx-2" @click="openEditModal(barangMsk)"><i class="bi bi-pencil-square"></i> <span>Edit</span></button>
+                  <button class="btn btn-sm btn-danger mx-2" @click="deleteBarang(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button>
                 </td>
               </tr>
             </tbody>
@@ -172,11 +88,142 @@
         </div>
       </div>
     </div>
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="editLabel">Form Barang Masuk</h1>
+              </div>
+              <div class="modal-body">
+                <form @submit.prevent="handleEditSubmit">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="mb-3 col-md-12">
+                        <label for="kode-barang" class="col-form-label">Masukan kode barang</label>
+                        <input type="text" class="form-control" id="kode-barang" v-model="editBarang.id_barang">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="mb-3 col-md-5">
+                        <label for="tanggal" class="col-form-label">Tanggal Masuk</label>
+                        <input type="date" class="form-control" id="tanggal" v-model="editBarang.tanggal_masuk">
+                      </div>
+                      <div class="mb-3 col-md-7">
+                        <label for="stok" class="col-form-label">Jumlah masuk stok</label>
+                        <input type="number" class="form-control" id="stok" v-model="editBarang.kuantitas" min="0" max="200">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                      <i class="bi bi-x-lg"></i><span class="mx-2">Batal</span>
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                      <i class="bi bi-check2"></i><span class="mx-2" @click="handleEditSubmit">Simpan</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
   </div>
 </template>
 
 <script setup>
 import Aside from '../components/Aside.vue'
+
+import { ref, onMounted } from 'vue';
+import axios from 'axios'; 
+
+const barangList = ref([]);
+
+const newBarang = ref({
+  id_barang: '',
+  tanggal_masuk: '',
+  kuantitas: 0,
+});
+
+const editBarang = ref({
+  id_barang_masuk: '',
+  id_barang: '',
+  tanggal_masuk: '',
+  kuantitas: 0,
+});
+
+const fetchData = async () => {
+  try {
+    const response = await axios.get('/barang-masuk');
+    barangList.value = response.data.barangMsk;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+const deleteBarang = async (id_barang_masuk) => {
+  try {
+    await axios.delete(`barang-masuk/delete/${id_barang_masuk}`);
+    fetchData(); 
+  } catch (error) {
+    console.error('Error deleting data:', error);
+  }
+};
+
+
+const handleAddSubmit = async () => {
+  try {
+    const response = await axios.post('barang-masuk/insert', {
+      id_barang: newBarang.value.id_barang,
+      tanggal_masuk: newBarang.value.tanggal_masuk,
+      kuantitas: newBarang.value.kuantitas,
+    });
+    console.log('Response:', response.data);
+    fetchData();
+    
+    newBarang.value.id_barang = '';
+    newBarang.value.tanggal_masuk = '';
+    newBarang.value.kuantitas = 0;
+    const exampleModal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
+    exampleModal.hide();
+  } catch (error) {
+    console.error('Error submitting form:', error);
+  }
+};
+
+const openEditModal = (barangMsk) => {
+  editBarang.value.id_barang_masuk = barangMsk.id_barang_masuk;
+  editBarang.value.id_barang = barangMsk.id_barang;
+  editBarang.value.tanggal_masuk = barangMsk.tanggal_masuk;
+  editBarang.value.kuantitas = barangMsk.kuantitas;
+  const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+  editModal.show();
+};
+
+const handleEditSubmit = async () => {
+  try {
+    const response = await axios.patch(`barang-masuk/update/${editBarang.value.id_barang_masuk}`, {
+      id_barang: editBarang.value.id_barang,
+      tanggal_masuk: editBarang.value.tanggal_masuk,
+      kuantitas: editBarang.value.kuantitas,
+    });
+    console.log('Response:', response.data);
+    fetchData(); 
+  
+    editBarang.value.id_barang_masuk = '';
+    editBarang.value.id_barang = '';
+    editBarang.value.tanggal_masuk = '';
+    editBarang.value.kuantitas = 0;
+    const editModal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
+    editModal.hide();
+  } catch (error) {
+    console.error('Error submitting form:', error);
+  }
+};
+
+
+
+
+onMounted(fetchData);
 </script>
 
 
@@ -257,7 +304,8 @@ h4 {
 
 .main {
     display: flex;
-    justify-content: center;
+    padding: 50px;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     min-height: 100vh;

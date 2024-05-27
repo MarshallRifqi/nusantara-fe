@@ -19,6 +19,13 @@
           </RouterLink>
         </li>
         <li class="sidebar-item">
+          <RouterLink to="/barangmaster" class="sidebar-link nav-link" exact>
+            <i class="bi bi-box-seam"></i>
+            <i class="fa-solid fa-list pe-2"></i>
+            Master Barang
+          </RouterLink>
+        </li>
+        <li class="sidebar-item">
           <RouterLink :to="{ name: 'BarangMasuk' }" class="sidebar-link nav-link">
             <i class="bi bi-box-arrow-in-down"></i>
             <i class="fa-solid fa-list pe-2"></i>
