@@ -20,7 +20,15 @@
                     <div class="row">
                       <div class="mb-3 col-md-12">
                         <label for="kode-barang" class="col-form-label">Masukan kode barang</label>
-                        <input type="text" class="form-control" id="kode-barang" v-model="newBarang.id_barang">
+                        <!-- <div>Selected: {{ selected }}</div> -->
+                        <br>
+                        <select id="kode-barang" v-model="newBarang.id_barang">
+                          <option disabled value="">Pilih kode barang</option>
+                          <option>BRG-42632546</option>
+                          <option>BRG-37735959</option>
+                          <option>BRG-21962086</option>
+                        </select>
+                        <!-- <input type="text" class="form-control" id="kode-barang" v-model="newBarang.id_barang"> -->
                       </div>
                     </div>
                     <div class="row">
