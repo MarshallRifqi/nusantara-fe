@@ -110,7 +110,8 @@
                   <!-- <button class="btn btn-sm btn-primary mx-2"><i class="bi bi-pencil-square"></i> <span>Edit</span></button> -->
                   <!-- <button type="button" class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#editModal" @click="openEditModal(barangMsk)">edit</button> -->
                   <button class="btn btn-sm btn-primary mx-2" @click="openEditModal(barangMsk)"><i class="bi bi-pencil-square"></i> <span>Edit</span></button>
-                  <button class="btn btn-sm btn-danger mx-2" @click="deleteBarang(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button>
+                  <!-- <button class="btn btn-sm btn-danger mx-2" @click="deleteBarang(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button> -->
+                  <button class="btn btn-sm btn-danger mx-2" @click="confirmDelete(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button>
                 </td>
               </tr>
             </tbody>
@@ -201,6 +202,28 @@ const deleteBarang = async (id_barang_masuk) => {
   }
 };
 
+const confirmDelete = (id_barang_masuk) => {
+  Swal.fire({
+    title: "Yakin ingin menghapus?",
+    text: "Tindakan ini dapat menghapus data penting!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Ya, saya ingin menghapus!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      deleteBarang(id_barang_masuk).then(() => {
+        Swal.fire({
+          title: "Terhapus!",
+          text: "Data berhasil terhapus.",
+          icon: "success"
+        });
+      });
+    }
+  });
+};
+
 
 const handleAddSubmit = async () => {
   try {
@@ -217,6 +240,13 @@ const handleAddSubmit = async () => {
     newBarang.value.kuantitas = 0;
     const exampleModal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
     exampleModal.hide();
+    Swal.fire({
+      position: "middle",
+      icon: "success",
+      title: "Data berhasil tersimpan",
+      showConfirmButton: false,
+      timer: 1500
+    });
   } catch (error) {
     console.error('Error submitting form:', error);
   }
@@ -247,6 +277,13 @@ const handleEditSubmit = async () => {
     editBarang.value.kuantitas = 0;
     const editModal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
     editModal.hide();
+    Swal.fire({
+      position: "middle",
+      icon: "success",
+      title: "Data berhasil tersimpan",
+      showConfirmButton: false,
+      timer: 1500
+    });
   } catch (error) {
     console.error('Error submitting form:', error);
   }
