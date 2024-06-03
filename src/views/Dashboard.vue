@@ -79,8 +79,8 @@
                     <!-- Table Element -->
                     <div class="card border-0">
                         <div class="card-header">
-                            <h5 class="card-title">
-                                Recent Orders
+                            <h5 class="card-title p-2">
+                                List Barang
                             </h5>
                             <!-- <h6 class="card-subtitle text-muted">
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ducimus,
@@ -91,73 +91,30 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Nomor DO</th>
-                                        <th scope="col">Kode Barang</th>
-                                        <th scope="col">Deskripsi</th>
-                                    </tr>
+                <th scope="col">#</th>
+                <th scope="col">Id Barang</th>
+                <th scope="col">Nama Ban</th>
+                <th scope="col">Kategori Ban</th>
+                <th scope="col">Harga</th>
+                <th scope="col">Stok</th>
+                <th scope="col">Value</th>
+                <!-- <th scope="col">Aksi</th> -->
+              </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>DO-001</td>
-                                        <td>DUEL-1</td>
-                                        <td>Dueller</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>DO-002</td>
-                                        <td>PTNZ-3</td>
-                                        <td>Potenza</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>DO-003</td>
-                                        <td>ECOP-2</td>
-                                        <td>Ecopia</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">4</th>
-                                        <td>DO-001</td>
-                                        <td>DUEL-1</td>
-                                        <td>Dueller</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">5</th>
-                                        <td>DO-002</td>
-                                        <td>PTNZ-3</td>
-                                        <td>Potenza</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">6</th>
-                                        <td>DO-003</td>
-                                        <td>ECOP-2</td>
-                                        <td>Ecopia</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">7</th>
-                                        <td>DO-003</td>
-                                        <td>ECOP-2</td>
-                                        <td>Ecopia</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">8</th>
-                                        <td>DO-003</td>
-                                        <td>ECOP-2</td>
-                                        <td>Ecopia</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">9</th>
-                                        <td>DO-003</td>
-                                        <td>ECOP-2</td>
-                                        <td>Ecopia</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">10</th>
-                                        <td>DO-003</td>
-                                        <td>ECOP-2</td>
-                                        <td>Ecopia</td>
-                                    </tr>
+                                    <tr v-for="(barang, index) in barangList" :key="barang.id_barang">
+                <th scope="row">{{ index + 1 }}</th>
+                <td>{{ barang.id_barang }}</td>
+                <td>{{ barang.nama_barang }}</td>
+                <td>{{ barang.kategori }}</td>
+                <td>{{ barang.harga}}</td>
+                <td>{{ barang.stok}}</td>
+                <td>{{ barang.total_harga}}</td>
+                <!-- <td>
+                  <button type="button" class="btn btn-sm btn-primary " data-bs-toggle="modal" data-bs-target="#editModal" @click="openEditModal(barang)"> <i class="bi bi-pencil-square"></i> <span>Edit</span> </button>
+                  <button class="btn btn-sm btn-danger mx-2" @click="deleteBarang(barang.id_barang)"> <i class="bi bi-trash"></i> <span>Delete</span></button>
+                </td> -->
+              </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -175,9 +132,23 @@
 
 <script setup>
 import Aside from '../components/Aside.vue'
-
+import { ref, onMounted } from 'vue';
+import axios from 'axios'; 
+const barangList = ref([]);
 import ChartComponent from '@/components/ChartComponent.vue';
+
+const fetchData = async () => {
+  try {
+    const response = await axios.get('/barang');
+    barangList.value = response.data.barang;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+onMounted(fetchData);
 </script>
+
+
 
 <style scoped>
 

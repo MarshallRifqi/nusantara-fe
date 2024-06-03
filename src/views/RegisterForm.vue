@@ -50,13 +50,13 @@
                 <div class="invalid-feedback">Password is required</div>
               </div>
             </div>
-            <!-- <div class="input-group mb-5">
+            <div class="input-group mb-5">
               <div class="col">
                 <label for="" class="mb-2">Confirm Password</label>
-                <input type="password" v-model="register.confirmPassword" class="form-control form-control-lg bg-light fs-6" placeholder="password" required />
+                <input type="password" v-model="confirmPassword" class="form-control form-control-lg bg-light fs-6" placeholder="password" required />
                 <div class="invalid-feedback">Password is required</div>
               </div>
-            </div> -->
+            </div>
             <div class="input-group mb-2 mt-3">
               <button type="submit" class="btn btn-lg btn-primary w-100 fs-6">Register</button>
             </div>

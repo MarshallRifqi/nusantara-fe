@@ -35,9 +35,13 @@
                       <input type="number" class="form-control" id="harga" v-model="form.harga" min="0" max="200">
                     </div>
                     <div class="mb-3">
+                      <label label for="stok" class="col-form-label">Stok</label>
+                      <input type="number" class="form-control" id="stok" v-model="form.stok" min="0" max="200">
+                    </div>
+                    <!-- <div class="mb-3">
                       <label for="tanggal" class="col-form-label">Tanggal</label>
                       <input type="date" class="form-control" id="tanggal" v-model="form.tanggal">
-                    </div>
+                    </div> -->
                   </div>
                 </form>
               </div>
@@ -53,6 +57,7 @@
           </div>
         </div>
       </div>
+
       <!-- Table Element -->
       <div class="card border-0 mx-5 p-2">
         <div class="card-header">
@@ -67,6 +72,8 @@
                 <th scope="col">Nama Ban</th>
                 <th scope="col">Kategori Ban</th>
                 <th scope="col">Harga</th>
+                <th scope="col">Stok</th>
+                <th scope="col">Value</th>
                 <th scope="col">Aksi</th>
               </tr>
             </thead>
@@ -77,6 +84,8 @@
                 <td>{{ barang.nama_barang }}</td>
                 <td>{{ barang.kategori }}</td>
                 <td>{{ barang.harga}}</td>
+                <td>{{ barang.stok}}</td>
+                <td>{{ barang.total_harga}}</td>
                 <td>
                   <button type="button" class="btn btn-sm btn-primary " data-bs-toggle="modal" data-bs-target="#editModal" @click="openEditModal(barang)"> <i class="bi bi-pencil-square"></i> <span>Edit</span> </button>
                   <button class="btn btn-sm btn-danger mx-2" @click="deleteBarang(barang.id_barang)"> <i class="bi bi-trash"></i> <span>Delete</span></button>
@@ -87,6 +96,26 @@
         </div>
       </div>
     </div>
+
+    <!-- <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete this item?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-danger" @click="confirmDelete">Delete</button>
+          </div>
+        </div>
+      </div> -->
+
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -112,9 +141,13 @@
                   <input type="number" class="form-control" id="harga" v-model="form.harga" min="0" max="200">
                 </div>
                 <div class="mb-3">
+                  <label for="stok" class="col-form-label">Stok</label>
+                  <input type="number" class="form-control" id="stok" v-model="form.stok" min="0" max="200">
+                </div>
+                <!-- <div class="mb-3">
                   <label for="tanggal" class="col-form-label">Tanggal</label>
                   <input type="date" class="form-control" id="tanggal" v-model="form.tanggal">
-                </div>
+                </div> -->
               </div>
             </form>
           </div>
@@ -143,7 +176,8 @@ const form = ref({
   nama_barang: '',
   kategori: '',
   harga: 0,
-  tanggal: '',
+  stok: 0,
+  // tanggal: '',
 });
 
 const fetchData = async () => {
@@ -169,7 +203,8 @@ const openEditModal = (item) => {
   form.value.nama_barang = item.nama_barang;
   form.value.kategori = item.kategori;
   form.value.harga = item.harga;
-  form.value.tanggal = item.tanggal;
+  form.value.stok = item.stok;
+  // form.value.tanggal = item.tanggal;
   const editModal = new bootstrap.Modal(document.getElementById('editModal'));
   editModal.show();
 };
@@ -180,7 +215,8 @@ const handleSubmit = async () => {
       nama_barang: form.value.nama_barang,
       kategori: form.value.kategori,
       harga: form.value.harga,
-      tanggal: form.value.tanggal,
+      stok: form.value.stok,
+      // tanggal: form.value.tanggal,
     });
     console.log('Response:', response.data);
     fetchData(); 
@@ -188,7 +224,8 @@ const handleSubmit = async () => {
     form.value.nama_barang = '';
     form.value.kategori = '';
     form.value.harga = 0;
-    form.value.tanggal = '';
+    form.value.stok = 0;
+    // form.value.tanggal = '';
   } catch (error) {
     console.error('Error submitting form:', error);
   }
@@ -200,7 +237,8 @@ const handleEditSubmit = async () => {
       nama_barang: form.value.nama_barang,
       kategori: form.value.kategori,
       harga: form.value.harga,
-      tanggal: form.value.tanggal,
+      stok: form.value.stok,
+      // tanggal: form.value.tanggal,
     });
     console.log('Response:', response.data);
     fetchData(); 
@@ -209,7 +247,8 @@ const handleEditSubmit = async () => {
     form.value.nama_barang = '';
     form.value.kategori = '';
     form.value.harga = 0;
-    form.value.tanggal = '';
+    form.value.stok = '';
+    // form.value.tanggal = '';
     const editModal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
     editModal.hide();
   } catch (error) {
