@@ -46,7 +46,7 @@
                 </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="closeEditModal">
                   <i class="bi bi-x-lg"></i><span class="mx-2">Batal</span>
                 </button>
                 <button type="button" class="btn btn-primary" @click="handleSubmit">
@@ -87,7 +87,7 @@
                 <td>{{ barang.stok}}</td>
                 <td>{{ barang.total_harga}}</td>
                 <td>
-                  <button type="button" class="btn btn-sm btn-primary " data-bs-toggle="modal" data-bs-target="#editModal" @click="openEditModal(barang)"> <i class="bi bi-pencil-square"></i> <span>Edit</span> </button>
+                  <button type="button" class="btn btn-sm btn-primary " data-bs-toggle="modal" data-bs-target="#editModal" @click="openEditModal(item)"> <i class="bi bi-pencil-square"></i> <span>Edit</span> </button>
                   <button class="btn btn-sm btn-danger mx-2" @click="deleteBarang(barang.id_barang)"> <i class="bi bi-trash"></i> <span>Delete</span></button>
                 </td>
               </tr>
@@ -152,7 +152,7 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+            <button id="myModal"type="button" class="btn btn-danger" data-bs-dismiss="modal">
               <i class="bi bi-x-lg"></i><span class="mx-2">Batal</span>
             </button>
             <button type="button" class="btn btn-primary" @click="handleEditSubmit">
@@ -207,6 +207,11 @@ const openEditModal = (item) => {
   // form.value.tanggal = item.tanggal;
   const editModal = new bootstrap.Modal(document.getElementById('editModal'));
   editModal.show();
+};
+
+const closeEditModal = (item) => {
+  const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+  editModal.hide();
 };
 
 const handleSubmit = async () => {
