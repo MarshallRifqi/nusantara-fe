@@ -40,7 +40,7 @@
                           <option disabled value="">Pilih barang</option>
                           <option value="BRG-14846914">Adrenalin RE003</option>
                           <option value="BRG-27540728">S007A</option>
-                          <option value="BRG-65147694	">RE050</option>
+                          <option value="BRG-65147694">RE050</option>
                           <option value="BRG-02769403">MPV-1</option>
                           <option value="BRG-19646238">EP150</option>
                           <option value="BRG-48653832">EP300</option>

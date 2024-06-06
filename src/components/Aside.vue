@@ -3,7 +3,7 @@
     <!-- Content For Sidebar -->
     <div class="h-100">
       <div class="sidebar-logo mb-5">
-        <img src="../assets/Nusantara_team__update.png" class="logo-nusantara" alt="">
+        <img src="../assets/nusantara_white.png" class="logo-nusantara" alt="">
         <br>
         <a href="#">Nusantara</a>
       </div>
