@@ -109,7 +109,7 @@
                   <div class="container-fluid">
                     <div class="row">
                       <div class="mb-3 col-md-12">
-                        <label for="kode-barang" class="col-form-label">Masukan kode barang</label>
+                        <label for="kode-barang" class="col-form-label">Id User</label>
                         <input type="text" class="form-control" id="kode-barang" v-model="editUser.id_pelanggan">
                       </div>
                     </div>
