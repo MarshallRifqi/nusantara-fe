@@ -33,6 +33,13 @@
           </RouterLink>
         </li>
         <li class="sidebar-item">
+          <RouterLink :to="{ name: 'customers' }" class="sidebar-link nav-link">
+            <i class="bi bi-person-workspace"></i>
+            <i class="fa-solid fa-list pe-2"></i>
+            Customer
+          </RouterLink>
+        </li>
+        <li class="sidebar-item">
           <RouterLink :to="{ name: 'BarangKeluar' }" class="sidebar-link icon-link">
             <i class="bi bi-box-arrow-up"></i>
             <i class="fa-solid fa-list pe-2"></i>
