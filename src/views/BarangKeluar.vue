@@ -7,197 +7,153 @@
         <div class="input-group-append mx-3">
           <button id="button-addon5" type="submit" class="btn btn-danger"><i class="bi bi-search"></i>Search</button>
         </div>
-        <!-- <div class="tambah-barang">
-          <a href="#" class="btn btn-primary">
-            <RouterLink :to="{ name: 'Login' }" class="tambah-button">Tambah Barang</RouterLink>
-          </a>
-        </div> -->
+        <button type="button" class="btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Tambah Barang</button>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Form Barang Keluar</h1>
+              </div>
+              <div class="modal-body">
+                <form @submit.prevent="handleAddSubmit">
+                  <div class="container-fluid">
+                    <!-- <div class="row">
+                      <div class="mb-3 col-md-12">
+                        <label for="kode-barang" class="col-form-label">Masukan kode barang</label>
+                        <div>Selected: {{ selected }}</div>
+                        <br>
+                        <select id="kode-barang" v-model="newBarang.id_barang">
+                          <option disabled value="">Pilih kode barang</option>
+                          <option>BRG-42632546</option>
+                          <option>BRG-37735959</option>
+                          <option>BRG-21962086</option>
+                        </select>
+                        <input type="text" class="form-control" id="kode-barang" v-model="newBarang.id_barang"> 
+                      </div>
+                    </div> -->
+                    
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <!-- <div>Selected: {{ selected }}</div> -->
+                            <label for="kode-barang" class="col-form-label">Pilih Barang</label>
+                            <select id="kode-barang" class="form-select mb-2" v-model="newBarang.id_barang">
+                              <option disabled value="">Pilih barang</option>
+                              <option value="BRG-14846914">Adrenalin RE003</option>
+                              <option value="BRG-27540728">S007A</option>
+                              <option value="BRG-65147694">RE050</option>
+                              <option value="BRG-02769403">MPV-1</option>
+                              <option value="BRG-19646238">EP150</option>
+                              <option value="BRG-48653832">EP300</option>
+                              <option value="BRG-45352771">All Terrain 697</option>
+                              <option value="BRG-73996611">Mud Terrain 674</option>
+                              <option value="BRG-04844424">HL 683</option>
+                            </select>
+                            <!-- <input type="text" class="form-control" id="kode-barang" v-model="newBarang.id_barang"> -->
+                            <!-- <label for="kode-barang" class="col-form-label" readonly>Masukan kode barang</label> -->
+                          </div>
+                          <div class="mb-3 col-md-6">
+                            <label for="kode-barang" class="col-form-label">Id Barang</label>
+                            <input type="text" class="form-control" id="kode-barang" v-model="newBarang.id_barang" readonly placeholder="BRG-00000000">
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label for="kode-barang" class="col-form-label">Pilih Customer</label>
+                            <select id="kode-barang" class="form-select mb-2">
+                              <option disabled value="">Customer</option>
+                              <option value="#">Customer 1</option>
+                              <option value="#">Customer 2</option>
+                              <option value="#">Customer 3</option>
+                            </select>
+                          </div>
+                          <div class="col-md-6">
+                            <label for="alamat" class="col-form-label">Id Pelanggan</label>
+                            <input type="text" class="form-control" id="alamat" placeholder="CST-00000" readonly>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="mb-3 col-md-12">
+                            <label for="alamat" class="col-form-label">Alamat</label>
+                            <input type="text" class="form-control" id="alamat" placeholder="Jalan haji daud No.70" readonly>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="row">
+                          <div class="mb-3 col-md-6">
+                            <label for="alamat" class="col-form-label">Stok Master Barang</label>
+                            <input type="number" class="form-control" id="alamat" placeholder="200" readonly>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                              <label for="stok" class="col-form-label">Stok Barang Keluar</label>
+                              <input type="number" class="form-control" id="stok" min="0" v-model="newBarang.kuantitas">
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="mb-3 col-md-12">
+                            <label for="stok" class="col-form-label">Keterangan</label>
+                            <input type="text" class="form-control" id="stok">
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="mb-3 col-md-12">
+                            <label for="tanggal" class="col-form-label">Tanggal Masuk</label>
+                            <input type="date" class="form-control" id="tanggal" v-model="newBarang.tanggal_masuk">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                      <i class="bi bi-x-lg"></i><span class="mx-2">Batal</span>
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                      <i class="bi bi-check2"></i><span class="mx-2">Simpan</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <!-- Table Element -->
-      <div class="card border-0 mx-5">
+      <div class="card border-0 mx-5 p-2">
         <div class="card-header">
-          <h5 class="card-title">Recent Orders</h5>
+          <h5 class="card-title">List Barang Keluar</h5>
         </div>
         <div class="card-body">
-          <table class="table">
+          <table class="table table-light table-striped">
             <thead>
               <tr>
-                <th scope="col" class="tbl-no">No</th>
-                <th scope="col" class="tbl-do">Nomor DO</th>
-                <th scope="col" class="tbl-kode">Kode Barang</th>
-                <th scope="col" class="tbl-deskripsi">Deskripsi</th>
-                <th scope="col" class="tbl-aksi">Aksi</th>
+                <th scope="col">#</th>
+                <th scope="col">Id barang masuk</th>
+                <th scope="col">Kode Barang</th>
+                <th scope="col">No DO</th>
+                <th scope="col">Nama Ban</th>
+                <th scope="col">Tipe Ban</th>
+                <th scope="col">Stok</th>
+                <th scope="col">Aksi</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>DO-001</td>
-                <td>DUEL-1</td>
-                <td>Dueller</td>
+              <tr v-for="(barangMsk, index) in barangList" :key="barangMsk.id_barang_masuk">
+                <th scope="row">{{ index + 1 }}</th>
+                <td>{{ barangMsk.id_barang_masuk }}</td>
+                <td>{{ barangMsk.id_barang }}</td>
+                <td>{{ barangMsk.no_do }}</td>
+                <td>{{ barangMsk.barang.nama_barang }}</td>
+                <td>{{ barangMsk.barang.kategori }}</td>
+                <td>{{ barangMsk.kuantitas }}</td>
                 <td>
-                  <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
-                    <i class="bi bi-pencil-square"></i>
-                    Edit
-                  </button>
-                  <EditModal />
-                  <button class="btn btn-sm btn-danger mx-2">
-                    <i class="bi bi-trash"></i>
-                    Delete
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>DO-002</td>
-                <td>PTNZ-3</td>
-                <td>Potenza</td>
-                <td>
-                  <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
-                    <i class="bi bi-pencil-square"></i>
-                    Edit
-                  </button>
-                  <EditModal />
-                  <button class="btn btn-sm btn-danger mx-2">
-                    <i class="bi bi-trash"></i>
-                    Delete
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>DO-003</td>
-                <td>ECOP-2</td>
-                <td>Ecopia</td>
-                <td>
-                  <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
-                    <i class="bi bi-pencil-square"></i>
-                    Edit
-                  </button>
-                  <EditModal />
-                  <button class="btn btn-sm btn-danger mx-2">
-                    <i class="bi bi-trash"></i>
-                    Delete
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">4</th>
-                <td>DO-001</td>
-                <td>DUEL-1</td>
-                <td>Dueller</td>
-                <td>
-                  <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
-                    <i class="bi bi-pencil-square"></i>
-                    Edit
-                  </button>
-                  <EditModal />
-                  <button class="btn btn-sm btn-danger mx-2">
-                    <i class="bi bi-trash"></i>
-                    Delete
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">5</th>
-                <td>DO-002</td>
-                <td>PTNZ-3</td>
-                <td>Potenza</td>
-                <td>
-                  <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
-                    <i class="bi bi-pencil-square"></i>
-                    Edit
-                  </button>
-                  <EditModal />
-                  <button class="btn btn-sm btn-danger mx-2">
-                    <i class="bi bi-trash"></i>
-                    Delete
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">6</th>
-                <td>DO-003</td>
-                <td>ECOP-2</td>
-                <td>Ecopia</td>
-                <td>
-                  <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
-                    <i class="bi bi-pencil-square"></i>
-                    Edit
-                  </button>
-                  <EditModal />
-                  <button class="btn btn-sm btn-danger mx-2">
-                    <i class="bi bi-trash"></i>
-                    Delete
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">7</th>
-                <td>DO-003</td>
-                <td>ECOP-2</td>
-                <td>Ecopia</td>
-                <td>
-                  <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
-                    <i class="bi bi-pencil-square"></i>
-                    Edit
-                  </button>
-                  <EditModal />
-                  <button class="btn btn-sm btn-danger mx-2">
-                    <i class="bi bi-trash"></i>
-                    Delete
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">8</th>
-                <td>DO-003</td>
-                <td>ECOP-2</td>
-                <td>Ecopia</td>
-                <td>
-                  <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
-                    <i class="bi bi-pencil-square"></i>
-                    Edit
-                  </button>
-                  <EditModal />
-                  <button class="btn btn-sm btn-danger mx-2">
-                    <i class="bi bi-trash"></i>
-                    Delete
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">9</th>
-                <td>DO-003</td>
-                <td>ECOP-2</td>
-                <td>Ecopia</td>
-                <td>
-                  <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
-                    <i class="bi bi-pencil-square"></i>
-                    Edit
-                  </button>
-                  <EditModal />
-                  <button class="btn btn-sm btn-danger mx-2">
-                    <i class="bi bi-trash"></i>
-                    Delete
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">10</th>
-                <td>DO-003</td>
-                <td>ECOP-2</td>
-                <td>Ecopia</td>
-                <td>
-                  <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
-                    <i class="bi bi-pencil-square"></i>
-                    Edit
-                  </button>
-                  <EditModal />
-                  <button class="btn btn-sm btn-danger mx-2">
-                    <i class="bi bi-trash"></i>
-                    Delete
-                  </button>
+                  <!-- <button class="btn btn-sm btn-primary mx-2"><i class="bi bi-pencil-square"></i> <span>Edit</span></button> -->
+                  <!-- <button type="button" class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#editModal" @click="openEditModal(barangMsk)">edit</button> -->
+                  <button class="btn btn-sm btn-primary mx-2" @click="openEditModal(barangMsk)"><i class="bi bi-pencil-square"></i> <span>Edit</span></button>
+                  <!-- <button class="btn btn-sm btn-danger mx-2" @click="deleteBarang(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button> -->
+                  <button class="btn btn-sm btn-danger mx-2" @click="confirmDelete(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button>
                 </td>
               </tr>
             </tbody>
@@ -205,13 +161,180 @@
         </div>
       </div>
     </div>
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="editLabel">Form Barang Masuk</h1>
+              </div>
+              <div class="modal-body">
+                <form @submit.prevent="handleEditSubmit">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="mb-3 col-md-12">
+                        <label for="kode-barang" class="col-form-label">Masukan kode barang</label>
+                        <input type="text" class="form-control" id="kode-barang" v-model="editBarang.id_barang">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="mb-3 col-md-5">
+                        <label for="tanggal" class="col-form-label">Tanggal Masuk</label>
+                        <input type="date" class="form-control" id="tanggal" v-model="editBarang.tanggal_masuk">
+                      </div>
+                      <div class="mb-3 col-md-7">
+                        <label for="stok" class="col-form-label">Jumlah masuk stok</label>
+                        <input type="number" class="form-control" id="stok" v-model="editBarang.kuantitas" min="0" max="200">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                      <i class="bi bi-x-lg"></i><span class="mx-2">Batal</span>
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                      <i class="bi bi-check2"></i><span class="mx-2" @click="handleEditSubmit">Simpan</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
   </div>
 </template>
 
-
 <script setup>
 import Aside from '../components/Aside.vue'
-import EditModal from '../components/EditModal.vue'
+
+import { ref, onMounted } from 'vue';
+import axios from 'axios'; 
+
+const barangList = ref([]);
+
+const newBarang = ref({
+  id_barang: '',
+  tanggal_masuk: '',
+  kuantitas: 0,
+});
+
+const editBarang = ref({
+  id_barang_masuk: '',
+  id_barang: '',
+  tanggal_masuk: '',
+  kuantitas: 0,
+});
+
+
+
+const fetchData = async () => {
+  try {
+    const response = await axios.get('/barang-masuk');
+    barangList.value = response.data.barangMsk;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+const deleteBarang = async (id_barang_masuk) => {
+  try {
+    await axios.delete(`barang-masuk/delete/${id_barang_masuk}`);
+    fetchData(); 
+  } catch (error) {
+    console.error('Error deleting data:', error);
+  }
+};
+
+const confirmDelete = (id_barang_masuk) => {
+  Swal.fire({
+    title: "Yakin ingin menghapus?",
+    text: "Tindakan ini dapat menghapus data penting!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Ya, saya ingin menghapus!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      deleteBarang(id_barang_masuk).then(() => {
+        Swal.fire({
+          title: "Terhapus!",
+          text: "Data berhasil terhapus.",
+          icon: "success"
+        });
+      });
+    }
+  });
+};
+
+
+const handleAddSubmit = async () => {
+  try {
+    const response = await axios.post('barang-masuk/insert', {
+      id_barang: newBarang.value.id_barang,
+      tanggal_masuk: newBarang.value.tanggal_masuk,
+      kuantitas: newBarang.value.kuantitas,
+    });
+    console.log('Response:', response.data);
+    fetchData();
+    
+    newBarang.value.id_barang = '';
+    newBarang.value.tanggal_masuk = '';
+    newBarang.value.kuantitas = 0;
+    const exampleModal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
+    exampleModal.hide();
+    Swal.fire({
+      position: "middle",
+      icon: "success",
+      title: "Data berhasil tersimpan",
+      showConfirmButton: false,
+      timer: 1500
+    });
+  } catch (error) {
+    console.error('Error submitting form:', error);
+  }
+};
+
+const openEditModal = (barangMsk) => {
+  editBarang.value.id_barang_masuk = barangMsk.id_barang_masuk;
+  editBarang.value.id_barang = barangMsk.id_barang;
+  editBarang.value.tanggal_masuk = barangMsk.tanggal_masuk;
+  editBarang.value.kuantitas = barangMsk.kuantitas;
+  const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+  editModal.show();
+};
+
+const handleEditSubmit = async () => {
+  try {
+    const response = await axios.patch(`barang-masuk/update/${editBarang.value.id_barang_masuk}`, {
+      id_barang: editBarang.value.id_barang,
+      tanggal_masuk: editBarang.value.tanggal_masuk,
+      kuantitas: editBarang.value.kuantitas,
+    });
+    console.log('Response:', response.data);
+    fetchData(); 
+  
+    editBarang.value.id_barang_masuk = '';
+    editBarang.value.id_barang = '';
+    editBarang.value.tanggal_masuk = '';
+    editBarang.value.kuantitas = 0;
+    const editModal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
+    editModal.hide();
+    Swal.fire({
+      position: "middle",
+      icon: "success",
+      title: "Data berhasil tersimpan",
+      showConfirmButton: false,
+      timer: 1500
+    });
+  } catch (error) {
+    console.error('Error submitting form:', error);
+  }
+};
+
+
+
+
+onMounted(fetchData);
 </script>
 
 
@@ -312,7 +435,8 @@ h4 {
 
 .main {
     display: flex;
-    justify-content: center;
+    padding: 50px;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     min-height: 100vh;
@@ -330,7 +454,6 @@ h4 {
 .main .tambah-barang {
     width: 30%;
 }
-
 .avatar {
   height: 40px;
   width: 40px;
