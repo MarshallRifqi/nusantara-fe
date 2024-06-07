@@ -12,49 +12,65 @@
           Hello, Admin!
         </li>
         <li class="sidebar-item">
-          <RouterLink to="/dashboard" class="sidebar-link nav-link" exact>
+          <RouterLink to="/dashboard" class="sidebar-link icon-link" exact>
             <i class="bi bi-house"></i>
             <i class="fa-solid fa-list pe-2"></i>
             Dashboard
           </RouterLink>
         </li>
         <li class="sidebar-item">
-          <RouterLink to="/barangmaster" class="sidebar-link nav-link" exact>
+          <RouterLink to="/barangmaster" class="sidebar-link icon-link" exact>
             <i class="bi bi-box-seam"></i>
             <i class="fa-solid fa-list pe-2"></i>
             Master Barang
           </RouterLink>
         </li>
         <li class="sidebar-item">
-          <RouterLink :to="{ name: 'BarangMasuk' }" class="sidebar-link nav-link">
+          <RouterLink :to="{ name: 'BarangMasuk' }" class="sidebar-link icon-link">
             <i class="bi bi-box-arrow-in-down"></i>
             <i class="fa-solid fa-list pe-2"></i>
             Barang Masuk
           </RouterLink>
         </li>
         <li class="sidebar-item">
-          <RouterLink :to="{ name: 'BarangKeluar' }" class="sidebar-link nav-link">
+          <RouterLink :to="{ name: 'BarangKeluar' }" class="sidebar-link icon-link">
             <i class="bi bi-box-arrow-up"></i>
             <i class="fa-solid fa-list pe-2"></i>
             Barang Keluar
           </RouterLink>
         </li>
         <li class="sidebar-item">
-          <RouterLink :to="{ name: 'Pengiriman' }" class="sidebar-link nav-link">
+          <a href="#submenu2" data-bs-toggle="collapse" class="sidebar-link icon-link">
             <i class="bi bi-truck"></i>
             <i class="fa-solid fa-list pe-2"></i>
             Pengiriman
-          </RouterLink>
+          </a>
+          <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+            <li class="sub-link">
+              <RouterLink :to="{ name: 'Pengiriman' }" class="sidebar-link icon-link">
+                <i class="bi bi-truck"></i>
+                <i class="fa-solid fa-list pe-2"></i>
+                Pengiriman
+              </RouterLink>
+            </li>
+            <li class="sub-link">
+              <RouterLink :to="{ name: 'RiwayatPengiriman' }" class="sidebar-link icon-link">
+                <i class="bi bi-truck"></i>
+                <i class="fa-solid fa-list pe-2"></i>
+                Riwayat Pengiriman
+              </RouterLink>
+            </li>
+          </ul>
         </li>
         <li class="sidebar-item">
-          <RouterLink :to="{ name: 'StockOpname' }" class="sidebar-link nav-link">
+          <RouterLink :to="{ name: 'StockOpname' }" class="sidebar-link icon-link">
             <i class="bi bi-bag-check"></i>
             <i class="fa-solid fa-list pe-2"></i>
             Stok Opname
           </RouterLink>
         </li>
         <li class="sidebar-item mt-5">
-          <RouterLink :to="{ name: 'Login' }" class="sidebar-link nav-link">
+          <RouterLink :to="{ name: 'Login' }" class="sidebar-link icon-link">
             <i class="fa-solid fa-list pe-2 bi-box-arrow-right"></i>
             Logout
           </RouterLink>
@@ -148,5 +164,12 @@ a {
 
 .sidebar-item{
   margin-bottom: 15px;
+}
+
+.sub-link{
+  margin-left: 10px;
+  /* padding: 10px; */
+  /* margin-bottom: 15px; */
+  margin-top: 15px
 }
 </style>

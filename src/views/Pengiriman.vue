@@ -2,213 +2,84 @@
   <div class="wrapper">
     <Aside/>
 
-            <div class="main">
-            <div class="input-group mb-5">
-                <input type="search" placeholder="Cari stok barang" aria-describedby="button-addon5" class="form-control rounded-pill">
-                <div class="input-group-append mx-3">
-                    <button id="button-addon5" type="submit" class="btn btn-danger"><i class="bi bi-search"></i>Search</button>
-                </div>
-                <div class="riwayat">
-                    <a href="#" class="btn btn-danger">
-                        <RouterLink :to="{ name: 'Login' }" class="tambah-button">Barang Terkirim</RouterLink>
-                    </a>
-                </div>
-            </div>
-                    <!-- Table Element -->
-                    <div class="card border-0 mx-5">
-                        <div class="card-header">
-                            <h5 class="card-title">
-                                Recent Orders
-                            </h5>
-                        </div>
-                        <div class="card-body">
-                            <table class="table">
-                                <thead>
-                                  <tr>
-                                    <th scope="col" class="tbl-no">No</th>
-                                    <th scope="col" class="tbl-do">Nomor DO</th>
-                                    <th scope="col" class="tbl-kode">Kode Barang</th>
-                                    <th scope="col" class="tbl-deskripsi">Deskripsi</th>
-                                    <th scope="col" class="tbl-aksi">Aksi</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                  <th scope="row">1</th>
-                                  <td>DO-001</td>
-                                  <td>DUEL-1</td>
-                                  <td>Dueller</td>
-                                  <td>
-                                    <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
-                                      <i class="bi bi-pencil-square"></i>
-                                      Edit
-                                    </button>
-                                    <EditModal />
-                                    <button class="btn btn-sm btn-danger mx-2">
-                                      <i class="bi bi-trash"></i>
-                                      Delete
-                                    </button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">2</th>
-                                  <td>DO-002</td>
-                                  <td>PTNZ-3</td>
-                                  <td>Potenza</td>
-                                  <td>
-                                    <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
-                                      <i class="bi bi-pencil-square"></i>
-                                      Edit
-                                    </button>
-                                    <EditModal />
-                                    <button class="btn btn-sm btn-danger mx-2">
-                                      <i class="bi bi-trash"></i>
-                                      Delete
-                                    </button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">3</th>
-                                  <td>DO-003</td>
-                                  <td>ECOP-2</td>
-                                  <td>Ecopia</td>
-                                  <td>
-                                    <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
-                                      <i class="bi bi-pencil-square"></i>
-                                      Edit
-                                    </button>
-                                    <EditModal />
-                                    <button class="btn btn-sm btn-danger mx-2">
-                                      <i class="bi bi-trash"></i>
-                                      Delete
-                                    </button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">4</th>
-                                  <td>DO-001</td>
-                                  <td>DUEL-1</td>
-                                  <td>Dueller</td>
-                                  <td>
-                                    <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
-                                      <i class="bi bi-pencil-square"></i>
-                                      Edit
-                                    </button>
-                                    <EditModal />
-                                    <button class="btn btn-sm btn-danger mx-2">
-                                      <i class="bi bi-trash"></i>
-                                      Delete
-                                    </button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">5</th>
-                                  <td>DO-002</td>
-                                  <td>PTNZ-3</td>
-                                  <td>Potenza</td>
-                                  <td>
-                                    <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
-                                      <i class="bi bi-pencil-square"></i>
-                                      Edit
-                                    </button>
-                                    <EditModal />
-                                    <button class="btn btn-sm btn-danger mx-2">
-                                      <i class="bi bi-trash"></i>
-                                      Delete
-                                    </button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">6</th>
-                                  <td>DO-003</td>
-                                  <td>ECOP-2</td>
-                                  <td>Ecopia</td>
-                                  <td>
-                                    <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
-                                      <i class="bi bi-pencil-square"></i>
-                                      Edit
-                                    </button>
-                                    <EditModal />
-                                    <button class="btn btn-sm btn-danger mx-2">
-                                      <i class="bi bi-trash"></i>
-                                      Delete
-                                    </button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">7</th>
-                                  <td>DO-003</td>
-                                  <td>ECOP-2</td>
-                                  <td>Ecopia</td>
-                                  <td>
-                                    <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
-                                      <i class="bi bi-pencil-square"></i>
-                                      Edit
-                                    </button>
-                                    <EditModal />
-                                    <button class="btn btn-sm btn-danger mx-2">
-                                      <i class="bi bi-trash"></i>
-                                      Delete
-                                    </button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">8</th>
-                                  <td>DO-003</td>
-                                  <td>ECOP-2</td>
-                                  <td>Ecopia</td>
-                                  <td>
-                                    <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
-                                      <i class="bi bi-pencil-square"></i>
-                                      Edit
-                                    </button>
-                                    <EditModal />
-                                    <button class="btn btn-sm btn-danger mx-2">
-                                      <i class="bi bi-trash"></i>
-                                      Delete
-                                    </button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">9</th>
-                                  <td>DO-003</td>
-                                  <td>ECOP-2</td>
-                                  <td>Ecopia</td>
-                                  <td>
-                                    <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
-                                      <i class="bi bi-pencil-square"></i>
-                                      Edit
-                                    </button>
-                                    <EditModal />
-                                    <button class="btn btn-sm btn-danger mx-2">
-                                      <i class="bi bi-trash"></i>
-                                      Delete
-                                    </button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">10</th>
-                                  <td>DO-003</td>
-                                  <td>ECOP-2</td>
-                                  <td>Ecopia</td>
-                                  <td>
-                                    <button class="btn btn-sm btn-warning mx-2" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@getbootstrap">
-                                      <i class="bi bi-pencil-square"></i>
-                                      Edit
-                                    </button>
-                                    <EditModal />
-                                    <button class="btn btn-sm btn-danger mx-2">
-                                      <i class="bi bi-trash"></i>
-                                      Delete
-                                    </button>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="main">
+      <div class="input-group mb-5">
+        <input type="search" placeholder="Cari stok barang" aria-describedby="button-addon5" class="form-control rounded-pill">
+        <div class="input-group-append mx-3">
+          <button id="button-addon5" type="submit" class="btn btn-danger"><i class="bi bi-search"></i>Search</button>
+        </div>
+        <div class="riwayat">
+          <a href="RiwayatPengiriman" class="btn btn-danger">
+            <RouterLink :to="{ name: 'RiwayatPengiriman' }" class="tambah-button">Barang Terkirim</RouterLink>
+          </a>
+        </div>
+      </div>
+      <!-- Table Element -->
+      <div class="card border-0 mx-5 p-2">
+        <div class="card-header">
+          <h5 class="card-title">List Pengiriman</h5>
+        </div>
+        <div class="card-body">
+          <table class="table table-light table-striped">
+            <thead>
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">Tanggal dan Waktu</th>
+                <th scope="col">Id Pengiriman</th>
+                <th scope="col">Nama Ban</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Status</th>
+                <th scope="col">Stok</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <!-- <th></th> -->
+                <td>1</td>
+                <td>07-05-2024</td>
+                <td></td>
+                <td>EP300</td>
+                <td></td>
+                <td><span class="badge rounded-pill bg-primary">Pengecekan</span></td>
+                <td></td>
+              </tr>
+              <tr>
+                <!-- <th></th> -->
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><span class="badge rounded-pill bg-secondary">Dalam Antrean</span></td>
+                <td></td>
+              </tr>
+              <tr>
+                <!-- <th></th> -->
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><span class="badge rounded-pill bg-warning">Pengiriman</span></td>
+                <td></td>
+              </tr>
+              <tr>
+                <!-- <th></th> -->
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><span class="badge rounded-pill bg-success">Terkirim</span></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </template>
 
 
