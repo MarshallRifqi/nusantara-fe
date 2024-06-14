@@ -3,19 +3,6 @@
     <Aside/>
 
     <div class="main">
-      <!-- <div class="container">
-        <div class="row">
-          <div class="col">
-            <img src="../assets/nusantara_white.png" class="logo-nusantara" alt="">
-          </div>
-          <div class="col-6">
-            2 of 3 (wider)
-          </div>
-          <div class="col">
-            3 of 3
-          </div>
-        </div>
-      </div> -->
 
       <div class="card border-0 mx-5 p-2">
         <div class="card-header">
@@ -49,30 +36,35 @@
           </div>
         </div>
         <div class="card-body">
+          <!-- Table Element -->
           <table class="table table-light table-striped">
             <thead>
               <tr>
-                <th scope="col">No</th>
-                <th scope="col">Tanggal dan Waktu</th>
-                <th scope="col">Id Pengiriman</th>
+                <th scope="col">#</th>
+                <th scope="col">Id barang masuk</th>
+                <th scope="col">Kode Barang</th>
+                <th scope="col">No DO</th>
                 <th scope="col">Nama Ban</th>
-                <th scope="col">Customer</th>
-                <th scope="col">Status</th>
+                <th scope="col">Tipe Ban</th>
                 <th scope="col">Stok</th>
-                <th scope="col">Aksi</th>
+                <th class="text-center" scope="col">Aksi</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <!-- <th></th> -->
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><span class="badge rounded-pill bg-success">Terkirim</span></td>
-                <td></td>
+              <tr v-for="(barangMsk, index) in barangList" :key="barangMsk.id_barang_masuk">
+                <th scope="row">{{ index + 1 }}</th>
+                <td>{{ barangMsk.id_barang_masuk }}</td>
+                <td>{{ barangMsk.id_barang }}</td>
+                <td>{{ barangMsk.no_do }}</td>
+                <td>{{ barangMsk.barang.nama_barang }}</td>
+                <td>{{ barangMsk.barang.kategori }}</td>
+                <td>{{ barangMsk.kuantitas }}</td>
                 <td>
+                  <!-- <button class="btn btn-sm btn-primary mx-2"><i class="bi bi-pencil-square"></i> <span>Edit</span></button> -->
+                  <!-- <button type="button" class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#editModal" @click="openEditModal(barangMsk)">edit</button> -->
+                  <button class="btn btn-sm btn-primary mx-2" @click="openEditModal(barangMsk)"><i class="bi bi-pencil-square"></i> <span>Edit</span></button>
+                  <!-- <button class="btn btn-sm btn-danger mx-2" @click="deleteBarang(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button> -->
+                  <button class="btn btn-sm btn-danger mx-2" @click="confirmDelete(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button>
                   <button class="btn btn-sm btn-primary mx-2" @click="opendetailModal()">Detail</button>
                 </td>
               </tr>
@@ -88,6 +80,7 @@
       </div>
     </div>
   </div>
+
 </template>
   
 <script setup>

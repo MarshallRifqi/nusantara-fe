@@ -8,7 +8,7 @@
           <button id="button-addon5" type="submit" class="btn btn-danger"><i class="bi bi-search"></i>Search</button>
         </div>
         <button type="button" class="btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          Tambah Barang
+          Tambah Customer
         </button>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -102,7 +102,7 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h1 class="modal-title fs-5" id="editLabel">Form Barang Masuk</h1>
+                <h1 class="modal-title fs-5" id="editLabel">Form Edit Customer</h1>
               </div>
               <div class="modal-body">
                 <form @submit.prevent="handleEditSubmit">
@@ -159,11 +159,11 @@ import axios from 'axios';
 const pelangganList = ref([]);
 // const BarangList = ref([]);
 
-const newBarang = ref({
-  id_barang: '',
-  tanggal_masuk: '',
-  kuantitas: 0,
-});
+// const newBarang = ref({
+//   id_barang: '',
+//   tanggal_masuk: '',
+//   kuantitas: 0,
+// });
 const newUser = ref({
   id_pelanggan: '',
   nama_pelanggan: '', 
@@ -172,18 +172,18 @@ const newUser = ref({
   no_telepon: '' 
 });
 
-const editBarang = ref({
-  id_barang_masuk: '',
-  id_barang: '',
-  tanggal_masuk: '',
-  kuantitas: 0,
-});
+// const editBarang = ref({
+//   id_barang_masuk: '',
+//   id_barang: '',
+//   tanggal_masuk: '',
+//   kuantitas: 0,
+// });
 const editUser = ref({
   id_pelanggan: '',
   nama_pelanggan: '', 
   alamat: '',
   email: '',
-  no_telpon: '' 
+  no_telepon: '' 
 });
 
 
@@ -197,7 +197,7 @@ const fetchData = async () => {
   }
 };
 
-const deleteBarang = async (id_pelanggan) => {
+const deleteCustomer = async (id_pelanggan) => {
   try {
     await axios.delete(`pelanggan/delete/${id_pelanggan}`);
     fetchData(); 
@@ -217,7 +217,7 @@ const confirmDelete = (id_pelanggan) => {
     confirmButtonText: "Ya, saya ingin menghapus!"
   }).then((result) => {
     if (result.isConfirmed) {
-      deleteBarang(id_pelanggan).then(() => {
+      deleteCustomer(id_pelanggan).then(() => {
         Swal.fire({
           title: "Terhapus!",
           text: "Data berhasil terhapus.",
@@ -232,9 +232,6 @@ const confirmDelete = (id_pelanggan) => {
 const handleAddSubmit = async () => {
   try {
     const response = await axios.post('pelanggan/insert', {
-      // id_barang: newBarang.value.id_barang,
-      // tanggal_masuk: newBarang.value.tanggal_masuk,
-      // kuantitas: newBarang.value.kuantitas,
       id_pelanggan: newUser.value.id_pelanggan,
       nama_pelanggan: newUser.value.nama_pelanggan, 
       alamat: newUser.value.alamat,
@@ -243,11 +240,6 @@ const handleAddSubmit = async () => {
     });
     console.log('Response:', response.data);
     fetchData();
-    
-    // newBarang.value.id_barang = '';
-    // newBarang.value.tanggal_masuk = '';
-    // newBarang.value.kuantitas = 0;
-
     newUser.value.id_pelanggan = '',
     newUser.value.nama_pelanggan = '', 
     newUser.value.alamat = '',
@@ -269,11 +261,6 @@ const handleAddSubmit = async () => {
 };
 
 const openEditModal = (pelanggan) => {
-  // editBarang.value.id_barang_masuk = barangMsk.id_barang_masuk;
-  // editBarang.value.id_barang = barangMsk.id_barang;
-  // editBarang.value.tanggal_masuk = barangMsk.tanggal_masuk;
-  // editBarang.value.kuantitas = barangMsk.kuantitas;
-
   editUser.value.id_pelanggan = pelanggan.id_pelanggan;
   editUser.value.nama_pelanggan = pelanggan.nama_pelanggan;
   editUser.value.alamat = pelanggan.alamat;
@@ -287,9 +274,6 @@ const openEditModal = (pelanggan) => {
 const handleEditSubmit = async () => {
   try {
     const response = await axios.put(`pelanggan/update/${editUser.value.id_pelanggan}`, {
-      // id_barang: editBarang.value.id_barang,
-      // tanggal_masuk: editBarang.value.tanggal_masuk,
-      // kuantitas: editBarang.value.kuantitas,
 
       id_pelanggan: editUser.value.id_pelanggan,
       nama_pelanggan: editUser.value.nama_pelanggan,

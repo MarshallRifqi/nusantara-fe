@@ -33,7 +33,7 @@
           </RouterLink>
         </li>
         <li class="sidebar-item">
-          <RouterLink :to="{ name: 'customers' }" class="sidebar-link nav-link">
+          <RouterLink :to="{ name: 'customers' }" class="sidebar-link icon-link">
             <i class="bi bi-person-workspace"></i>
             <i class="fa-solid fa-list pe-2"></i>
             Customer
@@ -68,13 +68,6 @@
               </RouterLink>
             </li>
           </ul>
-        </li>
-        <li class="sidebar-item">
-          <RouterLink :to="{ name: 'StockOpname' }" class="sidebar-link icon-link">
-            <i class="bi bi-bag-check"></i>
-            <i class="fa-solid fa-list pe-2"></i>
-            Stok Opname
-          </RouterLink>
         </li>
         <li class="sidebar-item mt-5">
           <RouterLink :to="{ name: 'Login' }" class="sidebar-link icon-link">
