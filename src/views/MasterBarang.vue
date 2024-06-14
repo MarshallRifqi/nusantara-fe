@@ -194,6 +194,7 @@ const deleteBarang = async (id_barang) => {
   try {
     await axios.delete(`/barang/delete/${id_barang}`);
     fetchData(); 
+    console.log('Response:', response.data);
   } catch (error) {
     console.error('Error deleting data:', error);
   }
@@ -201,6 +202,7 @@ const deleteBarang = async (id_barang) => {
 
 const confirmDelete = (id_barang) => {
   Swal.fire({
+    position: "center",
     title: "Yakin ingin menghapus?",
     text: "Tindakan ini dapat menghapus data penting!",
     icon: "warning",
@@ -213,7 +215,7 @@ const confirmDelete = (id_barang) => {
       deleteBarang(id_barang).then(() => {
         Swal.fire({
           title: "Terhapus!",
-          text: "Data berhasil terhapus.",
+          text: "Data Berhasil Terhapus",
           icon: "success"
         });
       });
@@ -252,9 +254,9 @@ const handleSubmit = async () => {
     const exampleModal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
     exampleModal.hide();
     Swal.fire({
-      position: "middle",
+      position: "center",
       icon: "success",
-      title: "Data berhasil tersimpan",
+      title: response.data,
       showConfirmButton: false,
       timer: 1500
     });
@@ -284,9 +286,9 @@ const handleEditSubmit = async () => {
     const editModal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
     editModal.hide();
     Swal.fire({
-      position: "middle",
+      position: "center",
       icon: "success",
-      title: "Data berhasil tersimpan",
+      title: response.data,
       showConfirmButton: false,
       timer: 1500
     });

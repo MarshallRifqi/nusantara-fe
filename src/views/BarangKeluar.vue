@@ -41,14 +41,14 @@
                             <select id="kode-barang" class="form-select mb-2" v-model="newBarang.id_barang">
                               <option disabled value="">Pilih barang</option>
                               <option value="BRG-14846914">Adrenalin RE003</option>
-                              <option value="BRG-27540728">S007A</option>
-                              <option value="BRG-65147694">RE050</option>
-                              <option value="BRG-02769403">MPV-1</option>
-                              <option value="BRG-19646238">EP150</option>
-                              <option value="BRG-48653832">EP300</option>
-                              <option value="BRG-45352771">All Terrain 697</option>
-                              <option value="BRG-73996611">Mud Terrain 674</option>
-                              <option value="BRG-04844424">HL 683</option>
+                              <!-- <option value="BRG-27540728">S007A</option> -->
+                              <!-- <option value="BRG-65147694">RE050</option> -->
+                              <!-- <option value="BRG-02769403">MPV-1</option> -->
+                              <!-- <option value="BRG-19646238">EP150</option> -->
+                              <!-- <option value="BRG-48653832">EP300</option> -->
+                              <!-- <option value="BRG-45352771">All Terrain 697</option> -->
+                              <!-- <option value="BRG-73996611">Mud Terrain 674</option> -->
+                              <!-- <option value="BRG-04844424">HL 683</option> -->
                             </select>
                             <!-- <input type="text" class="form-control" id="kode-barang" v-model="newBarang.id_barang"> -->
                             <!-- <label for="kode-barang" class="col-form-label" readonly>Masukan kode barang</label> -->
