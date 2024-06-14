@@ -25,7 +25,7 @@
                             <label for="kode-barang" class="col-form-label">Pilih Barang</label>
                             <select id="kode-barang" class="form-select mb-2" v-model="newBarang.id_barang">
                               <option disabled value="">Pilih barang</option>
-                              <option value="BRG-14846914">Adrenalin RE003</option>
+                              <option value="BRG-37424506">Adrenalin RE003</option>
                               <!-- <option value="BRG-27540728">S007A</option> -->
                               <!-- <option value="BRG-65147694">RE050</option> -->
                               <!-- <option value="BRG-02769403">MPV-1</option> -->
@@ -34,6 +34,7 @@
                               <!-- <option value="BRG-45352771">All Terrain 697</option> -->
                               <!-- <option value="BRG-73996611">Mud Terrain 674</option> -->
                               <!-- <option value="BRG-04844424">HL 683</option> -->
+                              <!-- <option value="BRG-90014740">Ban Baru</option> -->
                             </select>
                           </div>
                           <div class="mb-3 col-md-6">
@@ -43,47 +44,47 @@
                         </div>
                         <div class="row">
                           <div class="col-md-6">
-                            <label for="kode-barang" class="col-form-label">Pilih Customer</label>
-                            <select id="kode-barang" class="form-select mb-2">
+                            <label for="kode-pelanggan" class="col-form-label">Pilih Customer</label>
+                            <select id="kode-pelanggan" class="form-select mb-2" v-model="newBarang.id_pelanggan">
                               <option disabled value="">Customer</option>
-                              <option value="#">Customer 1</option>
-                              <option value="#">Customer 2</option>
-                              <option value="#">Customer 3</option>
+                              <option value="PLG-95465446">Marshall</option>
+                              <!-- <option value="#">Customer 2</option> -->
+                              <!-- <option value="#">Customer 3</option> -->
                             </select>
                           </div>
                           <div class="col-md-6">
                             <label for="alamat" class="col-form-label">Id Pelanggan</label>
-                            <input type="text" class="form-control" id="alamat" placeholder="CST-00000" readonly>
+                            <input type="text" class="form-control" id="alamat" v-model="newBarang.id_pelanggan" readonly>
                           </div>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                           <div class="mb-3 col-md-12">
                             <label for="alamat" class="col-form-label">Alamat</label>
                             <input type="text" class="form-control" id="alamat" placeholder="Jalan haji daud No.70" readonly>
                           </div>
-                        </div>
+                        </div> -->
                       </div>
                       <div class="col-md-6">
                         <div class="row">
-                          <div class="mb-3 col-md-6">
+                          <!-- <div class="mb-3 col-md-6">
                             <label for="alamat" class="col-form-label">Stok Master Barang</label>
                             <input type="number" class="form-control" id="alamat" placeholder="200" readonly>
-                            </div>
-                            <div class="mb-3 col-md-6">
-                              <label for="stok" class="col-form-label">Stok Barang Keluar</label>
+                            </div> -->
+                            <div class="mb-3 col-md-12">
+                              <label for="stok" class="col-form-label">Jumlah Barang Keluar</label>
                               <input type="number" class="form-control" id="stok" min="0" v-model="newBarang.kuantitas">
                           </div>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                           <div class="mb-3 col-md-12">
                             <label for="stok" class="col-form-label">Keterangan</label>
                             <input type="text" class="form-control" id="stok">
                           </div>
-                        </div>
+                        </div> -->
                         <div class="row">
                           <div class="mb-3 col-md-12">
-                            <label for="tanggal" class="col-form-label">Tanggal Masuk</label>
-                            <input type="date" class="form-control" id="tanggal" v-model="newBarang.tanggal_masuk">
+                            <label for="tanggal" class="col-form-label">Tanggal keluar</label>
+                            <input type="date" class="form-control" id="tanggal" v-model="newBarang.tanggal_keluar">
                           </div>
                         </div>
                       </div>
@@ -112,31 +113,31 @@
           <table class="table table-light table-striped">
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Id barang masuk</th>
-                <th scope="col">Kode Barang</th>
-                <th scope="col">No DO</th>
-                <th scope="col">Nama Ban</th>
-                <th scope="col">Tipe Ban</th>
-                <th scope="col">Stok</th>
+                <th scope="col">No</th>
+                <th scope="col">Id Barang Keluar</th>
+                <th scope="col">Id Barang</th>
+                <th scope="col">Id Pelanggan</th>
+                <th scope="col">Kuantitas</th>
+                <th scope="col">Tanggal Keluar</th>
+                <th scope="col">Total Harga</th>
                 <th class="text-center" scope="col">Aksi</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(barangMsk, index) in barangList" :key="barangMsk.id_barang_masuk">
+              <tr v-for="(barangKlr, index) in barangList" :key="barangKlr.id_barang_keluar">
                 <th scope="row">{{ index + 1 }}</th>
-                <td>{{ barangMsk.id_barang_masuk }}</td>
-                <td>{{ barangMsk.id_barang }}</td>
-                <td>{{ barangMsk.no_do }}</td>
-                <td>{{ barangMsk.barang.nama_barang }}</td>
-                <td>{{ barangMsk.barang.kategori }}</td>
-                <td>{{ barangMsk.kuantitas }}</td>
+                <td>{{ barangKlr.id_barang_keluar }}</td>
+                <td>{{ barangKlr.id_barang }}</td>
+                <td>{{ barangKlr.id_pelanggan }}</td>
+                <td>{{ barangKlr.kuantitas }}</td>
+                <td>{{ barangKlr.tanggal_keluar }}</td>
+                <td>{{ barangKlr.total_harga }}</td>
                 <td>
                   <!-- <button class="btn btn-sm btn-primary mx-2"><i class="bi bi-pencil-square"></i> <span>Edit</span></button> -->
                   <!-- <button type="button" class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#editModal" @click="openEditModal(barangMsk)">edit</button> -->
-                  <button class="btn btn-sm btn-primary mx-2" @click="openEditModal(barangMsk)"><i class="bi bi-pencil-square"></i> <span>Edit</span></button>
+                  <button class="btn btn-sm btn-primary mx-2" @click="openEditModal(barangKlr)"><i class="bi bi-pencil-square"></i> <span>Edit</span></button>
                   <!-- <button class="btn btn-sm btn-danger mx-2" @click="deleteBarang(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button> -->
-                  <button class="btn btn-sm btn-danger mx-2" @click="confirmDelete(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button>
+                  <button class="btn btn-sm btn-danger mx-2" @click="confirmDelete(barangKlr.id_barang_keluar)"><i class="bi bi-trash"></i> <span>Delete</span></button>
                   <button class="btn btn-sm btn-primary mx-2" @click="opendetailModal()">Detail</button>
                 </td>
               </tr>
@@ -156,19 +157,31 @@
               <div class="container-fluid">
                 <div class="row">
                   <div class="mb-3 col-md-12">
-                    <label for="kode-barang" class="col-form-label">Masukan kode barang</label>
-                    <input type="text" class="form-control" id="kode-barang" v-model="editBarang.id_barang">
+                    <label for="barang-keluar" class="col-form-label">Id Barang Keluar</label>
+                    <input type="text" class="form-control" id="barang-keluar" v-model="newBarang.id_barang_keluar" readonly>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="mb-3 col-md-5">
-                    <label for="tanggal" class="col-form-label">Tanggal Masuk</label>
-                    <input type="date" class="form-control" id="tanggal" v-model="editBarang.tanggal_masuk">
+                  <div class="mb-3 col-md-6">
+                    <label for="id-barang" class="col-form-label">Id Barang</label>
+                    <input type="text" class="form-control" id="id-barang" v-model="newBarang.id_barang" readonly>
                   </div>
-                  <div class="mb-3 col-md-7">
-                    <label for="stok" class="col-form-label">Jumlah masuk stok</label>
-                    <input type="number" class="form-control" id="stok" v-model="editBarang.kuantitas" min="0" max="200">
+                  <div class="mb-3 col-md-6">
+                    <label for="pelanggan" class="col-form-label">Id Pelanggan</label>
+                    <input type="text" class="form-control" id="pelanggan" v-model="newBarang.id_pelanggan" readonly>
                   </div>
+                </div>
+                <!-- <div class="row">
+                </div> -->
+                <div class="row">
+                  <div class="mb-3 col-md-6">
+                    <label for="stok-edit" class="col-form-label">Jumlah Barang keluar</label>
+                    <input type="number" class="form-control" id="stok-edit" v-model="newBarang.kuantitas">
+                    </div>
+                      <div class="mb-3 col-md-6">
+                        <label for="tanggal" class="col-form-label">Tanggal Masuk</label>
+                        <input type="date" class="form-control" id="tanggal" v-model="newBarang.tanggal_keluar">
+                      </div>
                 </div>
               </div>
               <div class="modal-footer">
@@ -228,7 +241,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="(barangMsk, index) in barangList" :key="barangMsk.id_barang_masuk">
+                          <!-- <tr v-for="(barangMsk, index) in barangList" :key="barangMsk.id_barang_masuk">
                             <th scope="row">{{ index + 1 }}</th>
                             <td>{{ barangMsk.id_barang_masuk }}</td>
                             <td>{{ barangMsk.id_barang }}</td>
@@ -237,14 +250,14 @@
                             <td>{{ barangMsk.barang.kategori }}</td>
                             <td>{{ barangMsk.kuantitas }}</td>
                             <td>
-                              <!-- <button class="btn btn-sm btn-primary mx-2"><i class="bi bi-pencil-square"></i> <span>Edit</span></button> -->
-                              <!-- <button type="button" class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#editModal" @click="openEditModal(barangMsk)">edit</button> -->
+                              <button class="btn btn-sm btn-primary mx-2"><i class="bi bi-pencil-square"></i> <span>Edit</span></button>
+                              <button type="button" class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#editModal" @click="openEditModal(barangMsk)">edit</button>
                               <button class="btn btn-sm btn-primary mx-2" @click="openEditModal(barangMsk)"><i class="bi bi-pencil-square"></i> <span>Edit</span></button>
-                              <!-- <button class="btn btn-sm btn-danger mx-2" @click="deleteBarang(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button> -->
+                              <button class="btn btn-sm btn-danger mx-2" @click="deleteBarang(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button>
                               <button class="btn btn-sm btn-danger mx-2" @click="confirmDelete(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button>
                               <button class="btn btn-sm btn-primary mx-2" @click="opendetailModal()">Detail</button>
                             </td>
-                          </tr>
+                          </tr> -->
                         </tbody>
                       </table>
                     </div>
@@ -280,32 +293,35 @@ const opendetailModal = () => {
 const barangList = ref([]);
 
 const newBarang = ref({
+  // id_barang_masuk: '',
   id_barang: '',
+  id_pelanggan: '',
   tanggal_masuk: '',
   kuantitas: 0,
+  tanggal_keluar: ''
 });
 
-const editBarang = ref({
-  id_barang_masuk: '',
-  id_barang: '',
-  tanggal_masuk: '',
-  kuantitas: 0,
-});
+// const editBarang = ref({
+//   id_barang_masuk: '',
+//   id_barang: '',
+//   tanggal_masuk: '',
+//   kuantitas: 0,
+// });
 
 
 
 const fetchData = async () => {
   try {
-    const response = await axios.get('/barang-masuk');
-    barangList.value = response.data.barangMsk;
+    const response = await axios.get('/barang-keluar');
+    barangList.value = response.data.barangKlr;
   } catch (error) {
     console.error('Error fetching data:', error);
   }
 };
 
-const deleteBarang = async (id_barang_masuk) => {
+const deleteBarang = async (id_barang_keluar) => {
   try {
-    await axios.delete(`barang-masuk/delete/${id_barang_masuk}`);
+    await axios.delete(`barang-keluar/delete/${id_barang_keluar}`);
     fetchData(); 
   } catch (error) {
     console.error('Error deleting data:', error);
@@ -337,23 +353,26 @@ const confirmDelete = (id_barang_masuk) => {
 
 const handleAddSubmit = async () => {
   try {
-    const response = await axios.post('barang-masuk/insert', {
+    const response = await axios.post('barang-keluar/insert', {
       id_barang: newBarang.value.id_barang,
-      tanggal_masuk: newBarang.value.tanggal_masuk,
+      id_pelanggan: newBarang.value.id_pelanggan,
       kuantitas: newBarang.value.kuantitas,
+      tanggal_keluar: newBarang.value.tanggal_keluar,
+
     });
     console.log('Response:', response.data);
     fetchData();
     
     newBarang.value.id_barang = '';
-    newBarang.value.tanggal_masuk = '';
-    newBarang.value.kuantitas = 0;
+    newBarang.value.id_pelanggan= '';
+    newBarang.value.kuantitas= '';
+    newBarang.value.tanggal_keluar = '';
     const exampleModal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
     exampleModal.hide();
     Swal.fire({
       position: "middle",
       icon: "success",
-      title: "Data berhasil tersimpan",
+      title: response.data,
       showConfirmButton: false,
       timer: 1500
     });
@@ -361,36 +380,75 @@ const handleAddSubmit = async () => {
     console.error('Error submitting form:', error);
   }
 };
+// const handleAddSubmit = async () => {
+//   try {
+//     const response = await axios.post('barang-masuk/insert', {
+//       id_barang: newBarang.value.id_barang,
+//       tanggal_masuk: newBarang.value.tanggal_masuk,
+//       kuantitas: newBarang.value.kuantitas,
+//     });
+//     console.log('Response:', response.data);
+//     fetchData();
+    
+//     newBarang.value.id_barang = '';
+//     newBarang.value.tanggal_masuk = '';
+//     newBarang.value.kuantitas = 0;
+//     const exampleModal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
+//     exampleModal.hide();
+//     Swal.fire({
+//       position: "middle",
+//       icon: "success",
+//       title: "Data berhasil tersimpan",
+//       showConfirmButton: false,
+//       timer: 1500
+//     });
+//   } catch (error) {
+//     console.error('Error submitting form:', error);
+//   }
+// };
 
-const openEditModal = (barangMsk) => {
-  editBarang.value.id_barang_masuk = barangMsk.id_barang_masuk;
-  editBarang.value.id_barang = barangMsk.id_barang;
-  editBarang.value.tanggal_masuk = barangMsk.tanggal_masuk;
-  editBarang.value.kuantitas = barangMsk.kuantitas;
+const openEditModal = (barangKlr) => {
+  newBarang.value.id_barang_keluar = barangKlr.id_barang_keluar;
+  newBarang.value.id_barang = barangKlr.id_barang;
+  newBarang.value.id_pelanggan= barangKlr.id_pelanggan;
+  newBarang.value.kuantitas = barangKlr.kuantitas;
+  newBarang.value.tanggal_keluar = barangKlr.tanggal_keluar;
   const editModal = new bootstrap.Modal(document.getElementById('editModal'));
   editModal.show();
 };
+// const openEditModal = (barangMsk) => {
+//   editBarang.value.id_barang_masuk = barangMsk.id_barang_masuk;
+//   editBarang.value.id_barang = barangMsk.id_barang;
+//   editBarang.value.tanggal_masuk = barangMsk.tanggal_masuk;
+//   editBarang.value.kuantitas = barangMsk.kuantitas;
+//   const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+//   editModal.show();
+// };
 
 const handleEditSubmit = async () => {
   try {
-    const response = await axios.patch(`barang-masuk/update/${editBarang.value.id_barang_masuk}`, {
-      id_barang: editBarang.value.id_barang,
-      tanggal_masuk: editBarang.value.tanggal_masuk,
-      kuantitas: editBarang.value.kuantitas,
+    const response = await axios.put(`barang-keluar/update/${newBarang.value.id_barang_keluar}`, {
+      // id_barang: editBarang.value.id_barang,
+      id_barang_keluar: newBarang.value.id_barang_keluar,
+      id_barang: newBarang.value.id_barang,
+      id_pelanggan: newBarang.value.id_pelanggan,
+      kuantitas: newBarang.value.kuantitas,
+      tanggal_keluar: newBarang.value.tanggal_keluar,
     });
     console.log('Response:', response.data);
     fetchData(); 
   
-    editBarang.value.id_barang_masuk = '';
-    editBarang.value.id_barang = '';
-    editBarang.value.tanggal_masuk = '';
-    editBarang.value.kuantitas = 0;
+    newBarang.value.id_barang_keluar = '';
+    newBarang.value.id_barang = '';
+    newBarang.value.id_pelanggan = '';
+    newBarang.value.kuantitas = 0;
+    newBarang.value.tanggal_keluar = '';
     const editModal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
     editModal.hide();
     Swal.fire({
       position: "middle",
       icon: "success",
-      title: "Data berhasil tersimpan",
+      title: response.data,
       showConfirmButton: false,
       timer: 1500
     });
@@ -398,6 +456,33 @@ const handleEditSubmit = async () => {
     console.error('Error submitting form:', error);
   }
 };
+// const handleEditSubmit = async () => {
+//   try {
+//     const response = await axios.patch(`barang-masuk/update/${editBarang.value.id_barang_masuk}`, {
+//       id_barang: editBarang.value.id_barang,
+//       tanggal_masuk: editBarang.value.tanggal_masuk,
+//       kuantitas: editBarang.value.kuantitas,
+//     });
+//     console.log('Response:', response.data);
+//     fetchData(); 
+  
+//     editBarang.value.id_barang_masuk = '';
+//     editBarang.value.id_barang = '';
+//     editBarang.value.tanggal_masuk = '';
+//     editBarang.value.kuantitas = 0;
+//     const editModal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
+//     editModal.hide();
+//     Swal.fire({
+//       position: "middle",
+//       icon: "success",
+//       title: "Data berhasil tersimpan",
+//       showConfirmButton: false,
+//       timer: 1500
+//     });
+//   } catch (error) {
+//     console.error('Error submitting form:', error);
+//   }
+// };
 
 
 
