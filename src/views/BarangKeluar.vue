@@ -17,21 +17,6 @@
               <div class="modal-body">
                 <form @submit.prevent="handleAddSubmit">
                   <div class="container-fluid">
-                    <!-- <div class="row">
-                      <div class="mb-3 col-md-12">
-                        <label for="kode-barang" class="col-form-label">Masukan kode barang</label>
-                        <div>Selected: {{ selected }}</div>
-                        <br>
-                        <select id="kode-barang" v-model="newBarang.id_barang">
-                          <option disabled value="">Pilih kode barang</option>
-                          <option>BRG-42632546</option>
-                          <option>BRG-37735959</option>
-                          <option>BRG-21962086</option>
-                        </select>
-                        <input type="text" class="form-control" id="kode-barang" v-model="newBarang.id_barang"> 
-                      </div>
-                    </div> -->
-                    
                     <div class="row">
                       <div class="col-md-6">
                         <div class="row">
@@ -50,8 +35,6 @@
                               <!-- <option value="BRG-73996611">Mud Terrain 674</option> -->
                               <!-- <option value="BRG-04844424">HL 683</option> -->
                             </select>
-                            <!-- <input type="text" class="form-control" id="kode-barang" v-model="newBarang.id_barang"> -->
-                            <!-- <label for="kode-barang" class="col-form-label" readonly>Masukan kode barang</label> -->
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="kode-barang" class="col-form-label">Id Barang</label>
@@ -136,7 +119,7 @@
                 <th scope="col">Nama Ban</th>
                 <th scope="col">Tipe Ban</th>
                 <th scope="col">Stok</th>
-                <th scope="col">Aksi</th>
+                <th class="text-center" scope="col">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -154,6 +137,7 @@
                   <button class="btn btn-sm btn-primary mx-2" @click="openEditModal(barangMsk)"><i class="bi bi-pencil-square"></i> <span>Edit</span></button>
                   <!-- <button class="btn btn-sm btn-danger mx-2" @click="deleteBarang(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button> -->
                   <button class="btn btn-sm btn-danger mx-2" @click="confirmDelete(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button>
+                  <button class="btn btn-sm btn-primary mx-2" @click="opendetailModal()">Detail</button>
                 </td>
               </tr>
             </tbody>
@@ -162,52 +146,136 @@
       </div>
     </div>
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="editLabel">Form Barang Masuk</h1>
-              </div>
-              <div class="modal-body">
-                <form @submit.prevent="handleEditSubmit">
-                  <div class="container-fluid">
-                    <div class="row">
-                      <div class="mb-3 col-md-12">
-                        <label for="kode-barang" class="col-form-label">Masukan kode barang</label>
-                        <input type="text" class="form-control" id="kode-barang" v-model="editBarang.id_barang">
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="mb-3 col-md-5">
-                        <label for="tanggal" class="col-form-label">Tanggal Masuk</label>
-                        <input type="date" class="form-control" id="tanggal" v-model="editBarang.tanggal_masuk">
-                      </div>
-                      <div class="mb-3 col-md-7">
-                        <label for="stok" class="col-form-label">Jumlah masuk stok</label>
-                        <input type="number" class="form-control" id="stok" v-model="editBarang.kuantitas" min="0" max="200">
-                      </div>
-                    </div>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="editLabel">Form Barang Masuk</h1>
+          </div>
+          <div class="modal-body">
+            <form @submit.prevent="handleEditSubmit">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="mb-3 col-md-12">
+                    <label for="kode-barang" class="col-form-label">Masukan kode barang</label>
+                    <input type="text" class="form-control" id="kode-barang" v-model="editBarang.id_barang">
                   </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                      <i class="bi bi-x-lg"></i><span class="mx-2">Batal</span>
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                      <i class="bi bi-check2"></i><span class="mx-2" @click="handleEditSubmit">Simpan</span>
-                    </button>
+                </div>
+                <div class="row">
+                  <div class="mb-3 col-md-5">
+                    <label for="tanggal" class="col-form-label">Tanggal Masuk</label>
+                    <input type="date" class="form-control" id="tanggal" v-model="editBarang.tanggal_masuk">
                   </div>
-                </form>
+                  <div class="mb-3 col-md-7">
+                    <label for="stok" class="col-form-label">Jumlah masuk stok</label>
+                    <input type="number" class="form-control" id="stok" v-model="editBarang.kuantitas" min="0" max="200">
+                  </div>
+                </div>
               </div>
-            </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                  <i class="bi bi-x-lg"></i><span class="mx-2">Batal</span>
+                </button>
+                <button type="submit" class="btn btn-primary">
+                  <i class="bi bi-check2"></i><span class="mx-2" @click="handleEditSubmit">Simpan</span>
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-  </div>
+      </div>
+    </div>
+    </div>
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h1 class="modal-title text-center fs-5" id="editLabel">Detail Pengiriman</h1>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="modal-body">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-md-4 text-center align-self-center">
+                      <img src="https://via.placeholder.com/150" alt="QR Code" class="img-fluid">
+                    </div>
+                    <div class="col-md-8">
+                      <p><strong>ID Pengiriman:</strong> 123456</p>
+                      <p><strong>Nama Barang:</strong> Barang Contoh</p>
+                      <p><strong>Customer:</strong> Nama Customer</p>
+                      <p><strong>Status:</strong> Dalam Pengiriman</p>
+                    </div>
+                  </div>
+
+                  <hr>
+
+                  <div class="card border-0 mx-5 p-2">
+                    <div class="card-header">
+                      <h5 class="card-title">Riyawat Pengiriman</h5>
+                    </div>
+                    <div class="card-body">
+                      <table class="table table-light table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Id barang masuk</th>
+                            <th scope="col">Kode Barang</th>
+                            <th scope="col">No DO</th>
+                            <th scope="col">Nama Ban</th>
+                            <th scope="col">Tipe Ban</th>
+                            <th scope="col">Stok</th>
+                            <th class="text-center" scope="col">Aksi</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr v-for="(barangMsk, index) in barangList" :key="barangMsk.id_barang_masuk">
+                            <th scope="row">{{ index + 1 }}</th>
+                            <td>{{ barangMsk.id_barang_masuk }}</td>
+                            <td>{{ barangMsk.id_barang }}</td>
+                            <td>{{ barangMsk.no_do }}</td>
+                            <td>{{ barangMsk.barang.nama_barang }}</td>
+                            <td>{{ barangMsk.barang.kategori }}</td>
+                            <td>{{ barangMsk.kuantitas }}</td>
+                            <td>
+                              <!-- <button class="btn btn-sm btn-primary mx-2"><i class="bi bi-pencil-square"></i> <span>Edit</span></button> -->
+                              <!-- <button type="button" class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#editModal" @click="openEditModal(barangMsk)">edit</button> -->
+                              <button class="btn btn-sm btn-primary mx-2" @click="openEditModal(barangMsk)"><i class="bi bi-pencil-square"></i> <span>Edit</span></button>
+                              <!-- <button class="btn btn-sm btn-danger mx-2" @click="deleteBarang(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button> -->
+                              <button class="btn btn-sm btn-danger mx-2" @click="confirmDelete(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button>
+                              <button class="btn btn-sm btn-primary mx-2" @click="opendetailModal()">Detail</button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                <i class="bi bi-x-lg"></i><span class="mx-2">Batal</span>
+              </button>
+              <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check2"></i><span class="mx-2" @click="handleEditSubmit">Simpan</span>
+              </button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 </template>
 
 <script setup>
 import Aside from '../components/Aside.vue'
 
 import { ref, onMounted } from 'vue';
-import axios from 'axios'; 
+import axios from 'axios';
+
+const opendetailModal = () => {
+  const detailModal = new bootstrap.Modal(document.getElementById('detailModal'));
+  detailModal.show();
+  };
 
 const barangList = ref([]);
 
