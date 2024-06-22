@@ -7,16 +7,7 @@
         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="10000">
-              <img src="../assets/login1.jpg" class="d-block w-100" alt="..." />
-            </div>
-            <div class="carousel-item" data-bs-interval="2000">
-              <img src="../assets/login2.jpg" class="d-block w-100" alt="..." />
-            </div>
-            <div class="carousel-item">
-              <img src="../assets/login3.jpg" class="d-block w-100" alt="..." />
-            </div>
-            <div class="carousel-item">
-              <img src="../assets/login4.jpg" class="d-block w-100" alt="..." />
+              <img src="../assets/Mobile-login.jpg" class="d-block w-100" alt="..." />
             </div>
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
@@ -38,33 +29,33 @@
             </div>
             <div class="input-group mb-3">
               <div class="col">
-                <label for="" class="mb-2">Username</label>
+                <label for="username" class="mb-2">Username</label>
                 <input type="text" id="username" v-model="username" class="form-control form-control-lg bg-light fs-6 w-100" placeholder="Username" required autofocus />
                 <div class="invalid-feedback">Username is invalid</div>
               </div>
             </div>
             <div class="input-group mb-3">
               <div class="col">
-                <label for="" class="mb-2">Password</label>
+                <label for="password" class="mb-2">Password</label>
                 <input type="password" id="password" v-model="password" class="form-control form-control-lg bg-light fs-6" placeholder="password" required />
                 <div class="invalid-feedback">Password is required</div>
               </div>
             </div>
-            <!-- <div class="input-group mb-5">
+            <div class="input-group mb-5">
               <div class="col">
-                <label for="" class="mb-2">Confirm Password</label>
-                <input type="password" v-model="register.confirmPassword" class="form-control form-control-lg bg-light fs-6" placeholder="password" required />
+                <label for="confirmPassword" class="mb-2">Confirm Password</label>
+                <input type="confirmPassword" v-model="confirmPassword" class="form-control form-control-lg bg-light fs-6" placeholder="password" required />
                 <div class="invalid-feedback">Password is required</div>
               </div>
-            </div> -->
+            </div>
             <div class="input-group mb-2 mt-3">
-              <button type="submit" class="btn btn-lg btn-primary w-100 fs-6">Register</button>
+              <button type="submit" class="btn btn-lg btn-danger w-100 fs-6">Register</button>
             </div>
             <div class="input-group mb-5 mt-3 d-flex justify-content-between">
               <div class="forgot">
                 <p>Already have an account?
                   <a href="#">
-                    <RouterLink to="#" class="nav-link">Sign in here</RouterLink>
+                    <RouterLink to="/login" class="nav-link">Sign in here</RouterLink>
                   </a>
                 </p>
               </div>
@@ -81,26 +72,28 @@
 import axios from 'axios';
 
 export default {
-// data() {
-//   return {
-//     username: '',
-//     password: ''
-//   }
-// },
-// methods: {
-//   async register() {
-//     try {
-//       const response = await axios.post('/api/register', {
-//         username: this.username,
-//         password: this.password
-//       });
-//       console.log(response.data);
-//       this.$router.push({ name: 'Login' });
-//     } catch (error) {
-//       console.error(error.response.data.message);
-//     }
-//   }
-// }
+data() {
+  return {
+    username: '',
+    password: '',
+    confirmPassword: ''
+  }
+},
+methods: {
+  async register() {
+    try {
+      const response = await axios.post('/register', {
+        username: this.username,
+        password: this.password,
+        confirmPassword: this.confirmPassword
+      });
+      console.log(response.data);
+      this.$router.push({ name: 'Login' });
+    } catch (error) {
+      console.error(error.response.data.message);
+    }
+  }
+}
 }
 
 </script>

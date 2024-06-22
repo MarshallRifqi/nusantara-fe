@@ -1,54 +1,65 @@
 <template>
   <div class="wrapper">
     <Aside/>
-  <div class="main">
-      <div class="input-group mt-5 mb-5">
-        <input type="search" placeholder="Cari stok barang" class="form-control rounded-pill">
+
+    <div class="main">
+      <div class="input-group mb-3">
+        <h2>Pengiriman</h2>
+        <!-- <input type="search" placeholder="Cari stok barang" aria-describedby="button-addon5" class="form-control rounded-pill">
         <div class="input-group-append mx-3">
-          <button id="button-addon5" class="btn btn-primary">
-            <i class="bi bi-search">Search</i>
-          </button>
-        </div>
-        <div class="tambah-barang">
-          <button><RouterLink to="#" class="btn btn-primary tambah-button">Tambah Barang</RouterLink> </button>
-          <!-- <RouterLink to="#" class="btn btn-primary tambah-button">Tambah Barang</RouterLink> -->
+          <button id="button-addon5" type="submit" class="btn btn-danger"><i class="bi bi-search"></i>Search</button>
+        </div> -->
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12 p-0">
+        <a href="RiwayatPengiriman" class="btn btn-danger">
+          <RouterLink :to="{ name: 'RiwayatPengiriman' }" class="tambah-button">Barang Terkirim</RouterLink>
+        </a>
+      </div>
         </div>
       </div>
-      <div class="card border-0 mx-5">
+
+      <!-- <div class="riwayat">
+        <a href="RiwayatPengiriman" class="btn btn-danger">
+          <RouterLink :to="{ name: 'RiwayatPengiriman' }" class="tambah-button">Barang Terkirim</RouterLink>
+        </a>
+      </div> -->
+      <!-- Table Element -->
+      <div class="card border table-shadow m-4 p-3">
         <div class="card-header">
-          <h5 class="card-title">Product lists</h5>
+          <h5 class="card-title">List Pengiriman</h5>
         </div>
-        <div class="card-body">
-          <table class="table">
-            <thead>
+        <div class="card-body table-responsive">
+          <table class="table table-light table-bordered"  id="example">
+            <thead class="table-danger mt-5">
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nomor Produk</th>
-                <th scope="col">Nama Produk</th>
-                <th scope="col">Kategori</th>
-                <th scope="col">Actions</th>
+                <th scope="col">No</th>
+                <th scope="col">Tanggal dan Waktu</th>
+                <th scope="col">Id Pengiriman</th>
+                <th scope="col">Nama Ban</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Status</th>
+                <th scope="col">Aksi</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row"></th>
-                <td>Lorem ipsum dolor sit amet.</td>
-                <td>Lorem ipsum dolor sit amet.</td>
-                <td>Lorem ipsum dolor sit amet.</td>
+              <tr v-for="(pengiriman, index) in listPengiriman" :key="pengiriman.barang_keluar">
+                <th scope="row">{{ index + 1 }}</th>
+                <td>{{ pengiriman.tanggal_pengiriman }}</td>
+                <td>{{ pengiriman.id_pengiriman }}</td>
+                <td>{{ pengiriman.barang_keluar.barang.nama_barang }}</td>
+                <td>{{ pengiriman.barang_keluar.pelanggan.nama_pelanggan }}</td>
+                <td><span class="badge rounded-pill bg-warning">{{ pengiriman.status }}</span></td>
                 <td>
-                  <!-- <RouterLink :to="{ name: 'UpdateProd', params: { id_product: product.id_product } }" class="btn btn-sm btn-warning">Edit</RouterLink> -->
-                  <!-- <button class="btn btn-sm btn-warning">Edit</button> -->
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                  <button class="btn btn-sm btn-success mx-2" @click="konfirmasiPengiriman(pengiriman.id_pengiriman)"><i class="bi bi-pencil-square"></i> <span>Konfirmasi</span></button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <a href="#" class="theme-toggle">
-        <i class="fa-regular fa-moon"></i>
-        <i class="fa-regular fa-sun"></i>
-      </a>
     </div>
   </div>
 
@@ -57,10 +68,64 @@
 
 <script setup>
 import Aside from '../components/Aside.vue'
+import { ref, onMounted,  nextTick  } from 'vue';
+import axios from 'axios';
+
+const listPengiriman = ref([]);
+
+const fetchData = async () => {
+  try {
+    const response = await axios.get('/pengiriman');
+    listPengiriman.value = response.data.data;
+    console.log('Response:', response.data);
+    await nextTick();
+    $('#example').DataTable();
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+const konfirmasi = async (id_pengiriman) => {
+  try {
+    const response = await axios.patch(`/pengiriman/konfirmasi/${id_pengiriman}`);
+    fetchData();
+    // listPengiriman.value = response.data.data;
+    console.log('Response:', response.data);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+const konfirmasiPengiriman = (id_pengiriman) => {
+    Swal.fire({
+      title: "Konfirmasi pengiriman",
+      text: "Ingin menyelesaikan pengiriman?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Konfirmasi",
+    }).then((result) => {
+        if (result.isConfirmed) {
+          konfirmasi(id_pengiriman).then(() => {
+            Swal.fire({
+              title: "Pengiriman Dikonfirmasi!",
+              text: "Pengiriman barang telah selesai",
+              icon: "success",
+              timer: 5000,
+          })
+        });
+        }
+    });
+  };
+
+
+onMounted(fetchData);
+
 </script>
 
 
-<style>
+<style scoped>
 
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
@@ -95,119 +160,88 @@ h4 {
   color: var(--bs-emphasis-color);
 }
 
+/* .tbl-no {
+  width: 3%;
+}
+
+.tbl-do {
+  width: 10%;
+}
+
+.tbl-kode {
+  width: 10%;
+}
+
+.tbl-deskripsi {
+  width: 15%;
+}
+
+.tbl-aksi {
+  width: 10%;
+} */
+
 ::-webkit-input-placeholder {
  font-size: 15px;
 }
 
 .tambah-button {
-  color: #FFF;
-  font-size: 0.875rem;
+    color: #FFF;
+    font-size: 0.875rem;
 }
 
 .input-group {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
-  width: 600px;
-  margin-left: 300px;
-  margin-top: 20px;
-  font-size: 1rem;
+    display: flex;
+    /* align-content: center;
+    align-items: center;
+    justify-content: center;
+    align-items: center; */
+    /* width: 50%; */
+    /* margin-left: 300px; */
+    /* margin-top: 20px; */
+    font-size: 1rem;
+    color: #5a5c69 ;
 }
 
 .footer {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 60px;
-  background-color: var(--bs-primary-bg-subtle);
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    background-color: var(--bs-primary-bg-subtle);
 
 }
 
 /* Layout for admin dashboard skeleton */
 
 .wrapper {
-  align-items: stretch;
-  display: flex;
-  width: 100%;
+    align-items: stretch;
+    display: flex;
+    width: 100%;
 }
 
-#sidebar {
-  max-width: 264px;
-  min-width: 264px;
-  background: #cf1313;
-  transition: all 0.35s ease-in-out;
-}
 
 .main {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  min-width: 0;
-  overflow: hidden;
-  transition: all 0.35s ease-in-out;
-  width: 100%;
-  background: var(--bs-dark-bg-subtle);
+    display: flex;
+    padding: 30px;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    min-width: 0;
+    overflow: hidden;
+    transition: all 0.35s ease-in-out;
+    width: 100%;
+    /* background: var(--bs-dark-bg-subtle); */
 }
 
-/* Sidebar Elements Style */
-.logo-nusantara {
-  margin-left: 30px;
-  width: 150px;
-  height: 150px
+.main .card {
+    width: 100%;
 }
 
-.sidebar-logo {
-  padding: 1.15rem;
-}
-
-.sidebar-logo a {
-  color: #e9ecef;
-  font-size: 1.15rem;
-  font-weight: 600;
-  margin-left: 60px;
-}
-
-.sidebar-nav {
-  flex-grow: 1;
-  list-style: none;
-  margin-bottom: 0;
-  padding-left: 0;
-  margin-left: 0;
-}
-
-.sidebar-header {
-  color: #e9ecef;
-  font-size: .75rem;
-  padding: 1.5rem 1.5rem .375rem;
-}
-
-a.sidebar-link {
-  padding: .625rem 1.625rem;
-  color: #e9ecef;
-  position: relative;
-  display: block;
-  font-size: 0.875rem;
-}
-
-.sidebar-link[data-bs-toggle="collapse"]::after {
-  border: solid;
-  border-width: 0 .075rem .075rem 0;
-  content: "";
-  display: inline-block;
-  padding: 2px;
-  position: absolute;
-  right: 1.5rem;
-  top: 1.4rem;
-  transform: rotate(-135deg);
-  transition: all .2s ease-out;
-}
-
-.sidebar-link[data-bs-toggle="collapse"].collapsed::after {
-  transform: rotate(45deg);
-  transition: all .2s ease-out;
+.main .riwayat {
+    width: 30%;
 }
 
 .avatar {
@@ -312,6 +346,12 @@ html[data-bs-theme="dark"] .theme-toggle .fa-moon {
 
 html[data-bs-theme="light"] .theme-toggle .fa-sun {
   display: none;
+}
+
+.table-shadow{
+  box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14);
+-webkit-box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14);
+-moz-box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14)!important
 }
 
 </style>

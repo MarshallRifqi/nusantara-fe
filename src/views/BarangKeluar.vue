@@ -1,66 +1,595 @@
 <template>
   <div class="wrapper">
     <Aside/>
-  <div class="main">
-      <div class="input-group mt-5 mb-5">
-        <input type="search" placeholder="Cari stok barang" class="form-control rounded-pill">
+    <div class="main">
+      <div class="input-group mb-3">
+        <h2>Barang Keluar</h2>
+        <!-- <input type="search" placeholder="Cari stok barang" aria-describedby="button-addon5" class="form-control rounded-pill">
         <div class="input-group-append mx-3">
-          <button id="button-addon5" class="btn btn-primary">
-            <i class="bi bi-search">Search</i>
-          </button>
-        </div>
-        <div class="tambah-barang">
-          <button><RouterLink to="#" class="btn btn-primary tambah-button">Tambah Barang</RouterLink> </button>
-          <!-- <RouterLink to="#" class="btn btn-primary tambah-button">Tambah Barang</RouterLink> -->
+          <button id="button-addon5" type="submit" class="btn btn-danger"><i class="bi bi-search"></i>Search</button>
+        </div> -->
+        <!-- <button type="button" class="btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Tambah Barang</button> -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Form Barang Keluar</h1>
+              </div>
+              <div class="modal-body">
+                <form @submit.prevent="handleAddSubmit">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <!-- <div>Selected: {{ selected }}</div> -->
+                            <label for="kode-barang" class="col-form-label">Pilih Barang</label>
+                            <select id="kode-barang" class="form-select mb-2" v-model="newBarang.id_barang">
+                              <option disabled value="">Pilih barang</option>
+                              <option value="BRG-57422696">Adrenalin RE003</option>
+                              <option value="BRG-27540728">S007A</option>
+                              <option value="BRG-65147694">RE050</option>
+                              <option value="BRG-02769403">MPV-1</option>
+                              <option value="BRG-19646238">EP150</option>
+                              <option value="BRG-48653832">EP300</option>
+                              <option value="BRG-45352771">All Terrain 697</option>
+                              <option value="BRG-73996611">Mud Terrain 674</option>
+                              <option value="BRG-04844424">HL 683</option>
+                              <option value="BRG-90014740">Ban Baru</option>
+                            </select>
+                          </div>
+                          <div class="mb-3 col-md-6">
+                            <label for="kode-barang" class="col-form-label">Id Barang</label>
+                            <input type="text" class="form-control" id="kode-barang" v-model="newBarang.id_barang" readonly placeholder="BRG-00000000">
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label for="kode-pelanggan" class="col-form-label">Pilih Customer</label>
+                            <select id="kode-pelanggan" class="form-select mb-2" v-model="newBarang.id_pelanggan">
+                              <option disabled value="">Customer</option>
+                              <option value="PLG-95465446">Marshall</option>
+                              <option value="PLG-97738791">Marshall Rifqi</option>
+                              <option value="PLG-97993116">John</option>
+                              <!-- <option value="#">Customer 2</option> -->
+                              <!-- <option value="#">Customer 3</option> -->
+                            </select>
+                          </div>
+                          <div class="col-md-6">
+                            <label for="alamat" class="col-form-label">Id Pelanggan</label>
+                            <input type="text" class="form-control" id="alamat" v-model="newBarang.id_pelanggan" readonly>
+                          </div>
+                        </div>
+                        <!-- <div class="row">
+                          <div class="mb-3 col-md-12">
+                            <label for="alamat" class="col-form-label">Alamat</label>
+                            <input type="text" class="form-control" id="alamat" placeholder="Jalan haji daud No.70" readonly>
+                          </div>
+                        </div> -->
+                      </div>
+                      <div class="col-md-6">
+                        <div class="row">
+                          <!-- <div class="mb-3 col-md-6">
+                            <label for="alamat" class="col-form-label">Stok Master Barang</label>
+                            <input type="number" class="form-control" id="alamat" placeholder="200" readonly>
+                            </div> -->
+                            <div class="mb-3 col-md-12">
+                              <label for="stok" class="col-form-label">Jumlah Barang Keluar</label>
+                              <input type="number" class="form-control" id="stok" min="0" v-model="newBarang.kuantitas">
+                          </div>
+                        </div>
+                        <!-- <div class="row">
+                          <div class="mb-3 col-md-12">
+                            <label for="stok" class="col-form-label">Keterangan</label>
+                            <input type="text" class="form-control" id="stok">
+                          </div>
+                        </div> -->
+                        <div class="row">
+                          <div class="mb-3 col-md-12">
+                            <label for="tanggal" class="col-form-label">Tanggal keluar</label>
+                            <input type="date" class="form-control" id="tanggal" v-model="newBarang.tanggal_keluar">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                      <i class="bi bi-x-lg"></i><span class="mx-2">Batal</span>
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                      <i class="bi bi-check2"></i><span class="mx-2">Simpan</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="card border-0 mx-5">
-        <div class="card-header">
-          <h5 class="card-title">Product lists</h5>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12 p-0">
+            <button type="button" class="btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Tambah Barang</button>
+          </div>
         </div>
-        <div class="card-body">
-          <table class="table">
-            <thead>
+      </div>
+
+
+      <!-- Table Element -->
+      <div class="card border table-shadow m-4 p-3">
+        <div class="card-header">
+          <h5 class="card-title">List Barang Keluar</h5>
+        </div>
+        <div class="card-body table-responsive">
+          <table class="table table-light table-bordered" id="example">
+            <thead class="table-danger mt-5">
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nomor Produk</th>
-                <th scope="col">Nama Produk</th>
-                <th scope="col">Kategori</th>
-                <th scope="col">Actions</th>
+                <th scope="col">No</th>
+                <th scope="col">Id Barang Keluar</th>
+                <th scope="col">Id Barang</th>
+                <th scope="col">Id Pelanggan</th>
+                <th scope="col">Kuantitas</th>
+                <th scope="col">Tanggal Keluar</th>
+                <th scope="col">Total Harga</th>
+                <th class="text-center" scope="col">Aksi</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row"></th>
-                <td>Lorem ipsum dolor sit amet.</td>
-                <td>Lorem ipsum dolor sit amet.</td>
-                <td>Lorem ipsum dolor sit amet.</td>
+              <tr v-for="(barangKlr, index) in barangList" :key="barangKlr.id_barang_keluar">
+                <th scope="row">{{ index + 1 }}</th>
+                <td>{{ barangKlr.id_barang_keluar }}</td>
+                <td>{{ barangKlr.id_barang }}</td>
+                <td>{{ barangKlr.id_pelanggan }}</td>
+                <td>{{ barangKlr.kuantitas }}</td>
+                <td>{{ barangKlr.tanggal_keluar }}</td>
+                <td>{{ barangKlr.total_harga }}</td>
                 <td>
-                  <!-- <RouterLink :to="{ name: 'UpdateProd', params: { id_product: product.id_product } }" class="btn btn-sm btn-warning">Edit</RouterLink> -->
-                  <!-- <button class="btn btn-sm btn-warning">Edit</button> -->
-                  <button class="btn btn-sm btn-danger mx-2">Delete</button>
+                  <!-- <button class="btn btn-sm btn-primary mx-2"><i class="bi bi-pencil-square"></i> <span>Edit</span></button> -->
+                  <!-- <button type="button" class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#editModal" @click="openEditModal(barangMsk)">edit</button> -->
+                  <button class="btn btn-sm btn-primary mx-2" @click="openEditModal(barangKlr)"><i class="bi bi-pencil-square"></i> <span>Edit</span></button>
+                  <!-- <button class="btn btn-sm btn-danger mx-2" @click="deleteBarang(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button> -->
+                  <button class="btn btn-sm btn-danger mx-2" @click="confirmDelete(barangKlr.id_barang_keluar)"><i class="bi bi-trash"></i> <span>Delete</span></button>
+                  <button class="btn btn-sm btn-primary mx-2" @click="confirmKirimBarang(barangKlr.id_barang_keluar)"><i class="bi bi-truck"></i> <span>Kirim</span></button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <a href="#" class="theme-toggle">
-        <i class="fa-regular fa-moon"></i>
-        <i class="fa-regular fa-sun"></i>
-      </a>
     </div>
-  </div>
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="editLabel">Form Barang Masuk</h1>
+          </div>
+          <div class="modal-body">
+            <form @submit.prevent="handleEditSubmit">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="mb-3 col-md-12">
+                    <label for="barang-keluar" class="col-form-label">Id Barang Keluar</label>
+                    <input type="text" class="form-control" id="barang-keluar" v-model="newBarang.id_barang_keluar" readonly>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="mb-3 col-md-6">
+                    <label for="id-barang" class="col-form-label">Id Barang</label>
+                    <input type="text" class="form-control" id="id-barang" v-model="newBarang.id_barang" readonly>
+                  </div>
+                  <div class="mb-3 col-md-6">
+                    <label for="pelanggan" class="col-form-label">Id Pelanggan</label>
+                    <input type="text" class="form-control" id="pelanggan" v-model="newBarang.id_pelanggan" readonly>
+                  </div>
+                </div>
+                <!-- <div class="row">
+                </div> -->
+                <div class="row">
+                  <div class="mb-3 col-md-6">
+                    <label for="stok-edit" class="col-form-label">Jumlah Barang keluar</label>
+                    <input type="number" class="form-control" id="stok-edit" v-model="newBarang.kuantitas">
+                    </div>
+                      <div class="mb-3 col-md-6">
+                        <label for="tanggal" class="col-form-label">Tanggal Masuk</label>
+                        <input type="date" class="form-control" id="tanggal" v-model="newBarang.tanggal_keluar">
+                      </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                  <i class="bi bi-x-lg"></i><span class="mx-2">Batal</span>
+                </button>
+                <button type="submit" class="btn btn-primary">
+                  <i class="bi bi-check2"></i><span class="mx-2" @click="handleEditSubmit">Simpan</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  
 
+    <!-- DETAIL MODAL -->
+    <div id="app">
+       <div class="modal fade  modal-fullscreen" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+           <div class="modal-dialog modal-fullscreen">
+             <div class="modal-content" id="printLabel">
+               <div class="modal-header">
+                 <!-- <div class="card-header"> -->
+                   <div class="container-fluid">
+                     <div class="row d-flex align-items-center justify-content-between mx-5">
+                       <div class="col-auto mx-4">
+                         <img src="../assets/nusantara_team__update.png" class="logo-nusantara" alt="">
+                       </div>
+                       <div class="col-auto mx-4">
+                         <h3 class="modal-title fs-7" id="editLabel">Detail Pengiriman</h3>
+                       </div>
+                     </div>
+                   </div>
+                 <!-- </div> -->
+               </div>
+               <div class="modal-body">
+                 <form>
+                   <div class="modal-body">
+                     <div class="container-fluid">
+                       <div class="row mx-auto mb-4">
+                         <div class="col-md-4 mx-auto" >
+                            <p>ID Pengiriman: <strong>{{ barangListId.id_barang_keluar }}</strong></p>
+                           <p>Jumlah Barang: <strong>{{ barangListId.kuantitas }}</strong></p>
+                           <p v-if="barangListId.Pengiriman">ID Pengiriman: <strong>{{ barangListId.Pengiriman.id_pengiriman }}</strong></p>
+                         </div>
+                         <div class="col-md-4">
+                           <img src="https://via.placeholder.com/150" alt="QR Code" class="img-fluid">
+                         </div>
+                       </div>
+                       <div class="row mx-auto mt-5">
+                         <div class="col-md-4 mx-auto">
+                           <p><strong>Kepada:</strong></p>
+                           <p  v-if="barangListId.pelanggan"><strong>{{ barangListId.pelanggan.nama_pelanggan}}</strong></p>
+                           <p  v-if="barangListId.pelanggan">{{ barangListId.pelanggan.alamat}}</p>
+                           <p  v-if="barangListId.pelanggan"><strong>{{ barangListId.pelanggan.no_telpon}}</strong></p>
+                         </div>
+                         <div class="col-md-4">
+                           <p><strong>Dari:</strong></p>
+                           <p><strong>Nusantara Warehouse</strong></p>
+                           <p>Jalan Saluyu Indah XIII No.52. Bandung, Jawa Barat</p>
+                           <p>(022) 7537688</p>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                   <div class="modal-footer">
+                     <div class="col mx-auto" align="center">
+                       <button type="submit" class="btn btn-primary" @click="printBtn()">
+                         <i class="bi bi-printer"></i><span class="mx-2">Print Label</span>
+                       </button>
+                     </div>
+                 </div>
+                 </form>
+               </div>
+             </div>
+           </div>
+         </div>
+     </div>
 </template>
-
 
 <script setup>
 import Aside from '../components/Aside.vue'
+
+import { ref, onMounted, nextTick } from 'vue';
+import axios from 'axios';
+
+// const opendetailModal = () => {
+//   const detailModal = new bootstrap.Modal(document.getElementById('detailModal'));
+//   detailModal.show();
+//   };
+
+const barangList = ref([]);
+
+const newBarang = ref({
+  // id_barang_masuk: '',
+  id_barang: '',
+  id_pelanggan: '',
+  tanggal_masuk: '',
+  kuantitas: 0,
+  tanggal_keluar: ''
+});
+
+// const editBarang = ref({
+//   id_barang_masuk: '',
+//   id_barang: '',
+//   tanggal_masuk: '',
+//   kuantitas: 0,
+// });
+
+
+
+const fetchData = async () => {
+  try {
+    const response = await axios.get('/barang-keluar');
+    barangList.value = response.data.barangKlr;
+    await nextTick();
+    $('#example').DataTable();
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+const deleteBarang = async (id_barang_keluar) => {
+  try {
+    await axios.delete(`barang-keluar/delete/${id_barang_keluar}`);
+    fetchData(); 
+  } catch (error) {
+    console.error('Error deleting data:', error);
+  }
+};
+
+const confirmDelete = (id_barang_masuk) => {
+  Swal.fire({
+    title: "Yakin ingin menghapus?",
+    text: "Tindakan ini dapat menghapus data penting!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Ya, saya ingin menghapus!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      deleteBarang(id_barang_masuk).then(() => {
+        Swal.fire({
+          title: "Terhapus!",
+          text: "Data berhasil terhapus.",
+          icon: "success"
+        });
+      });
+    }
+  });
+};
+
+
+const handleAddSubmit = async () => {
+  try {
+    const response = await axios.post('barang-keluar/insert', {
+      id_barang: newBarang.value.id_barang,
+      id_pelanggan: newBarang.value.id_pelanggan,
+      kuantitas: newBarang.value.kuantitas,
+      tanggal_keluar: newBarang.value.tanggal_keluar,
+
+    });
+    console.log('Response:', response.data);
+    fetchData();
+    
+    newBarang.value.id_barang = '';
+    newBarang.value.id_pelanggan= '';
+    newBarang.value.kuantitas= '';
+    newBarang.value.tanggal_keluar = '';
+    const exampleModal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
+    exampleModal.hide();
+    Swal.fire({
+      position: "middle",
+      icon: "success",
+      title: response.data,
+      showConfirmButton: false,
+      timer: 1500
+    });
+  } catch (error) {
+    console.error('Error submitting form:', error);
+  }
+};
+// const handleAddSubmit = async () => {
+//   try {
+//     const response = await axios.post('barang-masuk/insert', {
+//       id_barang: newBarang.value.id_barang,
+//       tanggal_masuk: newBarang.value.tanggal_masuk,
+//       kuantitas: newBarang.value.kuantitas,
+//     });
+//     console.log('Response:', response.data);
+//     fetchData();
+    
+//     newBarang.value.id_barang = '';
+//     newBarang.value.tanggal_masuk = '';
+//     newBarang.value.kuantitas = 0;
+//     const exampleModal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
+//     exampleModal.hide();
+//     Swal.fire({
+//       position: "middle",
+//       icon: "success",
+//       title: "Data berhasil tersimpan",
+//       showConfirmButton: false,
+//       timer: 1500
+//     });
+//   } catch (error) {
+//     console.error('Error submitting form:', error);
+//   }
+// };
+
+const openEditModal = (barangKlr) => {
+  newBarang.value.id_barang_keluar = barangKlr.id_barang_keluar;
+  newBarang.value.id_barang = barangKlr.id_barang;
+  newBarang.value.id_pelanggan= barangKlr.id_pelanggan;
+  newBarang.value.kuantitas = barangKlr.kuantitas;
+  newBarang.value.tanggal_keluar = barangKlr.tanggal_keluar;
+  const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+  editModal.show();
+};
+// const openEditModal = (barangMsk) => {
+//   editBarang.value.id_barang_masuk = barangMsk.id_barang_masuk;
+//   editBarang.value.id_barang = barangMsk.id_barang;
+//   editBarang.value.tanggal_masuk = barangMsk.tanggal_masuk;
+//   editBarang.value.kuantitas = barangMsk.kuantitas;
+//   const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+//   editModal.show();
+// };
+
+const handleEditSubmit = async () => {
+  try {
+    const response = await axios.put(`barang-keluar/update/${newBarang.value.id_barang_keluar}`, {
+      // id_barang: editBarang.value.id_barang,
+      id_barang_keluar: newBarang.value.id_barang_keluar,
+      id_barang: newBarang.value.id_barang,
+      id_pelanggan: newBarang.value.id_pelanggan,
+      kuantitas: newBarang.value.kuantitas,
+      tanggal_keluar: newBarang.value.tanggal_keluar,
+    });
+    console.log('Response:', response.data);
+    fetchData(); 
+  
+    newBarang.value.id_barang_keluar = '';
+    newBarang.value.id_barang = '';
+    newBarang.value.id_pelanggan = '';
+    newBarang.value.kuantitas = 0;
+    newBarang.value.tanggal_keluar = '';
+    const editModal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
+    editModal.hide();
+    Swal.fire({
+      position: "middle",
+      icon: "success",
+      title: response.data,
+      showConfirmButton: false,
+      timer: 1500
+    });
+  } catch (error) {
+    console.error('Error submitting form:', error);
+  }
+};
+// const handleEditSubmit = async () => {
+//   try {
+//     const response = await axios.patch(`barang-masuk/update/${editBarang.value.id_barang_masuk}`, {
+//       id_barang: editBarang.value.id_barang,
+//       tanggal_masuk: editBarang.value.tanggal_masuk,
+//       kuantitas: editBarang.value.kuantitas,
+//     });
+//     console.log('Response:', response.data);
+//     fetchData(); 
+  
+//     editBarang.value.id_barang_masuk = '';
+//     editBarang.value.id_barang = '';
+//     editBarang.value.tanggal_masuk = '';
+//     editBarang.value.kuantitas = 0;
+//     const editModal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
+//     editModal.hide();
+//     Swal.fire({
+//       position: "middle",
+//       icon: "success",
+//       title: "Data berhasil tersimpan",
+//       showConfirmButton: false,
+//       timer: 1500
+//     });
+//   } catch (error) {
+//     console.error('Error submitting form:', error);
+//   }
+// };
+
+const printBarang = () => {
+  Swal.fire({
+    title: "Download Label Print!",
+    text: "Pastikan anda mendownload label print!",
+    icon: "warning",
+    showConfirmButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",});
+  // window.open("DetailPengiriman", "_blank");
+  // detailModal.show();
+  // opendetailModal()
+  
+};
+
+const printBtn = () => {
+  const printLabelPengiriman = new bootstrap.Modal(document.getElementById('printLabel'));
+  print(printLabelPengiriman)
+};
+
+
+const kirimBarang = async (id_barang_keluar) => {
+  try {
+    const response = await axios.patch(`barang-keluar/kirim/${id_barang_keluar}`);
+    fetchData();
+    console.log('Response:', response.data);
+    barangListId.value = response.data.data;
+    // const detailModal = new bootstrap.Modal(document.getElementById('detailModal'));
+    // detailModal.show(id_barang_keluar);
+    // await fetchData(id_barang_keluar);
+  } catch (error) {
+    console.error('Error Kirim data:', error);
+  }
+};
+
+const confirmKirimBarang = (id_barang_keluar) => {
+    Swal.fire({
+      title: "Konfirmasi Kirim Barang",
+      text: "Apakah anda ingin mengirimkan barang ini?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, Kirim",
+    }).then((result) => {
+        if (result.isConfirmed) {
+          kirimBarang(id_barang_keluar).then(() => {
+            Swal.fire({
+              title: "Barang Terkirim!",
+              text: "Barang terkirim, silahkan print label pengiriman.",
+              icon: "success",
+              timer: 5000,
+          }).then(() => {
+            setTimeout(() => {
+              printBarang();
+              opendetailModal(id_barang_keluar)
+              Swal.fire({
+                title: "Download Label Print!",
+                text: "Pastikan anda mendownload label print!",
+                icon: "warning",
+                showConfirmButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+            }, 1500);
+          });
+        });
+      })
+    };
+    });
+  };
+
+  // const barangList = ref([]);
+  const barangListId = ref([]);
+
+  const opendetailModal = async (id_barang_keluar) => {
+  // barangListId.value.id_barang_keluar = data.id_barang_keluar
+  // barangListId.value.id_barang = data.id_barang
+  // barangListId.value.id_pelanggan = data.id_pelanggan
+  // barangListId.value.kuantitas = data.kuantitas
+  // barangListId.value.Pengiriman = Pengiriman
+  // newBarang.value.id_barang_keluar = barangKlr.id_barang_keluar;
+  // newBarang.value.id_barang = barangKlr.id_barang;
+  // newBarang.value.id_pelanggan= barangKlr.id_pelanggan;
+  // newBarang.value.kuantitas = barangKlr.kuantitas;
+  // newBarang.value.tanggal_keluar = barangKlr.tanggal_keluar;
+  try {
+    const response = await axios.get(`/barang-keluar/${id_barang_keluar}`);
+    barangListId.value = response.data.data;
+    console.log(response.data.msg)
+    console.log(response.data.data)
+    console.log (response.data.data.pelanggan.nama_pelanggan)
+    // kirimBarang(id_barang_keluar)
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    console.log(response.data.msg)
+  }
+  const detailModal = new bootstrap.Modal(document.getElementById('detailModal'));
+  detailModal.show();
+  // console.log('Response:', response.data);
+  // fetchDataId()
+};
+
+onMounted(fetchData);
 </script>
 
 
-<style>
+<style scoped>
 
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
@@ -70,6 +599,22 @@ import Aside from '../components/Aside.vue'
 ::before {
   box-sizing: border-box;
 }
+
+@media print {
+  #printLabel {
+    display: none;
+  }
+  #printLabel {
+    display: block;
+  }
+}
+
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap'); */
+
+.logo-nusantara {
+    height: 120px;
+    width: 120px;
+  }
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -95,6 +640,26 @@ h4 {
   color: var(--bs-emphasis-color);
 }
 
+/* .tbl-no {
+  width: 3%;
+}
+
+.tbl-do {
+  width: 10%;
+}
+
+.tbl-kode {
+  width: 10%;
+}
+
+.tbl-deskripsi {
+  width: 15%;
+}
+
+.tbl-aksi {
+  width: 10%;
+} */
+
 ::-webkit-input-placeholder {
  font-size: 15px;
 }
@@ -105,14 +670,16 @@ h4 {
 }
 
 .input-group {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
-  width: 600px;
-  margin-left: 300px;
-  margin-top: 20px;
-  font-size: 1rem;
+    display: flex;
+    /* align-content: center;
+    align-items: center;
+    justify-content: center;
+    align-items: center; */
+    /* width: 50%; */
+    /* margin-left: 300px; */
+    /* margin-top: 20px; */
+    font-size: 1rem;
+    color: #5a5c69 ;
 }
 
 .footer {
@@ -134,82 +701,27 @@ h4 {
   width: 100%;
 }
 
-#sidebar {
-  max-width: 264px;
-  min-width: 264px;
-  background: #cf1313;
-  transition: all 0.35s ease-in-out;
-}
-
 .main {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  min-width: 0;
-  overflow: hidden;
-  transition: all 0.35s ease-in-out;
-  width: 100%;
-  background: var(--bs-dark-bg-subtle);
+    display: flex;
+    padding: 30px;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    min-width: 0;
+    overflow: hidden;
+    transition: all 0.35s ease-in-out;
+    width: 100%;
+    /* background: var(--bs-dark-bg-subtle); */
 }
 
-/* Sidebar Elements Style */
-.logo-nusantara {
-  margin-left: 30px;
-  width: 150px;
-  height: 150px
+.main .card {
+    width: 100%;
 }
 
-.sidebar-logo {
-  padding: 1.15rem;
+.main .tambah-barang {
+    width: 30%;
 }
-
-.sidebar-logo a {
-  color: #e9ecef;
-  font-size: 1.15rem;
-  font-weight: 600;
-  margin-left: 60px;
-}
-
-.sidebar-nav {
-  flex-grow: 1;
-  list-style: none;
-  margin-bottom: 0;
-  padding-left: 0;
-  margin-left: 0;
-}
-
-.sidebar-header {
-  color: #e9ecef;
-  font-size: .75rem;
-  padding: 1.5rem 1.5rem .375rem;
-}
-
-a.sidebar-link {
-  padding: .625rem 1.625rem;
-  color: #e9ecef;
-  position: relative;
-  display: block;
-  font-size: 0.875rem;
-}
-
-.sidebar-link[data-bs-toggle="collapse"]::after {
-  border: solid;
-  border-width: 0 .075rem .075rem 0;
-  content: "";
-  display: inline-block;
-  padding: 2px;
-  position: absolute;
-  right: 1.5rem;
-  top: 1.4rem;
-  transform: rotate(-135deg);
-  transition: all .2s ease-out;
-}
-
-.sidebar-link[data-bs-toggle="collapse"].collapsed::after {
-  transform: rotate(45deg);
-  transition: all .2s ease-out;
-}
-
 .avatar {
   height: 40px;
   width: 40px;
@@ -312,6 +824,12 @@ html[data-bs-theme="dark"] .theme-toggle .fa-moon {
 
 html[data-bs-theme="light"] .theme-toggle .fa-sun {
   display: none;
+}
+
+.table-shadow{
+  box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14);
+-webkit-box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14);
+-moz-box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14)!important
 }
 
 </style>

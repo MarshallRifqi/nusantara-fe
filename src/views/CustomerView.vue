@@ -3,125 +3,104 @@
     <Aside/>
     <div class="main">
       <div class="input-group mb-3">
-        <h2>Barang Masuk</h2>
+        <h2>Customer</h2>
         <!-- <input type="search" placeholder="Cari stok barang" aria-describedby="button-addon5" class="form-control rounded-pill">
         <div class="input-group-append mx-3">
           <button id="button-addon5" type="submit" class="btn btn-danger"><i class="bi bi-search"></i>Search</button>
         </div> -->
-        <!-- <button type="button" class="btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Tambah Barang</button> -->
+        <!-- <button type="button" class="btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Tambah Customer
+        </button> -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Form Barang Masuk</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Form Customer</h1>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
               </div>
               <div class="modal-body">
                 <form @submit.prevent="handleAddSubmit">
                   <div class="container-fluid">
-                    <!-- <div class="row">
+                    <div class="row">
                       <div class="mb-3 col-md-12">
-                        <label for="kode-barang" class="col-form-label">Masukan kode barang</label>
-                        <div>Selected: {{ selected }}</div>
-                        <br>
-                        <select id="kode-barang" v-model="newBarang.id_barang">
-                          <option disabled value="">Pilih kode barang</option>
-                          <option>BRG-42632546</option>
-                          <option>BRG-37735959</option>
-                          <option>BRG-21962086</option>
-                        </select>
-                        <input type="text" class="form-control" id="kode-barang" v-model="newBarang.id_barang"> 
+                        <label for="namauser" class="col-form-label">Nama User</label>
+                        <input type="text" class="form-control" id="namauser" v-model="newUser.nama_pelanggan" placeholder="John Doe">
                       </div>
+                      <div class="mb-3 col-md-12">
+                        <label for="alamat" class="col-form-label">Alamat</label>
+                        <input type="text" class="form-control" id="alamat" v-model="newUser.alamat" placeholder="Jl. Summarecon Bekasi">
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label label for="email" class="col-form-label">Email</label>
+                      <input type="text" class="form-control" id="email" v-model="newUser.email" min="0" max="200" placeholder="user@gmail.com">
+                    </div>
+                    <div class="mb-3">
+                      <label label for="notelp" class="col-form-label">No Telepon</label>
+                      <input type="text" class="form-control" id="notelp" v-model="newUser.no_telepon" min="0" max="200" placeholder="081******">
+                    </div>
+                    <!-- <div class="mb-3">
+                      <label for="tanggal" class="col-form-label">Tanggal</label>
+                      <input type="date" class="form-control" id="tanggal" v-model="form.tanggal">
                     </div> -->
-                    <div class="row">
-                      <div class="mb-3 col-md-12">
-                        <!-- <div>Selected: {{ selected }}</div> -->
-                        <label for="kode-barang" class=" mb-3">Masukkan Nama Barang</label>
-                        <br>
-                        <select id="kode-barang" class="form-select mb-2" v-model="newBarang.id_barang">
-                          <option disabled value="">Pilih barang</option>
-                          <option value="BRG-57422696">Adrenalin RE003</option>
-                          <option value="BRG-27540728">S007A</option>
-                          <option value="BRG-65147694">RE050</option>
-                          <option value="BRG-02769403">MPV-1</option>
-                          <option value="BRG-19646238">EP150</option>
-                          <option value="BRG-48653832">EP300</option>
-                          <option value="BRG-45352771">All Terrain 697</option>
-                          <option value="BRG-73996611">Mud Terrain 674</option>
-                          <option value="BRG-04844424">HL 683</option>
-                          <option value="BRG-90014740">Ban Baru</option>
-                        </select>
-                        <!-- <input type="text" class="form-control" id="kode-barang" v-model="newBarang.id_barang"> -->
-                        <!-- <label for="kode-barang" class="col-form-label" readonly>Masukan kode barang</label> -->
-                        <input type="text" class="form-control" id="kode-barang" v-model="newBarang.id_barang" readonly>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="mb-3 col-md-5">
-                        <label for="tanggal" class="col-form-label">Tanggal Masuk</label>
-                        <input type="date" class="form-control" id="tanggal" v-model="newBarang.tanggal_masuk">
-                      </div>
-                      <div class="mb-3 col-md-7">
-                        <label for="stok" class="col-form-label">Jumlah masuk stok</label>
-                        <input type="number" class="form-control" id="stok" v-model="newBarang.kuantitas" min="0" max="1000">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                      <i class="bi bi-x-lg"></i><span class="mx-2">Batal</span>
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                      <i class="bi bi-check2"></i><span class="mx-2">Simpan</span>
-                    </button>
                   </div>
                 </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="closeEditModal">
+                  <i class="bi bi-x-lg"></i><span class="mx-2">Batal</span>
+                </button>
+                <button type="button" class="btn btn-primary" @click="handleAddSubmit">
+                  <i class="bi bi-check2"></i><span class="mx-2">Simpan</span>
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-12">
-            <button type="button" class="btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Tambah Barang</button>
+          <div class="col-md-12 p-0">
+            <button type="button" class="btn btn-danger rounded " data-bs-toggle="modal" data-bs-target="#exampleModal">Tambah Customer</button>   
           </div>
         </div>
       </div>
-      <!-- Table Element -->
-      <div class="card border table-shadow m-4 p-3">
 
+      <!-- Table Element mx-5 p-2 -->
+      <div class="card border table-shadow m-4 p-3">
         <div class="card-header">
-          <h5 class="card-title">List Barang Masuk</h5>
+          <h5 class="card-title">List Barang Keluar</h5>
         </div>
-        <div class="card-body ">
-          <table class="table table-bordered" width="100%" id="example">
-            <thead class="table-danger">
+        <div class="card-body table-responsive">
+          <table class="table table-light table-bordered" id="example">
+            <thead class="table-danger mt-5">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Id barang masuk</th>
-                <th scope="col">Kode Barang</th>
-                <th scope="col">No DO</th>
-                <th scope="col">Nama Ban</th>
-                <th scope="col">Tipe Ban</th>
-                <th scope="col">Stok</th>
+                <th scope="col">Id pelanggan</th>
+                <th scope="col">Nama Pelanggan</th>
+                <th scope="col">Alamat</th>
+                <th scope="col">Email</th>
+                <th scope="col">No Telepon</th>
+                <!-- <th scope="col">Stok</th> -->
                 <th scope="col">Aksi</th>
               </tr>
             </thead>
-            <tbody class="danger">
-              <tr v-for="(barangMsk, index) in barangList" :key="barangMsk.id_barang_masuk">
+            <tbody>
+              <tr v-for="(pelanggan, index) in pelangganList" :key="pelanggan.id_pelanggan">
                 <th scope="row">{{ index + 1 }}</th>
-                <td>{{ barangMsk.id_barang_masuk }}</td>
-                <td>{{ barangMsk.id_barang }}</td>
-                <td>{{ barangMsk.no_do }}</td>
-                <td>{{ barangMsk.barang.nama_barang }}</td>
-                <td>{{ barangMsk.barang.kategori }}</td>
-                <td>{{ barangMsk.kuantitas }}</td>
+                <td>{{ pelanggan.id_pelanggan }}</td>
+                <td>{{ pelanggan.nama_pelanggan }}</td>
+                <td>{{ pelanggan.alamat }}</td>
+                <td>{{ pelanggan.email }}</td>
+                <td>{{ pelanggan.no_telpon }}</td>
+                <!-- <td>{{ barangMsk.kuantitas }}</td> -->
                 <td>
                   <!-- <button class="btn btn-sm btn-primary mx-2"><i class="bi bi-pencil-square"></i> <span>Edit</span></button> -->
                   <!-- <button type="button" class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#editModal" @click="openEditModal(barangMsk)">edit</button> -->
-                  <button class="btn btn-sm btn-primary mx-2" @click="openEditModal(barangMsk)"><i class="bi bi-pencil-square"></i> <span>Edit</span></button>
+                  <button class="btn btn-sm btn-primary mx-2" @click="openEditModal(pelanggan)"><i class="bi bi-pencil-square"></i> <span>Edit</span></button>
                   <!-- <button class="btn btn-sm btn-danger mx-2" @click="deleteBarang(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button> -->
-                  <button class="btn btn-sm btn-danger mx-2" @click="confirmDelete(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button>
+                  <button class="btn btn-sm btn-danger mx-2" @click="confirmDelete(pelanggan.id_pelanggan)"><i class="bi bi-trash"></i> <span>Delete</span></button>
                 </td>
               </tr>
             </tbody>
@@ -133,25 +112,35 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h1 class="modal-title fs-5" id="editLabel">Form Edit Barang Masuk</h1>
+                <h1 class="modal-title fs-5" id="editLabel">Form Edit Customer</h1>
               </div>
               <div class="modal-body">
                 <form @submit.prevent="handleEditSubmit">
                   <div class="container-fluid">
                     <div class="row">
                       <div class="mb-3 col-md-12">
-                        <label for="kode-barang" class="col-form-label">Masukan kode barang</label>
-                        <input type="text" class="form-control" id="kode-barang" v-model="editBarang.id_barang">
+                        <label for="kode-barang" class="col-form-label">Id User</label>
+                        <input type="text" class="form-control" id="kode-barang" v-model="editUser.id_pelanggan">
                       </div>
                     </div>
                     <div class="row">
                       <div class="mb-3 col-md-5">
-                        <label for="tanggal" class="col-form-label">Tanggal Masuk</label>
-                        <input type="date" class="form-control" id="tanggal" v-model="editBarang.tanggal_masuk">
+                        <label for="tanggal" class="col-form-label">Nama</label>
+                        <input type="text" class="form-control" id="tanggal" v-model="editUser.nama_pelanggan">
                       </div>
                       <div class="mb-3 col-md-7">
-                        <label for="stok" class="col-form-label">Jumlah masuk stok</label>
-                        <input type="number" class="form-control" id="stok" v-model="editBarang.kuantitas" min="0" max="1000">
+                        <label for="stok" class="col-form-label">Alamat</label>
+                        <input type="text" class="form-control" id="stok" v-model="editUser.alamat" min="0" max="200">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="mb-3 col-md-5">
+                        <label for="tanggal" class="col-form-label">Email</label>
+                        <input type="text" class="form-control" id="tanggal" v-model="editUser.email">
+                      </div>
+                      <div class="mb-3 col-md-7">
+                        <label for="stok" class="col-form-label">No telpon</label>
+                        <input type="text" class="form-control" id="stok" v-model="editUser.no_telpon" >
                       </div>
                     </div>
                   </div>
@@ -174,38 +163,45 @@
 <script setup>
 import Aside from '../components/Aside.vue'
 
-
 import { ref, onMounted, nextTick } from 'vue';
 import axios from 'axios'; 
 
-// import $ from 'jquery';
-// import 'datatables.net-bs5';
-// import 'datatables.net-buttons-bs5';
-// import 'datatables.net-buttons/js/buttons.html5.mjs';
-// import 'datatables.net-buttons/js/buttons.print.mjs';
+const pelangganList = ref([]);
+// const BarangList = ref([]);
 
-const barangList = ref([]);
-
-const newBarang = ref({
-  id_barang: '',
-  tanggal_masuk: '',
-  kuantitas: 0,
+// const newBarang = ref({
+//   id_barang: '',
+//   tanggal_masuk: '',
+//   kuantitas: 0,
+// });
+const newUser = ref({
+  id_pelanggan: '',
+  nama_pelanggan: '', 
+  alamat: '',
+  email: '',
+  no_telepon: '' 
 });
 
-const editBarang = ref({
-  id_barang_masuk: '',
-  id_barang: '',
-  tanggal_masuk: '',
-  kuantitas: 0,
+// const editBarang = ref({
+//   id_barang_masuk: '',
+//   id_barang: '',
+//   tanggal_masuk: '',
+//   kuantitas: 0,
+// });
+const editUser = ref({
+  id_pelanggan: '',
+  nama_pelanggan: '', 
+  alamat: '',
+  email: '',
+  no_telpon: '' 
 });
-
 
 
 
 const fetchData = async () => {
   try {
-    const response = await axios.get('/barang-masuk');
-    barangList.value = response.data.barangMsk;
+    const response = await axios.get('/pelanggan');
+    pelangganList.value = response.data.pelanggan;
     await nextTick();
     $('#example').DataTable();
   } catch (error) {
@@ -213,16 +209,16 @@ const fetchData = async () => {
   }
 };
 
-const deleteBarang = async (id_barang_masuk) => {
+const deleteCustomer = async (id_pelanggan) => {
   try {
-    await axios.delete(`barang-masuk/delete/${id_barang_masuk}`);
+    await axios.delete(`pelanggan/delete/${id_pelanggan}`);
     fetchData(); 
   } catch (error) {
     console.error('Error deleting data:', error);
   }
 };
 
-const confirmDelete = (id_barang_masuk) => {
+const confirmDelete = (id_pelanggan) => {
   Swal.fire({
     title: "Yakin ingin menghapus?",
     text: "Tindakan ini dapat menghapus data penting!",
@@ -233,7 +229,7 @@ const confirmDelete = (id_barang_masuk) => {
     confirmButtonText: "Ya, saya ingin menghapus!"
   }).then((result) => {
     if (result.isConfirmed) {
-      deleteBarang(id_barang_masuk).then(() => {
+      deleteCustomer(id_pelanggan).then(() => {
         Swal.fire({
           title: "Terhapus!",
           text: "Data berhasil terhapus.",
@@ -247,23 +243,27 @@ const confirmDelete = (id_barang_masuk) => {
 
 const handleAddSubmit = async () => {
   try {
-    const response = await axios.post('barang-masuk/insert', {
-      id_barang: newBarang.value.id_barang,
-      tanggal_masuk: newBarang.value.tanggal_masuk,
-      kuantitas: newBarang.value.kuantitas,
+    const response = await axios.post('pelanggan/insert', {
+      id_pelanggan: newUser.value.id_pelanggan,
+      nama_pelanggan: newUser.value.nama_pelanggan, 
+      alamat: newUser.value.alamat,
+      email: newUser.value.email,
+      no_telepon: newUser.value.no_telepon 
     });
     console.log('Response:', response.data);
     fetchData();
-    
-    newBarang.value.id_barang = '';
-    newBarang.value.tanggal_masuk = '';
-    newBarang.value.kuantitas = 0;
+    newUser.value.id_pelanggan = '',
+    newUser.value.nama_pelanggan = '', 
+    newUser.value.alamat = '',
+    newUser.value.email = '',
+    newUser.value.no_telepon = ''; 
+
     const exampleModal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
     exampleModal.hide();
     Swal.fire({
       position: "middle",
       icon: "success",
-      title: response.data,
+      title: "Data berhasil tersimpan",
       showConfirmButton: false,
       timer: 1500
     });
@@ -272,35 +272,42 @@ const handleAddSubmit = async () => {
   }
 };
 
-const openEditModal = (barangMsk) => {
-  editBarang.value.id_barang_masuk = barangMsk.id_barang_masuk;
-  editBarang.value.id_barang = barangMsk.id_barang;
-  editBarang.value.tanggal_masuk = barangMsk.tanggal_masuk;
-  editBarang.value.kuantitas = barangMsk.kuantitas;
+const openEditModal = (pelanggan) => {
+  editUser.value.id_pelanggan = pelanggan.id_pelanggan;
+  editUser.value.nama_pelanggan = pelanggan.nama_pelanggan;
+  editUser.value.alamat = pelanggan.alamat;
+  editUser.value.email = pelanggan.email;
+  editUser.value.no_telpon  = pelanggan.no_telpon;
+
   const editModal = new bootstrap.Modal(document.getElementById('editModal'));
   editModal.show();
 };
 
 const handleEditSubmit = async () => {
   try {
-    const response = await axios.patch(`barang-masuk/update/${editBarang.value.id_barang_masuk}`, {
-      id_barang: editBarang.value.id_barang,
-      tanggal_masuk: editBarang.value.tanggal_masuk,
-      kuantitas: editBarang.value.kuantitas,
+    const response = await axios.put(`pelanggan/update/${editUser.value.id_pelanggan}`, {
+
+      id_pelanggan: editUser.value.id_pelanggan,
+      nama_pelanggan: editUser.value.nama_pelanggan,
+      alamat: editUser.value.alamat,
+      email: editUser.value.email,
+      no_telpon: editUser.value.no_telpon,
     });
     console.log('Response:', response.data);
     fetchData(); 
   
-    editBarang.value.id_barang_masuk = '';
-    editBarang.value.id_barang = '';
-    editBarang.value.tanggal_masuk = '';
-    editBarang.value.kuantitas = 0;
+    // editUser.value.tanggal_masuk = '';
+    editUser.value.id_pelanggan = '';
+    editUser.value.nama_pelanggan = '';
+    editUser.value.alamat = '';
+    editUser.value.email = '';
+    editUser.value.no_telpon = '';
     const editModal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
     editModal.hide();
     Swal.fire({
       position: "middle",
       icon: "success",
-      title: response.data,
+      title: "Data berhasil tersimpan",
       showConfirmButton: false,
       timer: 1500
     });
@@ -423,7 +430,7 @@ h4 {
     overflow: hidden;
     transition: all 0.35s ease-in-out;
     width: 100%;
-    /*background: var(--bs-dark-bg-subtle);*/
+    /* background: var(--bs-dark-bg-subtle); */
 }
 
 .main .card {
@@ -536,10 +543,12 @@ html[data-bs-theme="dark"] .theme-toggle .fa-moon {
 html[data-bs-theme="light"] .theme-toggle .fa-sun {
   display: none;
 }
+
 .table-shadow{
   box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14);
 -webkit-box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14);
 -moz-box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14)!important
 }
+
 
 </style>

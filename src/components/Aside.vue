@@ -1,67 +1,151 @@
 <template>
-  
-  <aside id="sidebar" class="js-sidebar">
+  <aside id="sidebar">
     <!-- Content For Sidebar -->
     <div class="h-100">
-        <div class="sidebar-logo mb-5">
-            <img src="../assets/nusantara.png" class="logo-nusantara" alt="">
-            <br>
-            <a href="#">Nusantara</a>
-        </div>
-        <ul class="sidebar-nav nav-tabs">
-            <li class="sidebar-header mb-4">
-                Hello, Admin!
+      <div class="sidebar-logo mb-5">
+        <img src="../assets/nusantara_white.png" class="logo-nusantara" alt="">
+        <br>
+        <a href="#">Nusantara</a>
+      </div>
+      <ul class="sidebar-nav nav-tabs">
+        <li class="sidebar-header mb-4">
+          Hello, Admin!
+        </li>
+        <li class="sidebar-item">
+          <RouterLink to="/dashboard" class="sidebar-link icon-link" exact>
+            <i class="bi bi-house"></i>
+            <i class="fa-solid fa-list pe-2"></i>
+            Dashboard
+          </RouterLink>
+        </li>
+        <li class="sidebar-item">
+          <RouterLink to="/barangmaster" class="sidebar-link icon-link" exact>
+            <i class="bi bi-box-seam"></i>
+            <i class="fa-solid fa-list pe-2"></i>
+            Master Barang
+          </RouterLink>
+        </li>
+        <li class="sidebar-item">
+          <RouterLink :to="{ name: 'BarangMasuk' }" class="sidebar-link icon-link">
+            <i class="bi bi-box-arrow-in-down"></i>
+            <i class="fa-solid fa-list pe-2"></i>
+            Barang Masuk
+          </RouterLink>
+        </li>
+        <li class="sidebar-item">
+          <RouterLink :to="{ name: 'customers' }" class="sidebar-link icon-link">
+            <i class="bi bi-person-workspace"></i>
+            <i class="fa-solid fa-list pe-2"></i>
+            Customer
+          </RouterLink>
+        </li>
+        <li class="sidebar-item">
+          <RouterLink :to="{ name: 'BarangKeluar' }" class="sidebar-link icon-link">
+            <i class="bi bi-box-arrow-up"></i>
+            <i class="fa-solid fa-list pe-2"></i>
+            Barang Keluar
+          </RouterLink>
+        </li>
+        <li class="sidebar-item">
+          <a href="#submenu2" data-bs-toggle="collapse" class="sidebar-link icon-link">
+            <i class="bi bi-truck"></i>
+            <i class="fa-solid fa-list pe-2"></i>
+            Pengiriman
+          </a>
+          <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+            <li class="sub-link">
+              <RouterLink :to="{ name: 'Pengiriman' }" class="sidebar-link icon-link">
+                <i class="bi bi-truck"></i>
+                <i class="fa-solid fa-list pe-2"></i>
+                Pengiriman
+              </RouterLink>
             </li>
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
-                    <i class="fa-solid fa-list pe-2"></i>
-                    <RouterLink to="/dashboard" class="nav-link">Dashboard</RouterLink>
-                    <!-- <RouterLink to="/about">About</RouterLink> -->
-                </a>
+            <li class="sub-link">
+              <RouterLink :to="{ name: 'RiwayatPengiriman' }" class="sidebar-link icon-link">
+                <i class="bi bi-truck"></i>
+                <i class="fa-solid fa-list pe-2"></i>
+                Riwayat Pengiriman
+              </RouterLink>
             </li>
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link nav-link active">
-                    <i class="fa-solid fa-list pe-2"></i>
-                    <RouterLink to="/barangmasuk" class="nav-link">Barang Masuk</RouterLink>
-                </a>
-            </li>
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link nav-link">
-                    <i class="fa-solid fa-list pe-2"></i>
-                    <RouterLink to="/barangkeluar" class="nav-link">Barang Keluar</RouterLink>
-                </a>
-            </li>
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
-                    <i class="fa-solid fa-list pe-2"></i>
-                    <RouterLink to="/pengiriman" class="nav-link">Pengiriman</RouterLink>
-                </a>
-            </li>
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link">
-                    <i class="fa-solid fa-list pe-2"></i>
-                    <RouterLink to="/stockopname" class="nav-link">Stok Opname</RouterLink>
-                </a>
-            </li>
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link mt-5">
-                    <RouterLink to="#" class="nav-link">
-                        <i class="fa-solid fa-list pe-2 bi-box-arrow-right"></i>
-                        Logout
-                    </RouterLink>
-                </a>
-            </li>
-        </ul>
+          </ul>
+        </li>
+        <li class="sidebar-item mt-5">
+          <a @click="handleLogout" class="sidebar-link icon-link">
+            <i class="fa-solid fa-list pe-2 bi-box-arrow-right"></i>
+            Logout
+          </a>
+        </li>
+      </ul>
     </div>
   </aside>
 </template>
 
-<style>
+<script>
+import axios from 'axios';
+import { useRouter } from 'vue-router';
+// import Swal from 'sweetalert2';
+
+export default {
+  setup() {
+    const router = useRouter();
+    return { router };
+  },
+  methods: {
+    async handleLogout() {
+      try {
+        const response = await axios.delete('/logout', {
+          withCredentials: true // Ensure cookies are sent
+        });
+        if (response.status === 200) {
+          // localStorage.removeItem('token'); // Remove the token from local storage
+          this.router.push({ name: 'Login' });
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: response.data.msg,
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      } catch (error) {
+        console.error('Logout failed:', error);
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: error.response.data.msg,
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    },
+  },
+};
+</script>
+
+<style scoped>
 /* Sidebar Elements Style */
+/* .h-100{
+  background-color: #E94F37;
+} */
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+}
+
 .logo-nusantara {
   margin-left: 30px;
   width: 150px;
-  height: 150px
+  height: 150px;
+}
+
+
+#sidebar {
+    max-width: 264px;
+    min-width: 264px;
+    background: #cf1313;
+    transition: all 0.35s ease-in-out;
 }
 
 .sidebar-logo {
@@ -89,7 +173,7 @@
   padding: 1.5rem 1.5rem .375rem;
 }
 
-a.sidebar-link {
+.sidebar-link {
   padding: .625rem 1.625rem;
   color: #e9ecef;
   position: relative;
@@ -113,5 +197,21 @@ a.sidebar-link {
 .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
   transform: rotate(45deg);
   transition: all .2s ease-out;
+}
+
+.router-link-exact-active {
+  color: #000000; /* Active link color */
+  background-color: #ffffff; /* Active link background color */
+}
+
+.sidebar-item{
+  margin-bottom: 15px;
+}
+
+.sub-link{
+  margin-left: 10px;
+  /* padding: 10px; */
+  /* margin-bottom: 15px; */
+  margin-top: 15px
 }
 </style>

@@ -1,171 +1,142 @@
 <template>
   <div class="wrapper">
     <Aside/>
-        <div class="main">
+    <div class="main">
+            <nav class="navbar navbar-expand px-3 border-bottom">
+                <button class="btn" id="sidebar-toggle" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse navbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                                <img src="../assets/nusantara.png" class="avatar img-fluid rounded" alt="">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a href="#" class="dropdown-item">Profile</a>
+                                <a href="#" class="dropdown-item">Setting</a>
+                                <a href="#" class="dropdown-item">Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
             <main class="content px-3 py-2">
+              <div class="mb-3 page-title">
+                  <h2 page-title>Dashboard</h2>
+              </div>
                 <div class="container-fluid">
-                    <div class="mb-3">
-                        <h4>Barang Keluar</h4>
-                    </div>
                     <div class="row">
-                        <div class="col-12 col-md-6 d-flex">
+                        <div class="col-12 col-md-4 d-flex">
                             <div class="card flex-fill border-0 illustration">
                                 <div class="card-body p-0 d-flex flex-fill">
                                     <div class="row g-0 w-100">
-                                        <div class="col-6">
+                                        <div class="col-10">
                                             <div class="p-3 m-1">
-                                                <h4>Welcome Back, Admin</h4>
-                                                <p class="mb-0">Admin Dashboard, Admin</p>
+                                                <h4>Jumlah Barang Masuk</h4>
+                                                <h2 class="mb-0">{{ MasukList }}</h2>
                                             </div>
-                                        </div>
-                                        <div class="col-6 align-self-end text-end">
-                                            <img src="#" class="img-fluid illustration-img"
-                                                alt="">
-                                        </div>
+                                        </div>  
+                                        <div class="col-2">
+                                            <div class="p-3 m-1">
+                                                <h2><i class="bi bi-bag-plus"></i></h2>
+                                            </div>
+                                        </div>  
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6 d-flex">
-                            <div class="card flex-fill border-0">
-                                <div class="card-body py-4">
-                                    <div class="d-flex align-items-start">
-                                        <div class="flex-grow-1">
-                                            <h4 class="mb-2">
-                                                $ 78.00
-                                            </h4>
-                                            <p class="mb-2">
-                                                Total Earnings
-                                            </p>
-                                            <div class="mb-0">
-                                                <span class="badge text-success me-2">
-                                                    +9.0%
-                                                </span>
-                                                <span class="text-muted">
-                                                    Since Last Month
-                                                </span>
+                        <div class="col-12 col-md-4 d-flex bg-sukse">
+                            <div class="card flex-fill border-0 out">
+                                <div class="card-body p-0 d-flex flex-fill">
+                                    <div class="row g-0 w-100">
+                                        <div class="col-10">
+                                            <div class="p-3 m-1">
+                                                <h4>Jumlah Barang Keluar</h4>
+                                                <h2 class="mb-0">{{ KeluarList }}</h2>
                                             </div>
-                                        </div>
+                                        </div>  
+                                        <div class="col-2">
+                                            <div class="p-3 m-1">
+                                                <h2><i class="bi bi-bag-dash"></i></h2>
+                                            </div>
+                                        </div>  
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="col-12 col-md-4 d-flex">
+                            <div class="card flex-fill border-0 send">
+                                <div class="card-body p-0 d-flex flex-fill">
+                                    <div class="row g-0 w-100">
+                                        <div class="col-10">
+                                            <div class="p-3 m-1">
+                                                <h4>Jumlah Barang Terkirim</h4>
+                                                <h2 class="mb-0">{{ TerkirimList }}</h2>
+                                                <!-- <p v-if="TerkirimList.barang_keluar">ID Pengiriman: <strong>{{ TerkirimList.barang_keluar.kuantitas }}</strong></p> -->
+                                                <!-- <h2><i class="bi bi-clipboard2-check"></i></h2> -->
+                                            </div>
+                                        </div>  
+                                        <div class="col-2">
+                                            <div class="p-3 m-1">
+                                                <h2><i class="bi bi-clipboard2-check"></i></h2>
+                                            </div>
+                                        </div>  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        
+                        
+                      </div>
+                    
+                    
                     <!-- Table Element -->
-                    <div class="card border-0">
-                        <div class="card-header">
-                            <h5 class="card-title">
-                                Recent Orders
-                            </h5>
-                            <!-- <h6 class="card-subtitle text-muted">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ducimus,
-                                necessitatibus reprehenderit itaque!
-                            </h6> -->
-                        </div>
-                        <div class="card-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Nomor DO</th>
-                                        <th scope="col">Kode Barang</th>
-                                        <th scope="col">Deskripsi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>DO-001</td>
-                                        <td>DUEL-1</td>
-                                        <td>Dueller</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>DO-002</td>
-                                        <td>PTNZ-3</td>
-                                        <td>Potenza</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>DO-003</td>
-                                        <td>ECOP-2</td>
-                                        <td>Ecopia</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">4</th>
-                                        <td>DO-001</td>
-                                        <td>DUEL-1</td>
-                                        <td>Dueller</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">5</th>
-                                        <td>DO-002</td>
-                                        <td>PTNZ-3</td>
-                                        <td>Potenza</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">6</th>
-                                        <td>DO-003</td>
-                                        <td>ECOP-2</td>
-                                        <td>Ecopia</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">7</th>
-                                        <td>DO-003</td>
-                                        <td>ECOP-2</td>
-                                        <td>Ecopia</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">8</th>
-                                        <td>DO-003</td>
-                                        <td>ECOP-2</td>
-                                        <td>Ecopia</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">9</th>
-                                        <td>DO-003</td>
-                                        <td>ECOP-2</td>
-                                        <td>Ecopia</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">10</th>
-                                        <td>DO-003</td>
-                                        <td>ECOP-2</td>
-                                        <td>Ecopia</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+      <div class="card border table-shadow p-3">
+        <div class="card-header">
+          <h5 class="card-title">List Barang</h5>
+        </div>
+        <div class="card-body table-responsive">
+          <!-- <div class="alert alert-primary" role="alert"></div> -->
+          <table class="table table-light table-bordered" id="example">
+            <thead class="table-danger mt-5">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Id Barang</th>
+                <th scope="col">Nama Ban</th>
+                <th scope="col">Kategori Ban</th>
+                <th scope="col">Harga</th>
+                <th scope="col">Stok</th>
+                <th scope="col">Value</th>
+                <!-- <th scope="col">Aksi</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(barang, index) in barangList" :key="barang.id_barang">
+                <th scope="row">{{ index + 1 }}</th>
+                <td>{{ barang.id_barang }}</td>
+                <td>{{ barang.nama_barang }}</td>
+                <td>{{ barang.kategori }}</td>
+                <td>{{ barang.harga}}</td>
+                <td>{{ barang.stok}}</td>
+                <td>{{ barang.total_harga}}</td>
+                <!-- <td>
+                  <button type="button" class="btn btn-sm btn-primary " data-bs-toggle="modal" data-bs-target="#editModal" @click="openEditModal(barang)"> <i class="bi bi-pencil-square"></i> <span>Edit</span> </button>
+                  <button class="btn btn-sm btn-danger mx-2" @click="deleteBarang(barang.id_barang)"> <i class="bi bi-trash"></i> <span>Delete</span></button>
+                  <button class="btn btn-sm btn-danger mx-2" @click="confirmDelete(barang.id_barang)"><i class="bi bi-trash"></i> <span>Delete</span></button>
+                </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
             </main>
             <a href="#" class="theme-toggle">
                 <i class="fa-regular fa-moon"></i>
                 <i class="fa-regular fa-sun"></i>
             </a>
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row text-muted">
-                        <div class="col-6 text-start">
-                            <p class="mb-0">
-                                <a href="#" class="text-muted">
-                                    <strong>Nusantara</strong>
-                                </a>
-                            </p>
-                        </div>
-                        <div class="col-6 text-end">
-                            <ul class="list-inline">
-                                <li class="list-inline-item">
-                                    <a href="#" class="text-muted">Contact</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#" class="text-muted">About Us</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </footer>
         </div>
     </div>
     
@@ -173,9 +144,63 @@
 
 <script setup>
 import Aside from '../components/Aside.vue'
+import { ref, onMounted, nextTick } from 'vue';
+import axios from 'axios'; 
+const barangList = ref([]);
+const MasukList = ref([]);
+const KeluarList = ref([]);
+const TerkirimList = ref([]);
+// // import ChartComponent from '@/components/ChartComponent.vue';
+
+const fetchData = async () => {
+  try {
+    const response = await axios.get('/barang');
+    barangList.value = response.data.barang;
+    await nextTick();
+    $('#example').DataTable();
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+const fetchDataMasuk = async () => {
+  try {
+    const response = await axios.get('/dashboard/jmlBarangMasuk');
+    MasukList.value = response.data.data.barangMasuk._sum.kuantitas;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+const fetchDataKeluar = async () => {
+  try {
+    const response = await axios.get('/dashboard/jmlBarangKeluar');
+    KeluarList.value = response.data.data.barangKeluar._sum.kuantitas;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+const fetchDataPengiriman = async () => {
+  try {
+    const response = await axios.get('/dashboard/jmlBarangTerkirim');
+    TerkirimList.value = response.data.data.barangTerkirim;
+    console.log(response.data.data)
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+
+onMounted(fetchData );
+onMounted(fetchDataMasuk);
+onMounted(fetchDataPengiriman);
+onMounted(fetchDataKeluar);
 </script>
 
-<style>
+
+
+<style scoped>
 
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
@@ -189,7 +214,7 @@ import Aside from '../components/Aside.vue'
 body {
   font-family: 'Poppins', sans-serif;
   font-size: 0.875rem;
-  opacity: 1;
+  /* opacity: 1; */
   overflow-y: scroll;
   margin: 0;
 }
@@ -249,14 +274,8 @@ h4 {
   width: 100%;
 }
 
-#sidebar {
-  max-width: 264px;
-  min-width: 264px;
-  background: #cf1313;
-  transition: all 0.35s ease-in-out;
-}
-
 .main {
+  padding: 20px;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -264,65 +283,11 @@ h4 {
   overflow: hidden;
   transition: all 0.35s ease-in-out;
   width: 100%;
-  background: var(--bs-dark-bg-subtle);
+  /* background: var(--bs-dark-bg-subtle); */
 }
 
-/* Sidebar Elements Style */
-.logo-nusantara {
-  margin-left: 30px;
-  width: 150px;
-  height: 150px
-}
-
-.sidebar-logo {
-  padding: 1.15rem;
-}
-
-.sidebar-logo a {
-  color: #e9ecef;
-  font-size: 1.15rem;
-  font-weight: 600;
-  margin-left: 60px;
-}
-
-.sidebar-nav {
-  flex-grow: 1;
-  list-style: none;
-  margin-bottom: 0;
-  padding-left: 0;
-  margin-left: 0;
-}
-
-.sidebar-header {
-  color: #e9ecef;
-  font-size: .75rem;
-  padding: 1.5rem 1.5rem .375rem;
-}
-
-a.sidebar-link {
-  padding: .625rem 1.625rem;
-  color: #e9ecef;
-  position: relative;
-  display: block;
-  font-size: 0.875rem;
-}
-
-.sidebar-link[data-bs-toggle="collapse"]::after {
-  border: solid;
-  border-width: 0 .075rem .075rem 0;
-  content: "";
-  display: inline-block;
-  padding: 2px;
-  position: absolute;
-  right: 1.5rem;
-  top: 1.4rem;
-  transform: rotate(-135deg);
-  transition: all .2s ease-out;
-}
-
-.sidebar-link[data-bs-toggle="collapse"].collapsed::after {
-  transform: rotate(45deg);
-  transition: all .2s ease-out;
+.main .card {
+    width: 100%;
 }
 
 .avatar {
@@ -336,8 +301,8 @@ a.sidebar-link {
 
 .content {
   flex: 1;
-  max-width: 100vw;
-  width: 100vw;
+  /* max-width: 100vw; */
+  /* width: 100vw; */
 }
 
 .form-control:focus {
@@ -368,6 +333,19 @@ padding-left: 0;
   background-color: var(--bs-primary-bg-subtle);
   color: var(--bs-emphasis-color);
 }
+.out {
+  background-color: var(--bs-warning-bg-subtle);
+  color: var(--bs-emphasis-color);
+}
+.send {
+  background-color: var(--bs-success-bg-subtle);
+  color: var(--bs-emphasis-color);
+}
+
+/* .thead{
+  background-color: var(--bs-danger-rgb)!important;
+  color: var(--bs-danger)!important;
+} */
 
 .illustration-img {
   max-width: 150px;
@@ -427,6 +405,26 @@ html[data-bs-theme="dark"] .theme-toggle .fa-moon {
 
 html[data-bs-theme="light"] .theme-toggle .fa-sun {
   display: none;
+}
+
+.table-shadow{
+  box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14);
+-webkit-box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14);
+-moz-box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14)!important
+}
+
+.bg-keluar{
+  background-color: #F4E1B3;
+  color: #F4E1B3;
+}
+
+/* .bg-terkirim{
+  background-color: ;
+} */
+
+
+.page-title{
+  color: #5a5c69 ;
 }
 
 </style>
