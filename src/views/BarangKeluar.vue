@@ -2,12 +2,13 @@
   <div class="wrapper">
     <Aside/>
     <div class="main">
-      <div class="input-group mb-5">
-        <input type="search" placeholder="Cari stok barang" aria-describedby="button-addon5" class="form-control rounded-pill">
+      <div class="input-group mb-3">
+        <h2>Barang Keluar</h2>
+        <!-- <input type="search" placeholder="Cari stok barang" aria-describedby="button-addon5" class="form-control rounded-pill">
         <div class="input-group-append mx-3">
           <button id="button-addon5" type="submit" class="btn btn-danger"><i class="bi bi-search"></i>Search</button>
-        </div>
-        <button type="button" class="btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Tambah Barang</button>
+        </div> -->
+        <!-- <button type="button" class="btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Tambah Barang</button> -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -25,16 +26,16 @@
                             <label for="kode-barang" class="col-form-label">Pilih Barang</label>
                             <select id="kode-barang" class="form-select mb-2" v-model="newBarang.id_barang">
                               <option disabled value="">Pilih barang</option>
-                              <option value="BRG-37424506">Adrenalin RE003</option>
-                              <!-- <option value="BRG-27540728">S007A</option> -->
-                              <!-- <option value="BRG-65147694">RE050</option> -->
-                              <!-- <option value="BRG-02769403">MPV-1</option> -->
-                              <!-- <option value="BRG-19646238">EP150</option> -->
-                              <!-- <option value="BRG-48653832">EP300</option> -->
-                              <!-- <option value="BRG-45352771">All Terrain 697</option> -->
-                              <!-- <option value="BRG-73996611">Mud Terrain 674</option> -->
-                              <!-- <option value="BRG-04844424">HL 683</option> -->
-                              <!-- <option value="BRG-90014740">Ban Baru</option> -->
+                              <option value="BRG-57422696">Adrenalin RE003</option>
+                              <option value="BRG-27540728">S007A</option>
+                              <option value="BRG-65147694">RE050</option>
+                              <option value="BRG-02769403">MPV-1</option>
+                              <option value="BRG-19646238">EP150</option>
+                              <option value="BRG-48653832">EP300</option>
+                              <option value="BRG-45352771">All Terrain 697</option>
+                              <option value="BRG-73996611">Mud Terrain 674</option>
+                              <option value="BRG-04844424">HL 683</option>
+                              <option value="BRG-90014740">Ban Baru</option>
                             </select>
                           </div>
                           <div class="mb-3 col-md-6">
@@ -48,6 +49,8 @@
                             <select id="kode-pelanggan" class="form-select mb-2" v-model="newBarang.id_pelanggan">
                               <option disabled value="">Customer</option>
                               <option value="PLG-95465446">Marshall</option>
+                              <option value="PLG-97738791">Marshall Rifqi</option>
+                              <option value="PLG-97993116">John</option>
                               <!-- <option value="#">Customer 2</option> -->
                               <!-- <option value="#">Customer 3</option> -->
                             </select>
@@ -104,14 +107,24 @@
           </div>
         </div>
       </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12 p-0">
+            <button type="button" class="btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Tambah Barang</button>
+          </div>
+        </div>
+      </div>
+
+
       <!-- Table Element -->
-      <div class="card border-0 mx-5 p-2">
+      <div class="card border table-shadow m-4 p-3">
         <div class="card-header">
           <h5 class="card-title">List Barang Keluar</h5>
         </div>
-        <div class="card-body">
-          <table class="table table-light table-striped">
-            <thead>
+        <div class="card-body table-responsive">
+          <table class="table table-light table-bordered" id="example">
+            <thead class="table-danger mt-5">
               <tr>
                 <th scope="col">No</th>
                 <th scope="col">Id Barang Keluar</th>
@@ -138,7 +151,7 @@
                   <button class="btn btn-sm btn-primary mx-2" @click="openEditModal(barangKlr)"><i class="bi bi-pencil-square"></i> <span>Edit</span></button>
                   <!-- <button class="btn btn-sm btn-danger mx-2" @click="deleteBarang(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button> -->
                   <button class="btn btn-sm btn-danger mx-2" @click="confirmDelete(barangKlr.id_barang_keluar)"><i class="bi bi-trash"></i> <span>Delete</span></button>
-                  <button class="btn btn-sm btn-primary mx-2" @click="opendetailModal()">Detail</button>
+                  <button class="btn btn-sm btn-primary mx-2" @click="confirmKirimBarang(barangKlr.id_barang_keluar)"><i class="bi bi-truck"></i> <span>Kirim</span></button>
                 </td>
               </tr>
             </tbody>
@@ -198,97 +211,82 @@
       </div>
     </div>
     </div>
-    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-          <div class="modal-header text-center">
-            <h1 class="modal-title text-center fs-5" id="editLabel">Detail Pengiriman</h1>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="modal-body">
-                <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-md-4 text-center align-self-center">
-                      <img src="https://via.placeholder.com/150" alt="QR Code" class="img-fluid">
-                    </div>
-                    <div class="col-md-8">
-                      <p><strong>ID Pengiriman:</strong> 123456</p>
-                      <p><strong>Nama Barang:</strong> Barang Contoh</p>
-                      <p><strong>Customer:</strong> Nama Customer</p>
-                      <p><strong>Status:</strong> Dalam Pengiriman</p>
-                    </div>
-                  </div>
+  
 
-                  <hr>
-
-                  <div class="card border-0 mx-5 p-2">
-                    <div class="card-header">
-                      <h5 class="card-title">Riyawat Pengiriman</h5>
-                    </div>
-                    <div class="card-body">
-                      <table class="table table-light table-striped">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Id barang masuk</th>
-                            <th scope="col">Kode Barang</th>
-                            <th scope="col">No DO</th>
-                            <th scope="col">Nama Ban</th>
-                            <th scope="col">Tipe Ban</th>
-                            <th scope="col">Stok</th>
-                            <th class="text-center" scope="col">Aksi</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <!-- <tr v-for="(barangMsk, index) in barangList" :key="barangMsk.id_barang_masuk">
-                            <th scope="row">{{ index + 1 }}</th>
-                            <td>{{ barangMsk.id_barang_masuk }}</td>
-                            <td>{{ barangMsk.id_barang }}</td>
-                            <td>{{ barangMsk.no_do }}</td>
-                            <td>{{ barangMsk.barang.nama_barang }}</td>
-                            <td>{{ barangMsk.barang.kategori }}</td>
-                            <td>{{ barangMsk.kuantitas }}</td>
-                            <td>
-                              <button class="btn btn-sm btn-primary mx-2"><i class="bi bi-pencil-square"></i> <span>Edit</span></button>
-                              <button type="button" class="btn btn-danger btn-sm " data-bs-toggle="modal" data-bs-target="#editModal" @click="openEditModal(barangMsk)">edit</button>
-                              <button class="btn btn-sm btn-primary mx-2" @click="openEditModal(barangMsk)"><i class="bi bi-pencil-square"></i> <span>Edit</span></button>
-                              <button class="btn btn-sm btn-danger mx-2" @click="deleteBarang(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button>
-                              <button class="btn btn-sm btn-danger mx-2" @click="confirmDelete(barangMsk.id_barang_masuk)"><i class="bi bi-trash"></i> <span>Delete</span></button>
-                              <button class="btn btn-sm btn-primary mx-2" @click="opendetailModal()">Detail</button>
-                            </td>
-                          </tr> -->
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                <i class="bi bi-x-lg"></i><span class="mx-2">Batal</span>
-              </button>
-              <button type="submit" class="btn btn-primary">
-                <i class="bi bi-check2"></i><span class="mx-2" @click="handleEditSubmit">Simpan</span>
-              </button>
-            </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- DETAIL MODAL -->
+    <div id="app">
+       <div class="modal fade  modal-fullscreen" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+           <div class="modal-dialog modal-fullscreen">
+             <div class="modal-content" id="printLabel">
+               <div class="modal-header">
+                 <!-- <div class="card-header"> -->
+                   <div class="container-fluid">
+                     <div class="row d-flex align-items-center justify-content-between mx-5">
+                       <div class="col-auto mx-4">
+                         <img src="../assets/nusantara_team__update.png" class="logo-nusantara" alt="">
+                       </div>
+                       <div class="col-auto mx-4">
+                         <h3 class="modal-title fs-7" id="editLabel">Detail Pengiriman</h3>
+                       </div>
+                     </div>
+                   </div>
+                 <!-- </div> -->
+               </div>
+               <div class="modal-body">
+                 <form>
+                   <div class="modal-body">
+                     <div class="container-fluid">
+                       <div class="row mx-auto mb-4">
+                         <div class="col-md-4 mx-auto" >
+                            <p>ID Pengiriman: <strong>{{ barangListId.id_barang_keluar }}</strong></p>
+                           <p>Jumlah Barang: <strong>{{ barangListId.kuantitas }}</strong></p>
+                           <p v-if="barangListId.Pengiriman">ID Pengiriman: <strong>{{ barangListId.Pengiriman.id_pengiriman }}</strong></p>
+                         </div>
+                         <div class="col-md-4">
+                           <img src="https://via.placeholder.com/150" alt="QR Code" class="img-fluid">
+                         </div>
+                       </div>
+                       <div class="row mx-auto mt-5">
+                         <div class="col-md-4 mx-auto">
+                           <p><strong>Kepada:</strong></p>
+                           <p  v-if="barangListId.pelanggan"><strong>{{ barangListId.pelanggan.nama_pelanggan}}</strong></p>
+                           <p  v-if="barangListId.pelanggan">{{ barangListId.pelanggan.alamat}}</p>
+                           <p  v-if="barangListId.pelanggan"><strong>{{ barangListId.pelanggan.no_telpon}}</strong></p>
+                         </div>
+                         <div class="col-md-4">
+                           <p><strong>Dari:</strong></p>
+                           <p><strong>Nusantara Warehouse</strong></p>
+                           <p>Jalan Saluyu Indah XIII No.52. Bandung, Jawa Barat</p>
+                           <p>(022) 7537688</p>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                   <div class="modal-footer">
+                     <div class="col mx-auto" align="center">
+                       <button type="submit" class="btn btn-primary" @click="printBtn()">
+                         <i class="bi bi-printer"></i><span class="mx-2">Print Label</span>
+                       </button>
+                     </div>
+                 </div>
+                 </form>
+               </div>
+             </div>
+           </div>
+         </div>
+     </div>
 </template>
 
 <script setup>
 import Aside from '../components/Aside.vue'
 
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';
 import axios from 'axios';
 
-const opendetailModal = () => {
-  const detailModal = new bootstrap.Modal(document.getElementById('detailModal'));
-  detailModal.show();
-  };
+// const opendetailModal = () => {
+//   const detailModal = new bootstrap.Modal(document.getElementById('detailModal'));
+//   detailModal.show();
+//   };
 
 const barangList = ref([]);
 
@@ -314,6 +312,8 @@ const fetchData = async () => {
   try {
     const response = await axios.get('/barang-keluar');
     barangList.value = response.data.barangKlr;
+    await nextTick();
+    $('#example').DataTable();
   } catch (error) {
     console.error('Error fetching data:', error);
   }
@@ -484,8 +484,106 @@ const handleEditSubmit = async () => {
 //   }
 // };
 
+const printBarang = () => {
+  Swal.fire({
+    title: "Download Label Print!",
+    text: "Pastikan anda mendownload label print!",
+    icon: "warning",
+    showConfirmButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",});
+  // window.open("DetailPengiriman", "_blank");
+  // detailModal.show();
+  // opendetailModal()
+  
+};
+
+const printBtn = () => {
+  const printLabelPengiriman = new bootstrap.Modal(document.getElementById('printLabel'));
+  print(printLabelPengiriman)
+};
 
 
+const kirimBarang = async (id_barang_keluar) => {
+  try {
+    const response = await axios.patch(`barang-keluar/kirim/${id_barang_keluar}`);
+    fetchData();
+    console.log('Response:', response.data);
+    barangListId.value = response.data.data;
+    // const detailModal = new bootstrap.Modal(document.getElementById('detailModal'));
+    // detailModal.show(id_barang_keluar);
+    // await fetchData(id_barang_keluar);
+  } catch (error) {
+    console.error('Error Kirim data:', error);
+  }
+};
+
+const confirmKirimBarang = (id_barang_keluar) => {
+    Swal.fire({
+      title: "Konfirmasi Kirim Barang",
+      text: "Apakah anda ingin mengirimkan barang ini?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, Kirim",
+    }).then((result) => {
+        if (result.isConfirmed) {
+          kirimBarang(id_barang_keluar).then(() => {
+            Swal.fire({
+              title: "Barang Terkirim!",
+              text: "Barang terkirim, silahkan print label pengiriman.",
+              icon: "success",
+              timer: 5000,
+          }).then(() => {
+            setTimeout(() => {
+              printBarang();
+              opendetailModal(id_barang_keluar)
+              Swal.fire({
+                title: "Download Label Print!",
+                text: "Pastikan anda mendownload label print!",
+                icon: "warning",
+                showConfirmButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+            }, 1500);
+          });
+        });
+      })
+    };
+    });
+  };
+
+  // const barangList = ref([]);
+  const barangListId = ref([]);
+
+  const opendetailModal = async (id_barang_keluar) => {
+  // barangListId.value.id_barang_keluar = data.id_barang_keluar
+  // barangListId.value.id_barang = data.id_barang
+  // barangListId.value.id_pelanggan = data.id_pelanggan
+  // barangListId.value.kuantitas = data.kuantitas
+  // barangListId.value.Pengiriman = Pengiriman
+  // newBarang.value.id_barang_keluar = barangKlr.id_barang_keluar;
+  // newBarang.value.id_barang = barangKlr.id_barang;
+  // newBarang.value.id_pelanggan= barangKlr.id_pelanggan;
+  // newBarang.value.kuantitas = barangKlr.kuantitas;
+  // newBarang.value.tanggal_keluar = barangKlr.tanggal_keluar;
+  try {
+    const response = await axios.get(`/barang-keluar/${id_barang_keluar}`);
+    barangListId.value = response.data.data;
+    console.log(response.data.msg)
+    console.log(response.data.data)
+    console.log (response.data.data.pelanggan.nama_pelanggan)
+    // kirimBarang(id_barang_keluar)
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    console.log(response.data.msg)
+  }
+  const detailModal = new bootstrap.Modal(document.getElementById('detailModal'));
+  detailModal.show();
+  // console.log('Response:', response.data);
+  // fetchDataId()
+};
 
 onMounted(fetchData);
 </script>
@@ -501,6 +599,22 @@ onMounted(fetchData);
 ::before {
   box-sizing: border-box;
 }
+
+@media print {
+  #printLabel {
+    display: none;
+  }
+  #printLabel {
+    display: block;
+  }
+}
+
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap'); */
+
+.logo-nusantara {
+    height: 120px;
+    width: 120px;
+  }
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -526,7 +640,7 @@ h4 {
   color: var(--bs-emphasis-color);
 }
 
-.tbl-no {
+/* .tbl-no {
   width: 3%;
 }
 
@@ -544,7 +658,7 @@ h4 {
 
 .tbl-aksi {
   width: 10%;
-}
+} */
 
 ::-webkit-input-placeholder {
  font-size: 15px;
@@ -561,10 +675,11 @@ h4 {
     align-items: center;
     justify-content: center;
     align-items: center; */
-    width: 50%;
+    /* width: 50%; */
     /* margin-left: 300px; */
     /* margin-top: 20px; */
     font-size: 1rem;
+    color: #5a5c69 ;
 }
 
 .footer {
@@ -588,7 +703,7 @@ h4 {
 
 .main {
     display: flex;
-    padding: 50px;
+    padding: 30px;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
@@ -597,11 +712,11 @@ h4 {
     overflow: hidden;
     transition: all 0.35s ease-in-out;
     width: 100%;
-    background: var(--bs-dark-bg-subtle);
+    /* background: var(--bs-dark-bg-subtle); */
 }
 
 .main .card {
-    width: 90%;
+    width: 100%;
 }
 
 .main .tambah-barang {
@@ -709,6 +824,12 @@ html[data-bs-theme="dark"] .theme-toggle .fa-moon {
 
 html[data-bs-theme="light"] .theme-toggle .fa-sun {
   display: none;
+}
+
+.table-shadow{
+  box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14);
+-webkit-box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14);
+-moz-box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14)!important
 }
 
 </style>

@@ -70,15 +70,57 @@
           </ul>
         </li>
         <li class="sidebar-item mt-5">
-          <RouterLink :to="{ name: 'Login' }" class="sidebar-link icon-link">
+          <a @click="handleLogout" class="sidebar-link icon-link">
             <i class="fa-solid fa-list pe-2 bi-box-arrow-right"></i>
             Logout
-          </RouterLink>
+          </a>
         </li>
       </ul>
     </div>
   </aside>
 </template>
+
+<script>
+import axios from 'axios';
+import { useRouter } from 'vue-router';
+// import Swal from 'sweetalert2';
+
+export default {
+  setup() {
+    const router = useRouter();
+    return { router };
+  },
+  methods: {
+    async handleLogout() {
+      try {
+        const response = await axios.delete('/logout', {
+          withCredentials: true // Ensure cookies are sent
+        });
+        if (response.status === 200) {
+          // localStorage.removeItem('token'); // Remove the token from local storage
+          this.router.push({ name: 'Login' });
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: response.data.msg,
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      } catch (error) {
+        console.error('Logout failed:', error);
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: error.response.data.msg,
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    },
+  },
+};
+</script>
 
 <style scoped>
 /* Sidebar Elements Style */

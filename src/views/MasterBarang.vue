@@ -2,14 +2,15 @@
   <div class="wrapper">
     <Aside/>
     <div class="main">
-      <div class="input-group mb-5">
-        <input type="search" placeholder="Cari stok barang" aria-describedby="button-addon5" class="form-control rounded-pill">
+      <div class="input-group mb-3">
+        <h2>Master Barang</h2>
+        <!-- <input type="search" placeholder="Cari stok barang" aria-describedby="button-addon5" class="form-control rounded-pill">
         <div class="input-group-append mx-3">
           <button id="button-addon5" type="submit" class="btn btn-danger"><i class="bi bi-search"></i>Search</button>
-        </div>
-        <button type="button" class="btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        </div> -->
+        <!-- <button type="button" class="btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Tambah Barang
-        </button>
+        </button> -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -23,20 +24,20 @@
                     <div class="row">
                       <div class="mb-3 col-md-7">
                         <label for="namaBarang" class="col-form-label">Nama Barang</label>
-                        <input type="text" class="form-control" id="namaBarang" v-model="form.nama_barang" placeholder="Nama Barang">
+                        <input type="text" class="form-control" id="namaBarang" v-model="form.nama_barang" placeholder="Adrenaline">
                       </div>
                       <div class="mb-3 col-md-5">
                         <label for="tipeBan" class="col-form-label">Tipe Ban</label>
-                        <input type="text" class="form-control" id="tipeBan" v-model="form.kategori" placeholder="Tipe">
+                        <input type="text" class="form-control" id="tipeBan" v-model="form.kategori" placeholder="Potenza">
                       </div>
                     </div>
                     <div class="mb-3">
                       <label label for="harga" class="col-form-label">Harga</label>
-                      <input type="number" class="form-control" id="harga" v-model="form.harga" min="0" max="200">
+                      <input type="number" class="form-control" id="harga" v-model="form.harga" min="0" max="1000">
                     </div>
                     <div class="mb-3">
                       <label label for="stok" class="col-form-label">Stok</label>
-                      <input type="number" class="form-control" id="stok" v-model="form.stok" min="0" max="200">
+                      <input type="number" class="form-control" id="stok" v-model="form.stok" min="0" max="1000">
                     </div>
                     <!-- <div class="mb-3">
                       <label for="tanggal" class="col-form-label">Tanggal</label>
@@ -58,14 +59,23 @@
         </div>
       </div>
 
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12 p-0">
+            <button type="button" class="btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Tambah Barang</button>
+          </div>
+        </div>
+      </div>
+
       <!-- Table Element -->
-      <div class="card border-0 mx-5 p-2">
+      <div class="card border table-shadow m-4 p-3">
         <div class="card-header">
           <h5 class="card-title">List Barang</h5>
         </div>
-        <div class="card-body">
-          <table class="table table-light table-striped">
-            <thead>
+        <div class="card-body table-responsive">
+          <!-- <div class="alert alert-primary" role="alert"></div> -->
+          <table class="table table-light table-bordered" id="example">
+            <thead class="table-danger mt-5">
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Id Barang</th>
@@ -130,11 +140,11 @@
                 <div class="row">
                   <div class="mb-3 col-md-7">
                     <label for="namaBarang" class="col-form-label">Nama Barang</label>
-                    <input type="text" class="form-control" id="namaBarang" v-model="form.nama_barang" placeholder="Nama Barang">
+                    <input type="text" class="form-control" id="namaBarang" v-model="form.nama_barang" placeholder="Adrenaline">
                   </div>
                   <div class="mb-3 col-md-5">
                     <label for="tipeBan" class="col-form-label">Tipe Ban</label>
-                    <input type="text" class="form-control" id="tipeBan" v-model="form.kategori" placeholder="Tipe">
+                    <input type="text" class="form-control" id="tipeBan" v-model="form.kategori" placeholder="Potenza">
                   </div>
                 </div>
                 <div class="mb-3">
@@ -169,8 +179,11 @@
 <script setup>
 import Aside from '../components/Aside.vue'
 
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';
 import axios from 'axios'; 
+
+// import $ from 'jquery';
+// import 'datatables.net-bs5';
 
 const barangList = ref([]);
 const form = ref({
@@ -185,6 +198,8 @@ const fetchData = async () => {
   try {
     const response = await axios.get('/barang');
     barangList.value = response.data.barang;
+    await nextTick();
+    $('#example').DataTable();
   } catch (error) {
     console.error('Error fetching data:', error);
   }
@@ -351,10 +366,11 @@ h4 {
     align-items: center;
     justify-content: center;
     align-items: center; */
-    width: 50%;
+    /* width: 50%; */
     /* margin-left: 300px; */
     /* margin-top: 20px; */
     font-size: 1rem;
+    color: #5a5c69 ;
 }
 
 .footer {
@@ -381,7 +397,7 @@ h4 {
 
 .main {
     /* margin-top: 50px; */
-    padding: 50px;
+    padding: 20px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -392,11 +408,11 @@ h4 {
     overflow: hidden;
     transition: all 0.35s ease-in-out;
     width: 100%;
-    background: var(--bs-dark-bg-subtle);
+    /* background: var(--bs-dark-bg-subtle); */
 }
 
 .main .card {
-    width: 90%;
+    width: 100%;
 }
 
 .main .tambah-barang {
@@ -504,6 +520,12 @@ html[data-bs-theme="dark"] .theme-toggle .fa-moon {
 
 html[data-bs-theme="light"] .theme-toggle .fa-sun {
   display: none;
+}
+
+.table-shadow{
+  box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14);
+-webkit-box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14);
+-moz-box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14)!important
 }
 
 </style>

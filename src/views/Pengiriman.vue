@@ -3,25 +3,37 @@
     <Aside/>
 
     <div class="main">
-      <div class="input-group mb-5">
-        <input type="search" placeholder="Cari stok barang" aria-describedby="button-addon5" class="form-control rounded-pill">
+      <div class="input-group mb-3">
+        <h2>Pengiriman</h2>
+        <!-- <input type="search" placeholder="Cari stok barang" aria-describedby="button-addon5" class="form-control rounded-pill">
         <div class="input-group-append mx-3">
           <button id="button-addon5" type="submit" class="btn btn-danger"><i class="bi bi-search"></i>Search</button>
-        </div>
-        <div class="riwayat">
-          <a href="RiwayatPengiriman" class="btn btn-danger">
-            <RouterLink :to="{ name: 'RiwayatPengiriman' }" class="tambah-button">Barang Terkirim</RouterLink>
-          </a>
+        </div> -->
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12 p-0">
+        <a href="RiwayatPengiriman" class="btn btn-danger">
+          <RouterLink :to="{ name: 'RiwayatPengiriman' }" class="tambah-button">Barang Terkirim</RouterLink>
+        </a>
+      </div>
         </div>
       </div>
+
+      <!-- <div class="riwayat">
+        <a href="RiwayatPengiriman" class="btn btn-danger">
+          <RouterLink :to="{ name: 'RiwayatPengiriman' }" class="tambah-button">Barang Terkirim</RouterLink>
+        </a>
+      </div> -->
       <!-- Table Element -->
-      <div class="card border-0 mx-5 p-2">
+      <div class="card border table-shadow m-4 p-3">
         <div class="card-header">
           <h5 class="card-title">List Pengiriman</h5>
         </div>
-        <div class="card-body">
-          <table class="table table-light table-striped">
-            <thead>
+        <div class="card-body table-responsive">
+          <table class="table table-light table-bordered"  id="example">
+            <thead class="table-danger mt-5">
               <tr>
                 <th scope="col">No</th>
                 <th scope="col">Tanggal dan Waktu</th>
@@ -29,49 +41,20 @@
                 <th scope="col">Nama Ban</th>
                 <th scope="col">Customer</th>
                 <th scope="col">Status</th>
-                <th scope="col">Stok</th>
+                <th scope="col">Aksi</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <!-- <th></th> -->
-                <td>1</td>
-                <td>07-05-2024</td>
-                <td></td>
-                <td>EP300</td>
-                <td></td>
-                <td><span class="badge rounded-pill bg-primary">Pengecekan</span></td>
-                <td></td>
-              </tr>
-              <tr>
-                <!-- <th></th> -->
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><span class="badge rounded-pill bg-secondary">Dalam Antrean</span></td>
-                <td></td>
-              </tr>
-              <tr>
-                <!-- <th></th> -->
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><span class="badge rounded-pill bg-warning">Pengiriman</span></td>
-                <td></td>
-              </tr>
-              <tr>
-                <!-- <th></th> -->
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><span class="badge rounded-pill bg-success">Terkirim</span></td>
-                <td></td>
+              <tr v-for="(pengiriman, index) in listPengiriman" :key="pengiriman.barang_keluar">
+                <th scope="row">{{ index + 1 }}</th>
+                <td>{{ pengiriman.tanggal_pengiriman }}</td>
+                <td>{{ pengiriman.id_pengiriman }}</td>
+                <td>{{ pengiriman.barang_keluar.barang.nama_barang }}</td>
+                <td>{{ pengiriman.barang_keluar.pelanggan.nama_pelanggan }}</td>
+                <td><span class="badge rounded-pill bg-warning">{{ pengiriman.status }}</span></td>
+                <td>
+                  <button class="btn btn-sm btn-success mx-2" @click="konfirmasiPengiriman(pengiriman.id_pengiriman)"><i class="bi bi-pencil-square"></i> <span>Konfirmasi</span></button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -85,7 +68,60 @@
 
 <script setup>
 import Aside from '../components/Aside.vue'
-import EditModal from '../components/EditModal.vue'
+import { ref, onMounted,  nextTick  } from 'vue';
+import axios from 'axios';
+
+const listPengiriman = ref([]);
+
+const fetchData = async () => {
+  try {
+    const response = await axios.get('/pengiriman');
+    listPengiriman.value = response.data.data;
+    console.log('Response:', response.data);
+    await nextTick();
+    $('#example').DataTable();
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+const konfirmasi = async (id_pengiriman) => {
+  try {
+    const response = await axios.patch(`/pengiriman/konfirmasi/${id_pengiriman}`);
+    fetchData();
+    // listPengiriman.value = response.data.data;
+    console.log('Response:', response.data);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+const konfirmasiPengiriman = (id_pengiriman) => {
+    Swal.fire({
+      title: "Konfirmasi pengiriman",
+      text: "Ingin menyelesaikan pengiriman?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Konfirmasi",
+    }).then((result) => {
+        if (result.isConfirmed) {
+          konfirmasi(id_pengiriman).then(() => {
+            Swal.fire({
+              title: "Pengiriman Dikonfirmasi!",
+              text: "Pengiriman barang telah selesai",
+              icon: "success",
+              timer: 5000,
+          })
+        });
+        }
+    });
+  };
+
+
+onMounted(fetchData);
+
 </script>
 
 
@@ -124,7 +160,7 @@ h4 {
   color: var(--bs-emphasis-color);
 }
 
-.tbl-no {
+/* .tbl-no {
   width: 3%;
 }
 
@@ -142,7 +178,7 @@ h4 {
 
 .tbl-aksi {
   width: 10%;
-}
+} */
 
 ::-webkit-input-placeholder {
  font-size: 15px;
@@ -159,10 +195,11 @@ h4 {
     align-items: center;
     justify-content: center;
     align-items: center; */
-    width: 50%;
+    /* width: 50%; */
     /* margin-left: 300px; */
     /* margin-top: 20px; */
     font-size: 1rem;
+    color: #5a5c69 ;
 }
 
 .footer {
@@ -187,7 +224,8 @@ h4 {
 
 .main {
     display: flex;
-    justify-content: center;
+    padding: 30px;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     min-height: 100vh;
@@ -195,11 +233,11 @@ h4 {
     overflow: hidden;
     transition: all 0.35s ease-in-out;
     width: 100%;
-    background: var(--bs-dark-bg-subtle);
+    /* background: var(--bs-dark-bg-subtle); */
 }
 
 .main .card {
-    width: 90%;
+    width: 100%;
 }
 
 .main .riwayat {
@@ -308,6 +346,12 @@ html[data-bs-theme="dark"] .theme-toggle .fa-moon {
 
 html[data-bs-theme="light"] .theme-toggle .fa-sun {
   display: none;
+}
+
+.table-shadow{
+  box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14);
+-webkit-box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14);
+-moz-box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14)!important
 }
 
 </style>

@@ -2,14 +2,15 @@
   <div class="wrapper">
     <Aside/>
     <div class="main">
-      <div class="input-group mb-5">
-        <input type="search" placeholder="Cari stok barang" aria-describedby="button-addon5" class="form-control rounded-pill">
+      <div class="input-group mb-3">
+        <h2>Customer</h2>
+        <!-- <input type="search" placeholder="Cari stok barang" aria-describedby="button-addon5" class="form-control rounded-pill">
         <div class="input-group-append mx-3">
           <button id="button-addon5" type="submit" class="btn btn-danger"><i class="bi bi-search"></i>Search</button>
-        </div>
-        <button type="button" class="btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        </div> -->
+        <!-- <button type="button" class="btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Tambah Customer
-        </button>
+        </button> -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -23,20 +24,20 @@
                     <div class="row">
                       <div class="mb-3 col-md-12">
                         <label for="namauser" class="col-form-label">Nama User</label>
-                        <input type="text" class="form-control" id="namauser" v-model="newUser.nama_pelanggan" placeholder="Nama Barang">
+                        <input type="text" class="form-control" id="namauser" v-model="newUser.nama_pelanggan" placeholder="John Doe">
                       </div>
                       <div class="mb-3 col-md-12">
                         <label for="alamat" class="col-form-label">Alamat</label>
-                        <input type="text" class="form-control" id="alamat" v-model="newUser.alamat">
+                        <input type="text" class="form-control" id="alamat" v-model="newUser.alamat" placeholder="Jl. Summarecon Bekasi">
                       </div>
                     </div>
                     <div class="mb-3">
                       <label label for="email" class="col-form-label">Email</label>
-                      <input type="text" class="form-control" id="email" v-model="newUser.email" min="0" max="200">
+                      <input type="text" class="form-control" id="email" v-model="newUser.email" min="0" max="200" placeholder="user@gmail.com">
                     </div>
                     <div class="mb-3">
                       <label label for="notelp" class="col-form-label">No Telepon</label>
-                      <input type="text" class="form-control" id="notelp" v-model="newUser.no_telepon" min="0" max="200">
+                      <input type="text" class="form-control" id="notelp" v-model="newUser.no_telepon" min="0" max="200" placeholder="081******">
                     </div>
                     <!-- <div class="mb-3">
                       <label for="tanggal" class="col-form-label">Tanggal</label>
@@ -57,14 +58,23 @@
           </div>
         </div>
       </div>
-      <!-- Table Element -->
-      <div class="card border-0 mx-5 p-2">
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12 p-0">
+            <button type="button" class="btn btn-danger rounded " data-bs-toggle="modal" data-bs-target="#exampleModal">Tambah Customer</button>   
+          </div>
+        </div>
+      </div>
+
+      <!-- Table Element mx-5 p-2 -->
+      <div class="card border table-shadow m-4 p-3">
         <div class="card-header">
           <h5 class="card-title">List Barang Keluar</h5>
         </div>
-        <div class="card-body">
-          <table class="table table-light table-striped">
-            <thead>
+        <div class="card-body table-responsive">
+          <table class="table table-light table-bordered" id="example">
+            <thead class="table-danger mt-5">
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Id pelanggan</th>
@@ -153,7 +163,7 @@
 <script setup>
 import Aside from '../components/Aside.vue'
 
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';
 import axios from 'axios'; 
 
 const pelangganList = ref([]);
@@ -183,7 +193,7 @@ const editUser = ref({
   nama_pelanggan: '', 
   alamat: '',
   email: '',
-  no_telepon: '' 
+  no_telpon: '' 
 });
 
 
@@ -192,6 +202,8 @@ const fetchData = async () => {
   try {
     const response = await axios.get('/pelanggan');
     pelangganList.value = response.data.pelanggan;
+    await nextTick();
+    $('#example').DataTable();
   } catch (error) {
     console.error('Error fetching data:', error);
   }
@@ -346,7 +358,7 @@ h4 {
   color: var(--bs-emphasis-color);
 }
 
-.tbl-no {
+/* .tbl-no {
   width: 3%;
 }
 
@@ -364,7 +376,7 @@ h4 {
 
 .tbl-aksi {
   width: 10%;
-}
+} */
 
 ::-webkit-input-placeholder {
  font-size: 15px;
@@ -381,10 +393,11 @@ h4 {
     align-items: center;
     justify-content: center;
     align-items: center; */
-    width: 50%;
+    /* width: 50%; */
     /* margin-left: 300px; */
     /* margin-top: 20px; */
     font-size: 1rem;
+    color: #5a5c69 ;
 }
 
 .footer {
@@ -408,7 +421,7 @@ h4 {
 
 .main {
     display: flex;
-    padding: 50px;
+    padding: 20px;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
@@ -417,11 +430,11 @@ h4 {
     overflow: hidden;
     transition: all 0.35s ease-in-out;
     width: 100%;
-    background: var(--bs-dark-bg-subtle);
+    /* background: var(--bs-dark-bg-subtle); */
 }
 
 .main .card {
-    width: 90%;
+    width: 100%;
 }
 
 .main .tambah-barang {
@@ -530,5 +543,12 @@ html[data-bs-theme="dark"] .theme-toggle .fa-moon {
 html[data-bs-theme="light"] .theme-toggle .fa-sun {
   display: none;
 }
+
+.table-shadow{
+  box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14);
+-webkit-box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14);
+-moz-box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14)!important
+}
+
 
 </style>

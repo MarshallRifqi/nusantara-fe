@@ -2,12 +2,13 @@
   <div class="wrapper">
     <Aside/>
     <div class="main">
-      <div class="input-group mb-5">
-        <input type="search" placeholder="Cari stok barang" aria-describedby="button-addon5" class="form-control rounded-pill">
+      <div class="input-group mb-3">
+        <h2>Barang Masuk</h2>
+        <!-- <input type="search" placeholder="Cari stok barang" aria-describedby="button-addon5" class="form-control rounded-pill">
         <div class="input-group-append mx-3">
           <button id="button-addon5" type="submit" class="btn btn-danger"><i class="bi bi-search"></i>Search</button>
-        </div>
-        <button type="button" class="btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Tambah Barang</button>
+        </div> -->
+        <!-- <button type="button" class="btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Tambah Barang</button> -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -38,16 +39,16 @@
                         <br>
                         <select id="kode-barang" class="form-select mb-2" v-model="newBarang.id_barang">
                           <option disabled value="">Pilih barang</option>
-                          <option value="BRG-37424506">Adrenalin RE003</option>
-                          <!-- <option value="BRG-27540728">S007A</option> -->
-                          <!-- <option value="BRG-65147694">RE050</option> -->
-                          <!-- <option value="BRG-02769403">MPV-1</option> -->
-                          <!-- <option value="BRG-19646238">EP150</option> -->
-                          <!-- <option value="BRG-48653832">EP300</option> -->
-                          <!-- <option value="BRG-45352771">All Terrain 697</option> -->
-                          <!-- <option value="BRG-73996611">Mud Terrain 674</option> -->
-                          <!-- <option value="BRG-04844424">HL 683</option> -->
-                          <!-- <option value="BRG-90014740">Ban Baru</option> -->
+                          <option value="BRG-57422696">Adrenalin RE003</option>
+                          <option value="BRG-27540728">S007A</option>
+                          <option value="BRG-65147694">RE050</option>
+                          <option value="BRG-02769403">MPV-1</option>
+                          <option value="BRG-19646238">EP150</option>
+                          <option value="BRG-48653832">EP300</option>
+                          <option value="BRG-45352771">All Terrain 697</option>
+                          <option value="BRG-73996611">Mud Terrain 674</option>
+                          <option value="BRG-04844424">HL 683</option>
+                          <option value="BRG-90014740">Ban Baru</option>
                         </select>
                         <!-- <input type="text" class="form-control" id="kode-barang" v-model="newBarang.id_barang"> -->
                         <!-- <label for="kode-barang" class="col-form-label" readonly>Masukan kode barang</label> -->
@@ -61,7 +62,7 @@
                       </div>
                       <div class="mb-3 col-md-7">
                         <label for="stok" class="col-form-label">Jumlah masuk stok</label>
-                        <input type="number" class="form-control" id="stok" v-model="newBarang.kuantitas" min="0" max="200">
+                        <input type="number" class="form-control" id="stok" v-model="newBarang.kuantitas" min="0" max="1000">
                       </div>
                     </div>
                   </div>
@@ -79,14 +80,22 @@
           </div>
         </div>
       </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <button type="button" class="btn btn-danger rounded" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Tambah Barang</button>
+          </div>
+        </div>
+      </div>
       <!-- Table Element -->
-      <div class="card border-0 mx-5 p-2">
+      <div class="card border table-shadow m-4 p-3">
+
         <div class="card-header">
           <h5 class="card-title">List Barang Masuk</h5>
         </div>
-        <div class="card-body">
-          <table class="table table-light table-striped">
-            <thead>
+        <div class="card-body ">
+          <table class="table table-bordered" width="100%" id="example">
+            <thead class="table-danger">
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Id barang masuk</th>
@@ -98,7 +107,7 @@
                 <th scope="col">Aksi</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody class="danger">
               <tr v-for="(barangMsk, index) in barangList" :key="barangMsk.id_barang_masuk">
                 <th scope="row">{{ index + 1 }}</th>
                 <td>{{ barangMsk.id_barang_masuk }}</td>
@@ -124,7 +133,7 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h1 class="modal-title fs-5" id="editLabel">Form Barang Masuk</h1>
+                <h1 class="modal-title fs-5" id="editLabel">Form Edit Barang Masuk</h1>
               </div>
               <div class="modal-body">
                 <form @submit.prevent="handleEditSubmit">
@@ -142,7 +151,7 @@
                       </div>
                       <div class="mb-3 col-md-7">
                         <label for="stok" class="col-form-label">Jumlah masuk stok</label>
-                        <input type="number" class="form-control" id="stok" v-model="editBarang.kuantitas" min="0" max="200">
+                        <input type="number" class="form-control" id="stok" v-model="editBarang.kuantitas" min="0" max="1000">
                       </div>
                     </div>
                   </div>
@@ -165,8 +174,15 @@
 <script setup>
 import Aside from '../components/Aside.vue'
 
-import { ref, onMounted } from 'vue';
+
+import { ref, onMounted, nextTick } from 'vue';
 import axios from 'axios'; 
+
+// import $ from 'jquery';
+// import 'datatables.net-bs5';
+// import 'datatables.net-buttons-bs5';
+// import 'datatables.net-buttons/js/buttons.html5.mjs';
+// import 'datatables.net-buttons/js/buttons.print.mjs';
 
 const barangList = ref([]);
 
@@ -185,10 +201,13 @@ const editBarang = ref({
 
 
 
+
 const fetchData = async () => {
   try {
     const response = await axios.get('/barang-masuk');
     barangList.value = response.data.barangMsk;
+    await nextTick();
+    $('#example').DataTable();
   } catch (error) {
     console.error('Error fetching data:', error);
   }
@@ -332,7 +351,7 @@ h4 {
   color: var(--bs-emphasis-color);
 }
 
-.tbl-no {
+/* .tbl-no {
   width: 3%;
 }
 
@@ -350,7 +369,7 @@ h4 {
 
 .tbl-aksi {
   width: 10%;
-}
+} */
 
 ::-webkit-input-placeholder {
  font-size: 15px;
@@ -367,10 +386,11 @@ h4 {
     align-items: center;
     justify-content: center;
     align-items: center; */
-    width: 50%;
+    /* width: 50%; */
     /* margin-left: 300px; */
     /* margin-top: 20px; */
     font-size: 1rem;
+    color: #5a5c69 ;
 }
 
 .footer {
@@ -394,7 +414,7 @@ h4 {
 
 .main {
     display: flex;
-    padding: 50px;
+    padding: 20px;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
@@ -403,11 +423,11 @@ h4 {
     overflow: hidden;
     transition: all 0.35s ease-in-out;
     width: 100%;
-    background: var(--bs-dark-bg-subtle);
+    /*background: var(--bs-dark-bg-subtle);*/
 }
 
 .main .card {
-    width: 90%;
+    width: 100%;
 }
 
 .main .tambah-barang {
@@ -515,6 +535,11 @@ html[data-bs-theme="dark"] .theme-toggle .fa-moon {
 
 html[data-bs-theme="light"] .theme-toggle .fa-sun {
   display: none;
+}
+.table-shadow{
+  box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14);
+-webkit-box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14);
+-moz-box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14)!important
 }
 
 </style>

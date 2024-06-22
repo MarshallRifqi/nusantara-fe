@@ -21,76 +21,87 @@
                     </ul>
                 </div>
             </nav>
-            <div class="chart">
-                <ChartComponent />
-            </div>
 
             <main class="content px-3 py-2">
+              <div class="mb-3 page-title">
+                  <h2 page-title>Dashboard</h2>
+              </div>
                 <div class="container-fluid">
-                    <div class="mb-3">
-                        <h4>Admin Dashboard</h4>
-                    </div>
                     <div class="row">
-                        <div class="col-12 col-md-6 d-flex">
+                        <div class="col-12 col-md-4 d-flex">
                             <div class="card flex-fill border-0 illustration">
                                 <div class="card-body p-0 d-flex flex-fill">
                                     <div class="row g-0 w-100">
-                                        <div class="col-6">
+                                        <div class="col-10">
                                             <div class="p-3 m-1">
-                                                <h4>Welcome Back, Admin</h4>
-                                                <p class="mb-0">Admin Dashboard, Admin</p>
+                                                <h4>Jumlah Barang Masuk</h4>
+                                                <h2 class="mb-0">{{ MasukList }}</h2>
                                             </div>
-                                        </div>
-                                        <div class="col-6 align-self-end text-end">
-                                            <img src="" class="img-fluid illustration-img"
-                                                alt="">
-                                        </div>
+                                        </div>  
+                                        <div class="col-2">
+                                            <div class="p-3 m-1">
+                                                <h2><i class="bi bi-bag-plus"></i></h2>
+                                            </div>
+                                        </div>  
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6 d-flex">
-                            <div class="card flex-fill border-0">
-                                <div class="card-body py-4">
-                                    <div class="d-flex align-items-start">
-                                        <div class="flex-grow-1">
-                                            <h4 class="mb-2">
-                                                $ 78.00
-                                            </h4>
-                                            <p class="mb-2">
-                                                Total Earnings
-                                            </p>
-                                            <div class="mb-0">
-                                                <span class="badge text-success me-2">
-                                                    +9.0%
-                                                </span>
-                                                <span class="text-muted">
-                                                    Since Last Month
-                                                </span>
+                        <div class="col-12 col-md-4 d-flex bg-sukse">
+                            <div class="card flex-fill border-0 out">
+                                <div class="card-body p-0 d-flex flex-fill">
+                                    <div class="row g-0 w-100">
+                                        <div class="col-10">
+                                            <div class="p-3 m-1">
+                                                <h4>Jumlah Barang Keluar</h4>
+                                                <h2 class="mb-0">{{ KeluarList }}</h2>
                                             </div>
-                                        </div>
+                                        </div>  
+                                        <div class="col-2">
+                                            <div class="p-3 m-1">
+                                                <h2><i class="bi bi-bag-dash"></i></h2>
+                                            </div>
+                                        </div>  
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="col-12 col-md-4 d-flex">
+                            <div class="card flex-fill border-0 send">
+                                <div class="card-body p-0 d-flex flex-fill">
+                                    <div class="row g-0 w-100">
+                                        <div class="col-10">
+                                            <div class="p-3 m-1">
+                                                <h4>Jumlah Barang Terkirim</h4>
+                                                <h2 class="mb-0">{{ TerkirimList }}</h2>
+                                                <!-- <p v-if="TerkirimList.barang_keluar">ID Pengiriman: <strong>{{ TerkirimList.barang_keluar.kuantitas }}</strong></p> -->
+                                                <!-- <h2><i class="bi bi-clipboard2-check"></i></h2> -->
+                                            </div>
+                                        </div>  
+                                        <div class="col-2">
+                                            <div class="p-3 m-1">
+                                                <h2><i class="bi bi-clipboard2-check"></i></h2>
+                                            </div>
+                                        </div>  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        
+                        
+                      </div>
                     
                     
                     <!-- Table Element -->
-                    <div class="card border-0">
-                        <div class="card-header">
-                            <h5 class="card-title p-2">
-                                List Barang
-                            </h5>
-                            <!-- <h6 class="card-subtitle text-muted">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum ducimus,
-                                necessitatibus reprehenderit itaque!
-                            </h6> -->
-                        </div>
-                        <div class="card-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
+      <div class="card border table-shadow p-3">
+        <div class="card-header">
+          <h5 class="card-title">List Barang</h5>
+        </div>
+        <div class="card-body table-responsive">
+          <!-- <div class="alert alert-primary" role="alert"></div> -->
+          <table class="table table-light table-bordered" id="example">
+            <thead class="table-danger mt-5">
+              <tr>
                 <th scope="col">#</th>
                 <th scope="col">Id Barang</th>
                 <th scope="col">Nama Ban</th>
@@ -100,9 +111,9 @@
                 <th scope="col">Value</th>
                 <!-- <th scope="col">Aksi</th> -->
               </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="(barang, index) in barangList" :key="barang.id_barang">
+            </thead>
+            <tbody>
+              <tr v-for="(barang, index) in barangList" :key="barang.id_barang">
                 <th scope="row">{{ index + 1 }}</th>
                 <td>{{ barang.id_barang }}</td>
                 <td>{{ barang.nama_barang }}</td>
@@ -113,13 +124,14 @@
                 <!-- <td>
                   <button type="button" class="btn btn-sm btn-primary " data-bs-toggle="modal" data-bs-target="#editModal" @click="openEditModal(barang)"> <i class="bi bi-pencil-square"></i> <span>Edit</span> </button>
                   <button class="btn btn-sm btn-danger mx-2" @click="deleteBarang(barang.id_barang)"> <i class="bi bi-trash"></i> <span>Delete</span></button>
+                  <button class="btn btn-sm btn-danger mx-2" @click="confirmDelete(barang.id_barang)"><i class="bi bi-trash"></i> <span>Delete</span></button>
                 </td> -->
               </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
             </main>
             <a href="#" class="theme-toggle">
                 <i class="fa-regular fa-moon"></i>
@@ -132,20 +144,58 @@
 
 <script setup>
 import Aside from '../components/Aside.vue'
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';
 import axios from 'axios'; 
 const barangList = ref([]);
-import ChartComponent from '@/components/ChartComponent.vue';
+const MasukList = ref([]);
+const KeluarList = ref([]);
+const TerkirimList = ref([]);
+// // import ChartComponent from '@/components/ChartComponent.vue';
 
 const fetchData = async () => {
   try {
     const response = await axios.get('/barang');
     barangList.value = response.data.barang;
+    await nextTick();
+    $('#example').DataTable();
   } catch (error) {
     console.error('Error fetching data:', error);
   }
 };
-onMounted(fetchData);
+
+const fetchDataMasuk = async () => {
+  try {
+    const response = await axios.get('/dashboard/jmlBarangMasuk');
+    MasukList.value = response.data.data.barangMasuk._sum.kuantitas;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+const fetchDataKeluar = async () => {
+  try {
+    const response = await axios.get('/dashboard/jmlBarangKeluar');
+    KeluarList.value = response.data.data.barangKeluar._sum.kuantitas;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+const fetchDataPengiriman = async () => {
+  try {
+    const response = await axios.get('/dashboard/jmlBarangTerkirim');
+    TerkirimList.value = response.data.data.barangTerkirim;
+    console.log(response.data.data)
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+
+onMounted(fetchData );
+onMounted(fetchDataMasuk);
+onMounted(fetchDataPengiriman);
+onMounted(fetchDataKeluar);
 </script>
 
 
@@ -164,7 +214,7 @@ onMounted(fetchData);
 body {
   font-family: 'Poppins', sans-serif;
   font-size: 0.875rem;
-  opacity: 1;
+  /* opacity: 1; */
   overflow-y: scroll;
   margin: 0;
 }
@@ -225,6 +275,7 @@ h4 {
 }
 
 .main {
+  padding: 20px;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -232,9 +283,12 @@ h4 {
   overflow: hidden;
   transition: all 0.35s ease-in-out;
   width: 100%;
-  background: var(--bs-dark-bg-subtle);
+  /* background: var(--bs-dark-bg-subtle); */
 }
 
+.main .card {
+    width: 100%;
+}
 
 .avatar {
   height: 40px;
@@ -247,8 +301,8 @@ h4 {
 
 .content {
   flex: 1;
-  max-width: 100vw;
-  width: 100vw;
+  /* max-width: 100vw; */
+  /* width: 100vw; */
 }
 
 .form-control:focus {
@@ -279,6 +333,19 @@ padding-left: 0;
   background-color: var(--bs-primary-bg-subtle);
   color: var(--bs-emphasis-color);
 }
+.out {
+  background-color: var(--bs-warning-bg-subtle);
+  color: var(--bs-emphasis-color);
+}
+.send {
+  background-color: var(--bs-success-bg-subtle);
+  color: var(--bs-emphasis-color);
+}
+
+/* .thead{
+  background-color: var(--bs-danger-rgb)!important;
+  color: var(--bs-danger)!important;
+} */
 
 .illustration-img {
   max-width: 150px;
@@ -338,6 +405,26 @@ html[data-bs-theme="dark"] .theme-toggle .fa-moon {
 
 html[data-bs-theme="light"] .theme-toggle .fa-sun {
   display: none;
+}
+
+.table-shadow{
+  box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14);
+-webkit-box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14);
+-moz-box-shadow: -1px 1px 39px 8px rgba(0,0,0,0.14)!important
+}
+
+.bg-keluar{
+  background-color: #F4E1B3;
+  color: #F4E1B3;
+}
+
+/* .bg-terkirim{
+  background-color: ;
+} */
+
+
+.page-title{
+  color: #5a5c69 ;
 }
 
 </style>
