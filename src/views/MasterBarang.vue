@@ -277,6 +277,13 @@ const handleSubmit = async () => {
     });
   } catch (error) {
     console.error('Error submitting form:', error);
+    Swal.fire({
+      position: "top-end",
+      icon: "error",
+      title: error.response.data,
+      showConfirmButton: false,
+      timer: 1500
+    });
   }
 };
 
@@ -301,7 +308,7 @@ const handleEditSubmit = async () => {
     const editModal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
     editModal.hide();
     Swal.fire({
-      position: "center",
+      position: "middle",
       icon: "success",
       title: response.data,
       showConfirmButton: false,
@@ -309,6 +316,13 @@ const handleEditSubmit = async () => {
     });
   } catch (error) {
     console.error('Error submitting form:', error);
+    Swal.fire({
+      position: "top-end",
+      icon: "error",
+      title: error.response.data,
+      showConfirmButton: false,
+      timer: 1500
+    });
   }
 };
 
