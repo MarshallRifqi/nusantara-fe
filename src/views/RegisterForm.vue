@@ -25,7 +25,7 @@
         <form @submit.prevent="register" class="needs-validation" autocomplete="off">
           <div class="row align-items-center">
             <div class="header-text mb-4">
-              <h2>Register</h2>
+              <h2>Sign Up</h2>
             </div>
             <div class="input-group mb-3">
               <div class="col">
@@ -44,18 +44,18 @@
             <div class="input-group mb-5">
               <div class="col">
                 <label for="confirmPassword" class="mb-2">Confirm Password</label>
-                <input type="confirmPassword" v-model="confirmPassword" class="form-control form-control-lg bg-light fs-6" placeholder="password" required />
+                <input type="password" id="confirmPassword" v-model="confirmPassword" class="form-control form-control-lg bg-light fs-6" placeholder="password" required />
                 <div class="invalid-feedback">Password is required</div>
               </div>
             </div>
             <div class="input-group mb-2 mt-3">
-              <button type="submit" class="btn btn-lg btn-danger w-100 fs-6">Register</button>
+              <button type="submit" class="btn btn-lg btn-danger w-100 fs-6">Sign Up</button>
             </div>
             <div class="input-group mb-5 mt-3 d-flex justify-content-between">
               <div class="forgot">
-                <p>Already have an account?
+                <p>Sudah mempunyai akun ?
                   <a href="#">
-                    <RouterLink to="/login" class="nav-link">Sign in here</RouterLink>
+                    <RouterLink to="/login" class="nav-link">Sign in Di sini!</RouterLink>
                   </a>
                 </p>
               </div>
@@ -88,9 +88,23 @@ methods: {
         confirmPassword: this.confirmPassword
       });
       console.log(response.data);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: response.data.msg,
+        showConfirmButton: false,
+        timer: 1500
+        });
       this.$router.push({ name: 'Login' });
     } catch (error) {
       console.error(error.response.data.message);
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: error.response.data.msg,
+        showConfirmButton: false,
+        timer: 1500
+        });
     }
   }
 }

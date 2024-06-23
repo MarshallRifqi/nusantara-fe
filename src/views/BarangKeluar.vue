@@ -26,16 +26,7 @@
                             <label for="kode-barang" class="col-form-label">Pilih Barang</label>
                             <select id="kode-barang" class="form-select mb-2" v-model="newBarang.id_barang">
                               <option disabled value="">Pilih barang</option>
-                              <option value="BRG-57422696">Adrenalin RE003</option>
-                              <option value="BRG-27540728">S007A</option>
-                              <option value="BRG-65147694">RE050</option>
-                              <option value="BRG-02769403">MPV-1</option>
-                              <option value="BRG-19646238">EP150</option>
-                              <option value="BRG-48653832">EP300</option>
-                              <option value="BRG-45352771">All Terrain 697</option>
-                              <option value="BRG-73996611">Mud Terrain 674</option>
-                              <option value="BRG-04844424">HL 683</option>
-                              <option value="BRG-90014740">Ban Baru</option>
+                              <option :value="barang.id_barang" v-for="(barang) in masterbarangList" :key="barang.id_barang">{{ barang.nama_barang }}</option>
                             </select>
                           </div>
                           <div class="mb-3 col-md-6">
@@ -47,10 +38,8 @@
                           <div class="col-md-6">
                             <label for="kode-pelanggan" class="col-form-label">Pilih Customer</label>
                             <select id="kode-pelanggan" class="form-select mb-2" v-model="newBarang.id_pelanggan">
-                              <option disabled value="">Customer</option>
-                              <option value="PLG-95465446">Marshall</option>
-                              <option value="PLG-97738791">Marshall Rifqi</option>
-                              <option value="PLG-97993116">John</option>
+                              <option disabled value="">Nama Pelanggan</option>
+                              <option v-for="(pelanggan) in pelangganList" :key="pelanggan.id_pelanggan" :value="pelanggan.id_pelanggan">{{ pelanggan.nama_pelanggan }}</option>
                               <!-- <option value="#">Customer 2</option> -->
                               <!-- <option value="#">Customer 3</option> -->
                             </select>
@@ -143,7 +132,7 @@
                 <td>{{ barangKlr.id_barang }}</td>
                 <td>{{ barangKlr.id_pelanggan }}</td>
                 <td>{{ barangKlr.kuantitas }}</td>
-                <td>{{ barangKlr.tanggal_keluar }}</td>
+                <td>{{ formatTanggal(barangKlr.tanggal_keluar) }}</td>
                 <td>{{ barangKlr.total_harga }}</td>
                 <td>
                   <!-- <button class="btn btn-sm btn-primary mx-2"><i class="bi bi-pencil-square"></i> <span>Edit</span></button> -->
@@ -238,26 +227,25 @@
                      <div class="container-fluid">
                        <div class="row mx-auto mb-4">
                          <div class="col-md-4 mx-auto" >
-                            <p>ID Pengiriman: <strong>{{ barangListId.id_barang_keluar }}</strong></p>
-                           <p>Jumlah Barang: <strong>{{ barangListId.kuantitas }}</strong></p>
-                           <p v-if="barangListId.Pengiriman">ID Pengiriman: <strong>{{ barangListId.Pengiriman.id_pengiriman }}</strong></p>
+                            <p>ID Barang: <strong>{{ barangListId.id_barang_keluar }}</strong></p>
+                            <p v-if="barangListId.Pengiriman">ID Pengiriman: <strong>{{ barangListId.Pengiriman.id_pengiriman }}</strong></p>
+                           <p>Jumlah Barang dikirim: <strong>{{ barangListId.kuantitas }}</strong></p>
                          </div>
                          <div class="col-md-4">
-                           <img src="https://via.placeholder.com/150" alt="QR Code" class="img-fluid">
+                           <qrcode-vue v-if="barangListId.Pengiriman" :value="barangListId.Pengiriman.id_pengiriman" :size="150"></qrcode-vue>
                          </div>
                        </div>
                        <div class="row mx-auto mt-5">
                          <div class="col-md-4 mx-auto">
-                           <p><strong>Kepada:</strong></p>
-                           <p  v-if="barangListId.pelanggan"><strong>{{ barangListId.pelanggan.nama_pelanggan}}</strong></p>
-                           <p  v-if="barangListId.pelanggan">{{ barangListId.pelanggan.alamat}}</p>
-                           <p  v-if="barangListId.pelanggan"><strong>{{ barangListId.pelanggan.no_telpon}}</strong></p>
+                           <p class="mb-3"><strong>Kepada:</strong></p>
+                           <p class="mb-2"  v-if="barangListId.pelanggan"><strong>{{ barangListId.pelanggan.nama_pelanggan}}</strong></p>
+                           <p class="mb-2" v-if="barangListId.pelanggan">{{ barangListId.pelanggan.alamat}}</p>
+                           <p class="mb-2" v-if="barangListId.pelanggan">{{ barangListId.pelanggan.no_telpon}}</p>
                          </div>
                          <div class="col-md-4">
-                           <p><strong>Dari:</strong></p>
-                           <p><strong>Nusantara Warehouse</strong></p>
-                           <p>Jalan Saluyu Indah XIII No.52. Bandung, Jawa Barat</p>
-                           <p>(022) 7537688</p>
+                           <p class="mb-3"><strong>Dari:</strong></p>
+                           <p class="mb-2"><strong>Nusantara Warehouse</strong></p>
+                           <p class="mb-2">Jalan Saluyu Indah XIII No.52. Bandung, Jawa Barat</p>
                          </div>
                        </div>
                      </div>
@@ -283,12 +271,19 @@ import Aside from '../components/Aside.vue'
 import { ref, onMounted, nextTick } from 'vue';
 import axios from 'axios';
 
+import { defineProps } from 'vue';
+import QrcodeVue from 'qrcode.vue';
+
+import dayjs from 'dayjs';
+
 // const opendetailModal = () => {
 //   const detailModal = new bootstrap.Modal(document.getElementById('detailModal'));
 //   detailModal.show();
 //   };
 
 const barangList = ref([]);
+const masterbarangList = ref([]);
+const pelangganList = ref([]);
 
 const newBarang = ref({
   // id_barang_masuk: '',
@@ -306,6 +301,13 @@ const newBarang = ref({
 //   kuantitas: 0,
 // });
 
+const props = defineProps({
+  barangListId: {
+    type: Object,
+    required: true
+  }
+});
+
 
 
 const fetchData = async () => {
@@ -314,6 +316,28 @@ const fetchData = async () => {
     barangList.value = response.data.barangKlr;
     await nextTick();
     $('#example').DataTable();
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+const fetchDataModal = async () => {
+  try {
+    const response = await axios.get('/barang');
+    masterbarangList.value = response.data.barang;
+    // await nextTick();
+    // $('#example').DataTable();
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+const fetchDataModalCus = async () => {
+  try {
+    const response = await axios.get('/pelanggan');
+    pelangganList.value = response.data.pelanggan;
+    // await nextTick();
+    // $('#example').DataTable();
   } catch (error) {
     console.error('Error fetching data:', error);
   }
@@ -378,6 +402,13 @@ const handleAddSubmit = async () => {
     });
   } catch (error) {
     console.error('Error submitting form:', error);
+    Swal.fire({
+      position: "top-end",
+      icon: "error",
+      title: error.response.data,
+      showConfirmButton: false,
+      timer: 3000
+    });
   }
 };
 // const handleAddSubmit = async () => {
@@ -425,6 +456,11 @@ const openEditModal = (barangKlr) => {
 //   editModal.show();
 // };
 
+const formatTanggal = (dateString) => {
+  return dayjs(dateString).format('DD MMMM YYYY');
+};
+
+
 const handleEditSubmit = async () => {
   try {
     const response = await axios.put(`barang-keluar/update/${newBarang.value.id_barang_keluar}`, {
@@ -454,6 +490,13 @@ const handleEditSubmit = async () => {
     });
   } catch (error) {
     console.error('Error submitting form:', error);
+    Swal.fire({
+      position: "top-end",
+      icon: "error",
+      title: error.response.data,
+      showConfirmButton: false,
+      timer: 1500
+    });
   }
 };
 // const handleEditSubmit = async () => {
@@ -586,6 +629,8 @@ const confirmKirimBarang = (id_barang_keluar) => {
 };
 
 onMounted(fetchData);
+onMounted(fetchDataModal);
+onMounted(fetchDataModalCus);
 </script>
 
 

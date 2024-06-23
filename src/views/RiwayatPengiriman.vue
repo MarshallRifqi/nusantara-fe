@@ -21,27 +21,27 @@
           <thead class="table-danger">
             <tr>
               <th scope="col">No</th>
-              <th scope="col">Tanggal dan Waktu</th>
+              <th scope="col">Tanggal pengiriman</th>
               <th scope="col">Id Pengiriman</th>
               <th scope="col">Nama Ban</th>
               <th scope="col">Customer</th>
               <th scope="col">Status</th>
-              <th scope="col">Aksi</th>
+              <!-- <th scope="col">Aksi</th> -->
             </tr>
           </thead>
           <tbody>
             <tr v-for="(pengiriman, index) in listPengiriman" :key="pengiriman.barang_keluar">
               <th scope="row">{{ index + 1 }}</th>
-              <td>{{ pengiriman.tanggal_pengiriman }}</td>
+              <td>{{ formatTanggal(pengiriman.tanggal_pengiriman) }}</td>
               <td>{{ pengiriman.id_pengiriman }}</td>
               <td>{{ pengiriman.barang_keluar.barang.nama_barang }}</td>
               <td>{{ pengiriman.barang_keluar.pelanggan.nama_pelanggan }}</td>
               <!-- <td>{{ pengiriman.status }}</td> -->
               <!-- <td>{{ pengiriman.kuantitas }}</td> -->
               <td><span class="badge rounded-pill bg-success">{{ pengiriman.status }}</span></td>
-              <td>
+              <!-- <td>
                 <button class="btn btn-sm btn-primary mx-2"><i class="bi bi-pencil-square"></i> <span>Detail</span></button>
-              </td>
+              </td> -->
             </tr>
           </tbody>
         </table>
@@ -117,9 +117,10 @@
 
 <script setup>
 import Aside from '../components/Aside.vue'
-import EditModal from '../components/EditModal.vue'
+// import EditModal from '../components/EditModal.vue'
 import { ref, onMounted, nextTick  } from 'vue';
 import axios from 'axios';
+import dayjs from 'dayjs';
 
 const opendetailModal = () => {
 const detailModal = new bootstrap.Modal(document.getElementById('detailModal'));
@@ -141,6 +142,9 @@ try {
 }
 };
 
+const formatTanggal = (dateString) => {
+  return dayjs(dateString).format('DD MMMM YYYY');
+};
 
 onMounted(fetchData);
 </script>

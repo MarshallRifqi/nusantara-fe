@@ -120,7 +120,7 @@
                     <div class="row">
                       <div class="mb-3 col-md-12">
                         <label for="kode-barang" class="col-form-label">Id User</label>
-                        <input type="text" class="form-control" id="kode-barang" v-model="editUser.id_pelanggan">
+                        <input type="text" class="form-control" id="kode-barang" v-model="editUser.id_pelanggan" readonly>
                       </div>
                     </div>
                     <div class="row">
@@ -263,12 +263,19 @@ const handleAddSubmit = async () => {
     Swal.fire({
       position: "middle",
       icon: "success",
-      title: "Data berhasil tersimpan",
+      title: response.data,
       showConfirmButton: false,
       timer: 1500
     });
   } catch (error) {
     console.error('Error submitting form:', error);
+    Swal.fire({
+      position: "top-end",
+      icon: "error",
+      title: error.response.data,
+      showConfirmButton: false,
+      timer: 1500
+    });
   }
 };
 
@@ -313,6 +320,13 @@ const handleEditSubmit = async () => {
     });
   } catch (error) {
     console.error('Error submitting form:', error);
+    Swal.fire({
+      position: "top-end",
+      icon: "error",
+      title: error.response.data,
+      showConfirmButton: false,
+      timer: 1500
+    });
   }
 };
 

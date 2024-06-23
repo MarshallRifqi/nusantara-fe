@@ -11,7 +11,7 @@
         </div> -->
       </div>
 
-      <div class="container-fluid">
+      <!-- <div class="container-fluid">
         <div class="row">
           <div class="col-md-12 p-0">
         <a href="RiwayatPengiriman" class="btn btn-danger">
@@ -19,7 +19,7 @@
         </a>
       </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- <div class="riwayat">
         <a href="RiwayatPengiriman" class="btn btn-danger">
@@ -36,7 +36,7 @@
             <thead class="table-danger mt-5">
               <tr>
                 <th scope="col">No</th>
-                <th scope="col">Tanggal dan Waktu</th>
+                <th scope="col">Tanggal pengiriman</th>
                 <th scope="col">Id Pengiriman</th>
                 <th scope="col">Nama Ban</th>
                 <th scope="col">Customer</th>
@@ -47,7 +47,7 @@
             <tbody>
               <tr v-for="(pengiriman, index) in listPengiriman" :key="pengiriman.barang_keluar">
                 <th scope="row">{{ index + 1 }}</th>
-                <td>{{ pengiriman.tanggal_pengiriman }}</td>
+                <td>{{ formatTanggal(pengiriman.tanggal_pengiriman) }}</td>
                 <td>{{ pengiriman.id_pengiriman }}</td>
                 <td>{{ pengiriman.barang_keluar.barang.nama_barang }}</td>
                 <td>{{ pengiriman.barang_keluar.pelanggan.nama_pelanggan }}</td>
@@ -70,6 +70,8 @@
 import Aside from '../components/Aside.vue'
 import { ref, onMounted,  nextTick  } from 'vue';
 import axios from 'axios';
+
+import dayjs from 'dayjs';
 
 const listPengiriman = ref([]);
 
@@ -94,6 +96,11 @@ const konfirmasi = async (id_pengiriman) => {
   } catch (error) {
     console.error('Error fetching data:', error);
   }
+};
+
+// Fungsi untuk memformat tanggal menggunakan dayjs
+const formatTanggal = (dateString) => {
+  return dayjs(dateString).format('DD MMMM YYYY');
 };
 
 const konfirmasiPengiriman = (id_pengiriman) => {

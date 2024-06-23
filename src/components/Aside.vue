@@ -83,6 +83,7 @@
 <script>
 import axios from 'axios';
 import { useRouter } from 'vue-router';
+import Cookies from 'js-cookie';
 // import Swal from 'sweetalert2';
 
 export default {
@@ -99,6 +100,7 @@ export default {
         if (response.status === 200) {
           // localStorage.removeItem('token'); // Remove the token from local storage
           this.router.push({ name: 'Login' });
+          Cookies.remove('token');
           Swal.fire({
             position: "top-end",
             icon: "success",

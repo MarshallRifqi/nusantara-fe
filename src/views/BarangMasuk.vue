@@ -39,20 +39,12 @@
                         <br>
                         <select id="kode-barang" class="form-select mb-2" v-model="newBarang.id_barang">
                           <option disabled value="">Pilih barang</option>
-                          <option value="BRG-57422696">Adrenalin RE003</option>
-                          <option value="BRG-27540728">S007A</option>
-                          <option value="BRG-65147694">RE050</option>
-                          <option value="BRG-02769403">MPV-1</option>
-                          <option value="BRG-19646238">EP150</option>
-                          <option value="BRG-48653832">EP300</option>
-                          <option value="BRG-45352771">All Terrain 697</option>
-                          <option value="BRG-73996611">Mud Terrain 674</option>
-                          <option value="BRG-04844424">HL 683</option>
-                          <option value="BRG-90014740">Ban Baru</option>
+                          <!-- <option value="{{barangMsk.id_barang}}" v-if="barangMsk.barang">{{ barangMsk.barang.nama_barang }}</option> -->
+                          <option :value="barang.id_barang" v-for="(barang) in masterbarangList" :key="barang.id_barang">{{ barang.nama_barang }}</option>
                         </select>
                         <!-- <input type="text" class="form-control" id="kode-barang" v-model="newBarang.id_barang"> -->
                         <!-- <label for="kode-barang" class="col-form-label" readonly>Masukan kode barang</label> -->
-                        <input type="text" class="form-control" id="kode-barang" v-model="newBarang.id_barang" readonly>
+                        <!-- <input type="text" class="form-control" id="kode-barang" v-model="newBarang.id_barang" readonly> -->
                       </div>
                     </div>
                     <div class="row">
@@ -103,6 +95,7 @@
                 <th scope="col">No DO</th>
                 <th scope="col">Nama Ban</th>
                 <th scope="col">Tipe Ban</th>
+                <th scope="col">Tanggal Masuk</th>
                 <th scope="col">Stok</th>
                 <th scope="col">Aksi</th>
               </tr>
@@ -115,6 +108,7 @@
                 <td>{{ barangMsk.no_do }}</td>
                 <td>{{ barangMsk.barang.nama_barang }}</td>
                 <td>{{ barangMsk.barang.kategori }}</td>
+                <td>{{ formatTanggal(barangMsk.tanggal_masuk) }}</td>
                 <td>{{ barangMsk.kuantitas }}</td>
                 <td>
                   <!-- <button class="btn btn-sm btn-primary mx-2"><i class="bi bi-pencil-square"></i> <span>Edit</span></button> -->
@@ -141,7 +135,7 @@
                     <div class="row">
                       <div class="mb-3 col-md-12">
                         <label for="kode-barang" class="col-form-label">Masukan kode barang</label>
-                        <input type="text" class="form-control" id="kode-barang" v-model="editBarang.id_barang">
+                        <input type="text" class="form-control" id="kode-barang" v-model="editBarang.id_barang_masuk" readonly>
                       </div>
                     </div>
                     <div class="row">
@@ -178,6 +172,8 @@ import Aside from '../components/Aside.vue'
 import { ref, onMounted, nextTick } from 'vue';
 import axios from 'axios'; 
 
+import dayjs from 'dayjs';
+
 // import $ from 'jquery';
 // import 'datatables.net-bs5';
 // import 'datatables.net-buttons-bs5';
@@ -185,6 +181,7 @@ import axios from 'axios';
 // import 'datatables.net-buttons/js/buttons.print.mjs';
 
 const barangList = ref([]);
+const masterbarangList = ref([]);
 
 const newBarang = ref({
   id_barang: '',
@@ -205,13 +202,32 @@ const editBarang = ref({
 const fetchData = async () => {
   try {
     const response = await axios.get('/barang-masuk');
-    barangList.value = response.data.barangMsk;
+    barangList.value = response.data.barangMsk
+    // barangList.value = response.data.barangMsk || [];
+    console.log(response.data.barangMsk);
     await nextTick();
     $('#example').DataTable();
   } catch (error) {
     console.error('Error fetching data:', error);
   }
 };
+
+// Fungsi untuk memformat tanggal menggunakan dayjs
+const formatTanggal = (dateString) => {
+  return dayjs(dateString).format('DD MMMM YYYY');
+};
+
+const fetchDataModal = async () => {
+  try {
+    const response = await axios.get('/barang');
+    masterbarangList.value = response.data.barang;
+    // await nextTick();
+    // $('#example').DataTable();
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
 
 const deleteBarang = async (id_barang_masuk) => {
   try {
@@ -269,6 +285,13 @@ const handleAddSubmit = async () => {
     });
   } catch (error) {
     console.error('Error submitting form:', error);
+    Swal.fire({
+      position: "top-end",
+      icon: "error",
+      title: error.response.data,
+      showConfirmButton: false,
+      timer: 1500
+    });
   }
 };
 
@@ -306,6 +329,13 @@ const handleEditSubmit = async () => {
     });
   } catch (error) {
     console.error('Error submitting form:', error);
+    Swal.fire({
+      position: "top-end",
+      icon: "error",
+      title: response.data,
+      showConfirmButton: false,
+      timer: 1500
+    });
   }
 };
 
@@ -313,6 +343,7 @@ const handleEditSubmit = async () => {
 
 
 onMounted(fetchData);
+onMounted(fetchDataModal);
 </script>
 
 
