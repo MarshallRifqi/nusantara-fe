@@ -191,7 +191,7 @@
                   <i class="bi bi-x-lg"></i><span class="mx-2">Batal</span>
                 </button>
                 <button type="submit" class="btn btn-primary">
-                  <i class="bi bi-check2"></i><span class="mx-2" @click="handleEditSubmit">Simpan</span>
+                  <i class="bi bi-check2"></i><span class="mx-2">Simpan</span>
                 </button>
               </div>
             </form>

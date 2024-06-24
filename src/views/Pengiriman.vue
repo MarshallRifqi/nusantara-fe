@@ -14,10 +14,14 @@
       <!-- <div class="container-fluid">
         <div class="row">
           <div class="col-md-12 p-0">
-        <a href="RiwayatPengiriman" class="btn btn-danger">
-          <RouterLink :to="{ name: 'RiwayatPengiriman' }" class="tambah-button">Barang Terkirim</RouterLink>
-        </a>
-      </div>
+            <qrcode-drop-zone @decode="onDecode">
+              <div class="drop-zone">
+                
+                <p>Drag & drop an image or click to select a file</p>
+              </div>
+            </qrcode-drop-zone>
+            <p>Result: {{ result }}</p>
+          </div>
         </div>
       </div> -->
 
@@ -72,6 +76,7 @@ import { ref, onMounted,  nextTick  } from 'vue';
 import axios from 'axios';
 
 import dayjs from 'dayjs';
+//import { QrcodeDropZone } from 'vue-qrcode-reader';
 
 const listPengiriman = ref([]);
 
@@ -126,6 +131,11 @@ const konfirmasiPengiriman = (id_pengiriman) => {
     });
   };
 
+//   const result = ref(null);
+
+// const onDecode = (decodedString) => {
+//   result.value = decodedString;
+// };
 
 onMounted(fetchData);
 
@@ -150,6 +160,16 @@ body {
   overflow-y: scroll;
   margin: 0;
 }
+
+/*.drop-zone {
+  width: 300px;
+  height: 200px;
+  border: 2px dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}*/
 
 a {
   cursor: pointer;

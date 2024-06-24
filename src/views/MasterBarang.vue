@@ -149,7 +149,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="harga" class="col-form-label">Harga</label>
-                  <input type="number" class="form-control" id="harga" v-model="form.harga" min="0" max="200">
+                  <input type="number" class="form-control" id="harga" v-model="form.harga" min="0">
                 </div>
                 <div class="mb-3">
                   <label for="stok" class="col-form-label">Stok</label>
@@ -160,16 +160,25 @@
                   <input type="date" class="form-control" id="tanggal" v-model="form.tanggal">
                 </div> -->
               </div>
+              <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                <i class="bi bi-x-lg"></i><span class="mx-2">Batal</span>
+              </button>
+              <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check2"></i><span class="mx-2">Simpan</span>
+              </button>
+            </div>
             </form>
           </div>
-          <div class="modal-footer">
+          <!-- <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
               <i class="bi bi-x-lg"></i><span class="mx-2">Batal</span>
             </button>
-            <button type="button" class="btn btn-primary" @click="handleEditSubmit">
+            <button type="submit" class="btn btn-primary">
               <i class="bi bi-check2"></i><span class="mx-2">Simpan</span>
             </button>
-          </div>
+          </div> -->
+          
         </div>
       </div>
     </div>
