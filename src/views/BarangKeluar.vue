@@ -152,7 +152,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="editLabel">Form Barang Masuk</h1>
+            <h1 class="modal-title fs-5" id="editLabel">Form Edit Barang Keluar</h1>
           </div>
           <div class="modal-body">
             <form @submit.prevent="handleEditSubmit">
@@ -181,7 +181,7 @@
                     <input type="number" class="form-control" id="stok-edit" v-model="newBarang.kuantitas">
                     </div>
                       <div class="mb-3 col-md-6">
-                        <label for="tanggal" class="col-form-label">Tanggal Masuk</label>
+                        <label for="tanggal" class="col-form-label">Tanggal Keluar</label>
                         <input type="date" class="form-control" id="tanggal" v-model="newBarang.tanggal_keluar">
                       </div>
                 </div>

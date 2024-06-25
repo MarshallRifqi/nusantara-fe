@@ -139,7 +139,7 @@
                         <input type="text" class="form-control" id="tanggal" v-model="editUser.email">
                       </div>
                       <div class="mb-3 col-md-7">
-                        <label for="stok" class="col-form-label">No telpon</label>
+                        <label for="stok" class="col-form-label">No Telepon</label>
                         <input type="text" class="form-control" id="stok" v-model="editUser.no_telpon" >
                       </div>
                     </div>
