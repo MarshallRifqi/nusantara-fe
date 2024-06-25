@@ -3,10 +3,14 @@
 ![Logo](https://imgtr.ee/images/2024/06/24/8ea2092c83467a10bd0196ebf7e86240.png)
 
 Aplikasi ini dibangun untuk mengelola data barang "Ban" masuk dan keluar gudang, untuk mengatur stok pada warehouse.
-Github Repository ini merupakan bagian Front End dari sistem kami, untuk melihat sisi Back End bisa klik url dibawah ini: https://github.com/fykri/nusantara-be
+Github Repository ini merupakan bagian Front End dari sistem kami, untuk melihat sisi Back End bisa klik url: 
+https://github.com/fykri/nusantara-be
+
+This application was built to manage stock in the warehouse. This Github Repository is the Front End part of our system, to see the Back End side you can click the url: 
+https://github.com/fykri/nusantara-be
 
 
-## Tech Stack Pada Sisi Front End:
+## Tech Stack Pada Sisi Front End (On the Front End Side):
 - Html
 - CSS
 - JavaScript
@@ -16,10 +20,21 @@ Github Repository ini merupakan bagian Front End dari sistem kami, untuk melihat
 
 
 ## Project Setup
+
+
 ### clone repository :
 ```sh
 git clone https://github.com/MarshallRifqi/nusantara-fe
 ```
+
+### download melalui zip file :
+1. Tekan tombol code
+2. Download Zip 
+
+##
+Download via zip file:
+1. Press the "code" button above this
+2. Press Download Zip
 
 ### install dependencies :
 ```sh
@@ -31,4 +46,20 @@ npm install
 npm run dev
 ```
 
+### Catatan
+Agar WMS ini dapat dijalankan sepenuhnya, pastikan ikuti langkah-langkah dibawah ini:
+1. Jalankan Folder Front End dan Back End secara bersamaan
+2. Pastikan Database milik anda juga dalam keadaan aktif
+3. Salin dan paste url di bawah ini pada browser anda:
+   ```sh
+   http://localhost:5173/
+   ```
 
+### Notes
+In order for this WMS to run, make sure to follow the steps below:
+1. Run the Front End and Back End Folders simultaneously
+2. Make sure your database is also active
+3. Copy and paste the url below in your browser:
+   ```sh
+   http://localhost:5173/
+   ```
