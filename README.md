@@ -27,14 +27,14 @@ https://github.com/fykri/nusantara-be
 git clone https://github.com/MarshallRifqi/nusantara-fe
 ```
 
-### download melalui zip file :
-1. Tekan tombol code
-2. Download Zip 
+### download melalui ZIP file :
+1. Tekan tombol ``<>code`` di atas.
+2. Lalu tekan ``Download ZIP``.
 
 ##
-Download via zip file:
-1. Press the "code" button above this
-2. Press Download Zip
+Download via ZIP file:
+1. Press the ``<>code`` button above.
+2. And press ``Download ZIP``.
 
 ### install dependencies :
 ```sh
@@ -47,7 +47,7 @@ npm run dev
 ```
 
 ### Catatan
-Agar WMS ini dapat dijalankan sepenuhnya, pastikan ikuti langkah-langkah dibawah ini:
+Agar WMS ini dapat dijalankan sepenuhnya, pastikan ikuti langkah-langkah di bawah ini:
 1. Jalankan Folder Front End dan Back End secara bersamaan
 2. Pastikan Database milik anda juga dalam keadaan aktif
 3. Salin dan paste url di bawah ini pada browser anda:
